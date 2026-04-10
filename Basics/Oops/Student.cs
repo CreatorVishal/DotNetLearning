@@ -1,4 +1,17 @@
-﻿//public class Testing
+﻿using Basics.Oops;
+namespace Basics.Oops{
+   public partial struct Mystruct
+    {
+        public void display2() {
+            WriteLine($"{age},{surname},");
+        }
+
+
+
+    }
+}
+    
+//public class Testing
 //{
 //    static Testing()
 //    {
