@@ -1,8 +1,24 @@
 ﻿using Basics.France;
 using Tx=Basics.Texas;
 using Basics.Oops;
+record order(int age , double salary,string fullName);
+ internal record Job {
+    public int job_no { get; init; }
+    public string job_name { get;init; }
+   public Job(int JN, string JJ) {
+      job_no =JN;
+      job_name =JJ;
+    }
 
-class Poly{
+  
+}
+public enum CountryCode{
+   Ind= +91,
+    US= +1,
+    UK= +44,        
+
+
+}
 
 class Ss
 {
@@ -22,7 +38,9 @@ class Ss
 }
 class Practice
 {
+    public required int Fett { get;set; }
     private double salary;
+
     public double Salary
     {
         get { return salary; }
@@ -402,16 +420,50 @@ class Practice
 
             WriteLine($"Name : {name}, Age : {age3}");
             Ss s11 = new Ss();
-            s11.custage1 = 23;
+        WriteLine("------------------------------------------------------");
+        WriteLine(s11);
+        WriteLine("------------------------------------------------------");
+        s11.custage1 = 23;
             WriteLine(s11.custage1);
         Practice prac = new Practice();
         prac.Salary = 5000;
         WriteLine(prac.Salary);
         WriteLine(prac.AnnualSalary);
+        var order1= new order(22,5000000,"Vishal Sharma");
+        var order2 = new order(22,5000000, "Vishal Sharma");
+
+        WriteLine(order1 == order2); // true, because record types have value-based equality
+
+        var order3= order1 with {salary = 6000000 }; // creating a new record with modified salary
+
+        WriteLine(order1);
+        WriteLine(order3);
+        var(age5,salary5,fullNAME) = order1;
+        WriteLine($"{order1.age},{order1.salary}");
+
+        var j1 = new Job(1, "Software developer ");
+       
+        WriteLine(j1);
+
+        WriteLine(CountryCode.Ind);
+
+
+
+
+        
+        
+
+
+
+
+
+
+
 
 
 
     }
 }
+
 
      
