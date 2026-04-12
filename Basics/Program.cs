@@ -1,6 +1,8 @@
 ﻿using Basics.France;
 using Tx=Basics.Texas;
 using Basics.Oops;
+using Basics;
+
 record order(int age , double salary,string fullName);
  internal record Job {
     public int job_no { get; init; }
@@ -38,6 +40,7 @@ class Ss
 }
 class Practice
 {
+    public readonly int Asdf = 45; 
     public required int Fett { get;set; }
     private double salary;
 
@@ -425,10 +428,11 @@ class Practice
         WriteLine("------------------------------------------------------");
         s11.custage1 = 23;
             WriteLine(s11.custage1);
-        Practice prac = new Practice();
-        prac.Salary = 5000;
-        WriteLine(prac.Salary);
-        WriteLine(prac.AnnualSalary);
+        //Practice prac = new Practice();
+        //prac.Salary = 5000;
+        //WriteLine(prac.Salary);
+        //WriteLine(prac.AnnualSalary);
+
         var order1= new order(22,5000000,"Vishal Sharma");
         var order2 = new order(22,5000000, "Vishal Sharma");
 
@@ -447,11 +451,26 @@ class Practice
 
         WriteLine(CountryCode.Ind);
 
+        Pp obj2 = new Pp();
+        obj2.display();
+
+        //Montu n = new();
+        //n.display();
+        //n.display1();
+
+
+        Dog dg = new();
+        dg.makeSound();
+
+        Cat4 ct = new();
+        ct.makeSound();
 
 
 
-        
-        
+
+
+
+
 
 
 
