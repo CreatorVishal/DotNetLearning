@@ -464,12 +464,16 @@ class Practice
 
         Cat4 ct = new();
         ct.makeSound();
+        Generics<int> obj445 = new Generics<int>();
+        obj445.Run<int,string>(10, "Vishal");
+
+        DelegatesPrac Dele = new();
+        
 
 
 
 
-
-
+            
 
 
 
