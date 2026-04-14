@@ -19,7 +19,7 @@ namespace Basics
             return x * x*x;
         }
 
-        int y=> y * 5;
+        //int y=> y * 5;
 
 
         internal DelegatesPrac(){
@@ -33,10 +33,11 @@ namespace Basics
 
             WriteLine("Lambda function...  " + d2(5));
 
-            WriteLine("Lambda function with expression body...  " + y);
-
-
+            //WriteLine("Lambda function with expression body...  " + y);
             
+
+           
+
 
             
 

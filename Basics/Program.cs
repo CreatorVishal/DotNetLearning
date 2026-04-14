@@ -299,19 +299,6 @@ class Practice
             //    age3 = 25;
             //}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
             //Paris p1 = new(); //yha error aata is liye hmne ek namespace ko alias bna diya  
             //like this  -------- alias = nickname of namespace 
             //using Basics.France;
@@ -468,12 +455,26 @@ class Practice
         obj445.Run<int,string>(10, "Vishal");
 
         DelegatesPrac Dele = new();
-        
+
+        Func<int, float, float> M = (a, b) => a * b;
+
+        float result = M(2, 3.2f);
+
+        YieldConcept yc = new();
+        foreach (var num in yc.GetNumbers())
+        {
+            WriteLine(num);
+        }
+        var dj = yc.GetPersonInfo();
+        WriteLine(dj.name);
+        WriteLine(dj.age);
+        TuplePrac qq = new();
 
 
 
 
-            
+
+
 
 
 
