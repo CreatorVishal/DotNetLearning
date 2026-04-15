@@ -125,7 +125,7 @@ class Practice
             WriteLine(4 >> 2);
             int y = 5;
             WriteLine($"y << 3 | {y << 3,7} | {y << 3:B8}");
-            char ch = 'd';
+            //char ch = 'd';
 
             WriteLine(typeof(int));//System.Int32
             WriteLine(nameof(y));//y
@@ -289,7 +289,7 @@ class Practice
             //public int num5 {get;set;} // property
 
             //Types of field 
-            const int Max = 100;//constant
+            //const int Max = 100;//constant
 
             //Readonly
             //readonly int age3;
@@ -469,6 +469,8 @@ class Practice
         WriteLine(dj.name);
         WriteLine(dj.age);
         TuplePrac qq = new();
+
+        Test tt = new();
 
 
 
