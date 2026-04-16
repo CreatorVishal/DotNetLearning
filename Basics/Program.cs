@@ -470,7 +470,16 @@ class Practice
         WriteLine(dj.age);
         TuplePrac qq = new();
 
-        Test tt = new();
+        //Test99 tt = new();
+        OperatorOverloadingConcept jj = new();
+        OperatorOverloading nn = new();
+        unSafeStackallocExercise us = new unSafeStackallocExercise();
+        us.normalmethod();
+
+       
+
+
+
 
 
 
