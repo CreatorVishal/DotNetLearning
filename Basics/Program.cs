@@ -476,7 +476,53 @@ class Practice
         unSafeStackallocExercise us = new unSafeStackallocExercise();
         us.normalmethod();
 
-       
+        //Records
+
+
+        var st1 = new Student("Vishal", 22);
+        var st2 = new Student("Vishal", 22);
+        WriteLine(st1 == st2); // true, because record types have value-based equality
+        //st1.Name="Vishalsharma" Not allowed because record types are immutable by default
+
+        WriteLine(st1.Name);
+        WriteLine(st2.age);
+
+        var st3 = st1 with { age = 25 };
+        WriteLine(st3.age);
+
+        WriteLine("--------------------------------------");
+        var a1 = new A(5);
+        var a2 = a1;
+
+        a2.x = 10;
+
+        Console.WriteLine(a1.x);
+        Console.WriteLine(a2.x);
+
+        var c1 = new Car("Fortuner", 2026);
+        var c2 = new Car("Scorpio", 2026);
+
+        c1.DisplayInfo();
+        c2.DisplayInfo();
+        StringBuilder sb= new StringBuilder();
+        sb.Append("Hello");
+        sb.Append("Vishal");
+        sb.Append("Sharma");
+        sb.AppendLine("Hii");
+        sb.Insert(0, "Hiiiiiiiiii");
+        sb.Remove(0, 10);
+        WriteLine(sb);
+
+        string text = "Hello Vishal";
+
+        byte[] bytes = Encoding.UTF8.GetBytes(text);
+        WriteLine(bytes);
+
+
+
+        byte[] b={70,34,34,23,3,4,};
+        string result10=Encoding.UTF8.GetString(b);
+        WriteLine(result10);
 
 
 
