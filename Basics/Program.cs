@@ -524,6 +524,11 @@ class Practice
         string result10=Encoding.UTF8.GetString(b);
         WriteLine(result10);
 
+        WriteLine("----------------------------Practice1.cs-----------------------------");
+        Practice1 Pr1 = new Practice1("Vishal", 22);
+        Pr1.display();
+
+
 
 
 
