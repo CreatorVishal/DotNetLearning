@@ -528,6 +528,24 @@ class Practice
         Practice1 Pr1 = new Practice1("Vishal", 22);
         Pr1.display();
 
+        ////const
+
+        //const int age_limit=18;
+        //age_limit=22;//Not possible
+        //---------------------------------------------
+
+        //string parsing in main method
+
+        //string str="123";
+        // int number =int.Parse(str);
+        //----------------------------------------------
+
+        //Type Casting
+
+        //decimal d = 12323.12343m;
+        //int number = Convert.ToInt32(d);
+
+
 
 
 
