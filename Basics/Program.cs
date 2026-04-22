@@ -335,9 +335,9 @@ class Practice
 
 
             int[] num2 = { 10, 20, 30, 40 };
-            foreach (int r in num2)
+            foreach (int r3 in num2)
             {
-                WriteLine(r);
+                WriteLine(r3);
             }
 
             int sum2 = 0;
@@ -545,12 +545,42 @@ class Practice
         //decimal d = 12323.12343m;
         //int number = Convert.ToInt32(d);
 
+        //WriteLine("C:\nProgram");//isme new line me print hoga but agr same krna ho to @ use kro 
+        //WriteLine(@"C:\nProgram");//same as it is print hoga 
 
 
+        double pi = 3.14;
+        Write(Math.Round(pi));
+        Write(Math.Floor(pi));
+        Write(Math.Abs(pi));
+        Write(Math.Ceiling(pi));
+        Write(Math.Clamp(11,0,10));//10
+        Write(Math.Clamp(8,0,10));//8
+        Write(Math.Clamp(-1,0,10));//0
+        WriteLine(Math.Min(12, 15));
+        WriteLine(Math.Max(12, 15));
+        WriteLine(Math.Pow(2, 5));//32
+
+        //Random number
+
+        Random r = new();
+        WriteLine(r.Next());//iski range bhi de skte h WriteLine(r.Next(0,11));
+        WriteLine(r.NextDouble());//o se 1 tk ka no. lega 
 
 
+        int[] arr = { 10, 20, 30, 40, 50 };
+        int sum = 0;
 
+        for (int i = 0; i < arr.Length; i++)
+        {
+            sum += arr[i];
+        }
 
+        Console.WriteLine("Sum of array = " + sum);
+
+        WriteLine();
+        WorkingwithFiles wf= new WorkingwithFiles();    
+        wf.CreateFile();
 
 
 
