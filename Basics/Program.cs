@@ -585,21 +585,51 @@ class Practice
         UserInput1.GetUserInput();
         //readingFiles.readFiles();
 
-    
+
+        ////////////////////////////////////
+        ///
+
+        BasicConcepts bc = new BasicConcepts();
+        bc.Display();
+        bc.Sum44(23,22);
+        Calculator calc = new Calculator();
+
+        WriteLine("Add: " + calc.Add(10, 5));
+        WriteLine("Sub: " + calc.Subtract(10, 5));
+        WriteLine("Mul: " + calc.Multiply(10, 5));
+        WriteLine("Div: " + calc.Divide(10, 5));
+
+        //Generics
 
 
 
+        Box<int> b1 = new Box<int>();
+        b1.Value = 123;
+        b1.Value = 2345;
+        Box<string> b2 = new Box<string>() ;
+        b2.Value = "Hello";
+        b2.Value = "Vishal";  
+        
+        WriteLine(b1.Value);
+        WriteLine(b2.Value);
 
+        int x22 = 10;
+        int y22 = 20;
 
+        Box<int> box = new Box<int>();
+       WriteLine("Before: " + x22 + " " + y22);
+        box.swap4(ref x22, ref y22);
+        WriteLine("After: " + x22 + " " + y22);
 
+        Pair<string, int> pair = new Pair<string, int>();
+        pair.First= "Vishal";
+        pair.Second = 23;
+        pair.Display22();
 
+        Store<int>  sr= new Store<int>();
+        sr.Add22(10);
 
-
-
-
-
-
-
+        WriteLine(sr.Get());
 
     }
 }
