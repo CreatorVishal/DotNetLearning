@@ -20,6 +20,151 @@ namespace Basics
 
         }
     }
+    public class StudenT
+    {
+       public int Age22 { get; set; }
+        public string Name22 { get; set; }
+
+        public void setData(string name, int age)
+        {
+            Name22 = name;
+            Age22 = age;
+        }
+        public void Display()
+
+        {
+            WriteLine("Name is " + Name22);
+            WriteLine("Age is " + Age22);
+        }
+    }
+
+    //Inheritance
+    public class Animal1
+    {
+        public void Sound()
+        {
+            WriteLine("Animal makes a sound");
+        }
+    }
+
+    public class Dog1 : Animal1
+    {
+        public void Bark()
+        {
+            WriteLine("Dog barks");
+        }
+
+    }
+
+    //Overloading
+
+    public class loadingConcept
+    {
+        public void Multiply(int a, int b)
+        {
+            WriteLine("Multiplication of two numbers: " + (a * b));
+        }
+        public void Multiply(int a, int b, int c)
+        {
+            WriteLine("Multiplication of three numbers: " + (a * b * c));
+        }
+    }
+
+    //Overriding and hiding
+
+    public class Animal3
+    {
+        public virtual void Sound()
+        {
+            WriteLine("Animal makes a sound");
+        }
+    }
+    public class Dog3 : Animal3
+    {
+        //public override void Sound()
+        public new void Sound()
+        {
+            base.Sound();
+
+            WriteLine("Dog barks");
+        }
+    }
+
+    //Abstract and Interface
+
+    public abstract class Shape
+    {
+        public abstract void Draw();
+    }
+
+    public class Circle3 : Shape
+    {
+        public override void Draw()
+        {
+            Console.WriteLine("Drawing Circle");
+        }
+    }
+
+    public abstract class Vehicle
+    {
+        public abstract void Start();
+
+        public void Stop()
+        {
+            Console.WriteLine("Vehicle stopped");
+        }
+    }
+    public class Car2 : Vehicle
+    {
+        public override void Start()
+        {
+            Console.WriteLine("Car started");
+        }
+    }
+    public class Bike: Vehicle
+    {
+        public override void Start()
+        {
+            Console.WriteLine("Bike started");
+        }
+    }
+
+    //Interface
+    public interface IAnimal
+    {
+        public void sound();
+    }
+    public class Dog4 : IAnimal { 
+        public void sound()
+        {
+            Console.WriteLine("Dog barks");
+        }
+
+    }
+
+
+    public interface IRun1
+    {
+        void Run1();
+    }
+
+    public interface IEat
+    {
+        void Eat();
+    }
+
+    public class Human : IRun1, IEat
+    {
+        public void Run1()
+        {
+            Console.WriteLine("Human runs");
+        }
+
+        public void Eat()
+        {
+            Console.WriteLine("Human eats");
+        }
+    }
 
     public class ListPractice { 
         public void ListExample()

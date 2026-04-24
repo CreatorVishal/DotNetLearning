@@ -650,8 +650,46 @@ class Practice
         ListPractice lp = new ListPractice();
         lp.ListExample();
 
+        WriteLine("---------------------------------------");
+        StudenT st=new StudenT();
+        st.Name22 = "Vishal";
+        st.Age22 = 23;
+        st.Display();
+        st.setData("Vishal Sharma", 22);
+        st.Display();
+
+        Dog1 dg1 = new Dog1();
+        dg1.Sound();
+        dg1.Bark();
+
+        loadingConcept lc = new loadingConcept();
+        lc.Multiply(2, 3);
+        lc.Multiply(3, 4, 3);
 
 
+        Animal3 an = new Dog3();
+        an.Sound();
+        //Circle3 cle = new Circle3();
+        //cle.Draw();
+        Shape cle = new Circle3();
+        cle.Draw();
+
+
+        Vehicle v = new Car2();
+        Vehicle v2 = new Bike();
+        v2.Start();
+        v2.Stop();
+        v.Start();
+        v.Stop();
+
+        IAnimal a = new Dog4();
+        a.sound();
+
+
+
+        Human h1 = new Human();
+        h1.Eat();
+        h1.Run1();
 
 
 
