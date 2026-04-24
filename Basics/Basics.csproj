@@ -1,5 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
+	  <Compile Remove="Practice folder\**" />
+	  <EmbeddedResource Remove="Practice folder\**" />
+	  <None Remove="Practice folder\**" />
+	</ItemGroup>
+	<ItemGroup>
 		<Using Include="System.Console" Static="true" />
 	</ItemGroup>
 

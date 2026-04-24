@@ -629,7 +629,22 @@ class Practice
         Store<int>  sr= new Store<int>();
         sr.Add22(10);
 
-        WriteLine(sr.Get());
+        //WriteLine(sr.Get());
+
+        UserInput1.GetUserInput();
+
+        DirectoryInfo ss1= new DirectoryInfo(@"D:\\DotNetLearningAllfiles\\CreatorVishal\\DotNetLearning\\Basics\\subfolderr");
+        ss1.Create();
+
+        FileInfo f1 = new FileInfo("Ok.txt");
+              
+        WriteLine("File Length: " + f1.Length);
+        WriteLine("File Full Name: " + f1.FullName);
+        WriteLine("File Exists: " + f1.Exists);
+
+
+
+
 
     }
 }

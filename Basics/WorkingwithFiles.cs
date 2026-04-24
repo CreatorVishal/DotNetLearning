@@ -48,8 +48,8 @@ namespace Basics
             //desktop pr file ke liye 
 
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string path= Path.Combine(desktop,"Myfolder");
-            File.WriteAllText(path, "This is a file on the desktop.");
+            //string path= Path.Combine(desktop,"Myfolder");
+            //File.WriteAllText(path, "This is a file on the desktop.");
 
           
             string deskfile = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
@@ -67,8 +67,69 @@ namespace Basics
             WriteLine(path4);
             File.WriteAllText(path4, "This is a sample file in the New_Folder directory.");
 
+            using (StreamWriter sw = new StreamWriter("Ok.txt"))
+            {
+                sw.WriteLine("Hello Vishal !");
+            }
+            using (StreamReader sr = new StreamReader("Ok.txt"))
+            {
+                string content = sr.ReadToEnd();
+                WriteLine("Content of Ok.txt: " + content);
+               
+            }
+           var result = File.Exists("Ok.txt");
+            WriteLine(result);
 
 
+            Directory.CreateDirectory("Practice folder ");
+            var getfilesprac = Directory.GetFiles("Practice folder ");
+            var getparentc=Directory.GetParent("Practice folder ");
+
+            WriteLine(getfilesprac);
+            foreach (var file in getfilesprac)
+            {
+                Console.WriteLine(file);
+            }
+            WriteLine("--------------------"+getparentc.FullName);
+
+
+            if (Directory.Exists("Practice folder "))
+            {
+                WriteLine("Directory Exist ");
+                WriteLine("Path of this directory is : " + Directory.GetCurrentDirectory());
+            }
+
+            Write(Directory.GetCurrentDirectory());
+            string path6 = Path.Combine("D:", "New Folder 1", "Sample11.txt");
+
+            WriteLine(Directory.GetParent(path6));
+
+            if (Directory.Exists(Directory.GetParent(path6).FullName))
+            {
+                WriteLine("Directory exist");
+            }
+            else
+            {
+                WriteLine("Directory does not exist");
+                Directory.CreateDirectory("New folder 1");
+            }
+
+
+            using (FileStream fs = new FileStream("Ok.txt", FileMode.Create))
+            {
+                if (File.Exists("Ok.txt"))
+                {
+                    WriteLine("File exist");
+
+                    string Paths = Path.Combine(Directory.GetCurrentDirectory(), "Ok.txt");
+                    WriteLine(Paths);
+                }
+                else
+                {
+                    WriteLine("File does not exist");
+                }
+            }
+            
 
 
         }
@@ -83,6 +144,9 @@ namespace Basics
     //    }
         
     //}
+
+
+
 
 
 
