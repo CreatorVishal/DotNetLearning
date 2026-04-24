@@ -643,6 +643,17 @@ class Practice
         WriteLine("File Exists: " + f1.Exists);
 
 
+        WriteLine("---------------------------------------------------------------------------------");
+        AllConceptspractice acp = new AllConceptspractice();
+        acp.TakeandMultiply(0, 0);
+        WriteLine("---------------------------------------------------------------------------------");
+        ListPractice lp = new ListPractice();
+        lp.ListExample();
+
+
+
+
+
 
 
 
