@@ -142,8 +142,101 @@ namespace Basics
     //        WriteLine("Data is : "+data);
 
     //    }
-        
+
     //}
+    public class practicefiles
+    {
+        public void createFiles1()
+        {
+            //string path = "Practice_File.txt";
+            //File.WriteAllText(path,"Hi\nI am Vishal Sharma\n I am doing MCA " );
+            //string data = File.ReadAllText(path);
+            //WriteLine(data);
+
+            //File.Copy("Practice_File.txt", "testu.txt", true); //agr true diya or destination file h to override krega or agr false diya to error throw krega like below example . 
+            //try
+            //{
+            //    if (!File.Exists("testu.txt"))
+            //    {
+            //        File.Copy("Practice_File.txt", "testu.txt");
+            //    }
+            //    else
+            //    {
+            //        throw new Exception("File already exist");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    WriteLine(ex.Message);
+            //}
+            //File.Move("testu.txt", @"D:\DotNetLearningAllfiles\CreatorVishal\DotNetLearning\Basics\New folder 1\testu.txt");
+
+            //File.Replace(@"D:\DotNetLearningAllfiles\CreatorVishal\DotNetLearning\Basics\New folder 1", "ok.txt", "backupok.txt");
+
+            //Directory
+
+            //Directory.CreateDirectory("DiPractice-1");
+
+
+            //FileInfo ff = new FileInfo("AtoZfileinfoprac.txt");
+            //ff.Create().Close();
+
+            //File.WriteAllText("AtoZfileinfoprac.txt", "This is a practice file for FileInfo class.");
+
+            // WriteLine("--------------------------------------------------------------------------------------");
+            // if(!File.Exists("data.txt"))
+            // {
+            //     File.WriteAllText("data.txt", "Name : Vishal \n Course: MCA");
+
+            //     string data = File.ReadAllText("data.txt");
+            //     WriteLine(data);
+            // }
+            // else
+            // {
+
+            //     WriteLine("File already exists");
+            //     File.AppendAllText("data.txt", "\nAge: 23");
+            // }
+            //File.Copy("data.txt", "backupdata.txt", true);
+
+            // WriteLine("File copied successfully to backupdata.txt");
+            // WriteLine("----------------------------------------------");
+            //FileInfo g = new FileInfo("fileinfo.txt");
+            ////create a file 
+            //g.Create().Close();
+            ////If we want to write in this file then we can use below code
+            //File.WriteAllText(g.FullName, "This is a practice file for FileInfo class.");
+            //g.Refresh(); // Refresh the FileInfo object to update its properties after creating the file
+            //WriteLine(g.Name);
+            //WriteLine(g.Length);
+            //WriteLine(g.Extension);
+            //WriteLine(g.CreationTime);
+            //g.CopyTo("ok.txt", true);
+            //g.MoveTo("ok1.txt");
+            //g.Refresh();
+            //WriteLine("After Move: " + g.Name);
+
+            //
+            FileInfo f2 = new FileInfo("Pop.txt");
+            //Write
+            using (StreamWriter sw = f2.CreateText())
+            {
+                sw.WriteLine("Hello Vishal sharma How are you ?");
+                sw.WriteLine("Where are you from ?");
+                //string dataq= File.ReadAllText("Pop.txt");
+                // WriteLine("Data in Pop.txt: " + dataq);//exception aayegi because file is open in write mode and we are trying to read it. To avoid this we can use sw.Flush() to flush the buffer and then read the file or we can close the streamwriter and then read the file.
+
+
+            }
+            //Read
+            using (StreamReader sjk = f2.OpenText())
+            {
+                string content = sjk.ReadToEnd();
+                WriteLine("Content of Pop.txt: " + content);
+            }
+
+        }
+    }
 
 
 

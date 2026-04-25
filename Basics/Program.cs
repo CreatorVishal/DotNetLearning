@@ -525,8 +525,8 @@ class Practice
         WriteLine(result10);
 
         WriteLine("----------------------------Practice1.cs-----------------------------");
-        Practice1 Pr1 = new Practice1("Vishal", 22);
-        Pr1.display();
+        //Practice1 Pr1 = new Practice1("Vishal", 22);
+        //Pr1.display();
 
         ////const
 
@@ -549,40 +549,40 @@ class Practice
         //WriteLine(@"C:\nProgram");//same as it is print hoga 
 
 
-        double pi = 3.14;
-        Write(Math.Round(pi));
-        Write(Math.Floor(pi));
-        Write(Math.Abs(pi));
-        Write(Math.Ceiling(pi));
-        Write(Math.Clamp(11, 0, 10));//10
-        Write(Math.Clamp(8, 0, 10));//8
-        Write(Math.Clamp(-1, 0, 10));//0
-        WriteLine(Math.Min(12, 15));
-        WriteLine(Math.Max(12, 15));
-        WriteLine(Math.Pow(2, 5));//32
+        //double pi = 3.14;
+        //Write(Math.Round(pi));
+        //Write(Math.Floor(pi));
+        //Write(Math.Abs(pi));
+        //Write(Math.Ceiling(pi));
+        //Write(Math.Clamp(11, 0, 10));//10
+        //Write(Math.Clamp(8, 0, 10));//8
+        //Write(Math.Clamp(-1, 0, 10));//0
+        //WriteLine(Math.Min(12, 15));
+        //WriteLine(Math.Max(12, 15));
+        //WriteLine(Math.Pow(2, 5));//32
 
         //Random number
 
-        Random r = new();
-        WriteLine(r.Next());//iski range bhi de skte h WriteLine(r.Next(0,11));
-        WriteLine(r.NextDouble());//o se 1 tk ka no. lega 
+        //Random r = new();
+        //WriteLine(r.Next());//iski range bhi de skte h WriteLine(r.Next(0,11));
+        //WriteLine(r.NextDouble());//o se 1 tk ka no. lega 
 
 
-        int[] arr = { 10, 20, 30, 40, 50 };
-        int sum = 0;
+        //int[] arr = { 10, 20, 30, 40, 50 };
+        //int sum = 0;
 
-        for (int i = 0; i < arr.Length; i++)
-        {
-            sum += arr[i];
-        }
+        //for (int i = 0; i < arr.Length; i++)
+        //{
+        //    sum += arr[i];
+        //}
 
-        Console.WriteLine("Sum of array = " + sum);
+        //Console.WriteLine("Sum of array = " + sum);
 
-        WriteLine();
+        //WriteLine();
         //WorkingwithFiles wf = new WorkingwithFiles();
         //wf.CreateFile();
         //Filesmanagement.WriteFile();
-        UserInput1.GetUserInput();
+        //UserInput1.GetUserInput();
         //readingFiles.readFiles();
 
 
@@ -636,60 +636,63 @@ class Practice
         DirectoryInfo ss1= new DirectoryInfo(@"D:\\DotNetLearningAllfiles\\CreatorVishal\\DotNetLearning\\Basics\\subfolderr");
         ss1.Create();
 
-        FileInfo f1 = new FileInfo("Ok.txt");
-              
-        WriteLine("File Length: " + f1.Length);
-        WriteLine("File Full Name: " + f1.FullName);
-        WriteLine("File Exists: " + f1.Exists);
+        //FileInfo f1 = new FileInfo("Ok.txt");
+
+        //WriteLine("File Length: " + f1.Length);
+        //WriteLine("File Full Name: " + f1.FullName);
+        //WriteLine("File Exists: " + f1.Exists);
 
 
-        WriteLine("---------------------------------------------------------------------------------");
-        AllConceptspractice acp = new AllConceptspractice();
-        acp.TakeandMultiply(0, 0);
-        WriteLine("---------------------------------------------------------------------------------");
-        ListPractice lp = new ListPractice();
-        lp.ListExample();
+        //WriteLine("---------------------------------------------------------------------------------");
+        //AllConceptspractice acp = new AllConceptspractice();
+        //acp.TakeandMultiply(0, 0);
+        //WriteLine("---------------------------------------------------------------------------------");
+        //ListPractice lp = new ListPractice();
+        //lp.ListExample();
 
-        WriteLine("---------------------------------------");
-        StudenT st=new StudenT();
-        st.Name22 = "Vishal";
-        st.Age22 = 23;
-        st.Display();
-        st.setData("Vishal Sharma", 22);
-        st.Display();
+        //WriteLine("---------------------------------------");
+        //StudenT st=new StudenT();
+        //st.Name22 = "Vishal";
+        //st.Age22 = 23;
+        //st.Display();
+        //st.setData("Vishal Sharma", 22);
+        //st.Display();
 
-        Dog1 dg1 = new Dog1();
-        dg1.Sound();
-        dg1.Bark();
+        //Dog1 dg1 = new Dog1();
+        //dg1.Sound();
+        //dg1.Bark();
 
-        loadingConcept lc = new loadingConcept();
-        lc.Multiply(2, 3);
-        lc.Multiply(3, 4, 3);
+        //loadingConcept lc = new loadingConcept();
+        //lc.Multiply(2, 3);
+        //lc.Multiply(3, 4, 3);
 
 
-        Animal3 an = new Dog3();
-        an.Sound();
-        //Circle3 cle = new Circle3();
+        //Animal3 an = new Dog3();
+        //an.Sound();
+        ////Circle3 cle = new Circle3();
+        ////cle.Draw();
+        //Shape cle = new Circle3();
         //cle.Draw();
-        Shape cle = new Circle3();
-        cle.Draw();
 
 
-        Vehicle v = new Car2();
-        Vehicle v2 = new Bike();
-        v2.Start();
-        v2.Stop();
-        v.Start();
-        v.Stop();
+        //Vehicle v = new Car2();
+        //Vehicle v2 = new Bike();
+        //v2.Start();
+        //v2.Stop();
+        //v.Start();
+        //v.Stop();
 
-        IAnimal a = new Dog4();
-        a.sound();
+        //IAnimal a = new Dog4();
+        //a.sound();
 
 
 
-        Human h1 = new Human();
-        h1.Eat();
-        h1.Run1();
+        //Human h1 = new Human();
+        //h1.Eat();
+        //h1.Run1();
+
+        practicefiles pv = new practicefiles();
+        pv.createFiles1();
 
 
 
