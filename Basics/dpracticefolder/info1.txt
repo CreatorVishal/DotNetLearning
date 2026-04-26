@@ -1,0 +1,1 @@
+This second file is created inside the directory.
