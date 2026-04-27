@@ -51,7 +51,8 @@ namespace Basics
                 sa.WriteLine("Thia is a new file created using FileInfo class.");
 
             }
-            using (StreamWriter sa = fqq.AppendText()) { 
+            using (StreamWriter sa = fqq.AppendText())
+            {
                 sa.WriteLine("This is an appended line to the existing file.");
             }
             //fqq.CopyTo("data.txt", true);
@@ -60,7 +61,7 @@ namespace Basics
 
             //--------------
             //Directory
-            
+
             Directory.CreateDirectory("dpracticefolder");
             if (Directory.Exists("dpracticefolder"))
             {
@@ -72,12 +73,12 @@ namespace Basics
             //File.WriteAllText(@"dpracticefolder\info.txt", "This file is created inside the directory.");  
             //File.WriteAllText(@"dpracticefolder\info1.txt", "This second file is created inside the directory.");
             string folder = "dpracticefolder";
-            string file1= Path.Combine(folder,"info.txt");
-            string file2= Path.Combine(folder,"info1.txt");
+            string file1 = Path.Combine(folder, "info.txt");
+            string file2 = Path.Combine(folder, "info1.txt");
             File.WriteAllText(file1, "This file is created inside the directory");
             File.WriteAllText(file2, "This second file is created inside the directory.");
             string[] files = Directory.GetFiles("dpracticefolder");
-            foreach(string file in files)
+            foreach (string file in files)
             {
                 Console.WriteLine(file);
                 string sr = File.ReadAllText(file);
@@ -95,7 +96,7 @@ namespace Basics
 
             string foldername = "Data";
             Directory.CreateDirectory(foldername);
-            for(int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++)
             {
                 string file = Path.Combine(foldername, $"file{i}.txt");
                 WriteLine($"Enter content for file {i + 1}:");
@@ -117,7 +118,7 @@ namespace Basics
             DateTime lastAccessTime = Directory.GetLastAccessTime(foldername);
             WriteLine($"Directory Creation Time: {creationTime}");
             WriteLine($"Directory Last Access Time: {lastAccessTime}");
-            
+
             //Directory Info
             DirectoryInfo di = new DirectoryInfo("dpracticefolder");
             //di.Create();
@@ -126,21 +127,22 @@ namespace Basics
             //    WriteLine("Directory created successfully using DirectoryInfo class.");
             //}
             FileInfo[] fl = di.GetFiles();
-            foreach(FileInfo f in fl)
+            foreach (FileInfo f in fl)
             {
                 WriteLine("File Name: " + f.Name);
                 WriteLine("File Size: " + f.Length + " bytes");
                 WriteLine("Creation Time: " + f.CreationTime);
                 WriteLine("Last Access Time: " + f.LastAccessTime);
                 WriteLine("Extension: " + f.Extension);
-                WriteLine("Full Path: "  + f.FullName);
+                WriteLine("Full Path: " + f.FullName);
                 WriteLine();
             }
             DirectoryInfo[] dd = di.GetDirectories();
-            foreach(DirectoryInfo dl in dd)
+            foreach (DirectoryInfo dl in dd)
             {
                 WriteLine(dl.Name);
-            };
+            }
+            ;
 
             WriteLine("Full Path: " + di.FullName);
             WriteLine("Parent: " + di.Parent);
@@ -159,7 +161,7 @@ namespace Basics
             //File info 
             //1. CreateText
             FileInfo d = new FileInfo("Fwp.txt");
-            using(StreamWriter sw= d.CreateText())
+            using (StreamWriter sw = d.CreateText())
             {
                 sw.WriteLine("Hi this is a new file ..... ");
             }
@@ -182,7 +184,8 @@ namespace Basics
             }
             //open read
             FileInfo sl = new FileInfo("data1.txt");
-            using (FileStream fs = sl.OpenRead()) {
+            using (FileStream fs = sl.OpenRead())
+            {
                 using (StreamReader sr = new StreamReader(fs))
                 {
                     string data = sr.ReadToEnd();
@@ -228,14 +231,14 @@ namespace Basics
             }
             //Append 
 
-            using(FileStream fs= new FileStream("test.txt",FileMode.Append))
-            using(StreamWriter sw= new StreamWriter(fs))
+            using (FileStream fs = new FileStream("test.txt", FileMode.Append))
+            using (StreamWriter sw = new StreamWriter(fs))
             {
                 sw.WriteLine("\n Line 3 ");
 
             }
-            using(FileStream fs= new FileStream("test.txt",FileMode.Append))
-            using(StreamWriter sw= new StreamWriter(fs))
+            using (FileStream fs = new FileStream("test.txt", FileMode.Append))
+            using (StreamWriter sw = new StreamWriter(fs))
             {
                 sw.WriteLine("\n Line 4 ");
 
@@ -274,8 +277,8 @@ namespace Basics
             WriteLine(Path.GetDirectoryName(path));
             WriteLine(Path.GetFileName(path));
 
-            WriteLine(File.Exists(path));         
-            WriteLine(Directory.Exists(folder1));  
+            WriteLine(File.Exists(path));
+            WriteLine(Directory.Exists(folder1));
 
             WriteLine(Path.ChangeExtension(path, ".pdf"));
             WriteLine(Path.HasExtension("data.txt"));
@@ -366,6 +369,142 @@ namespace Basics
             //string doc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             //string pathh = Path.Combine(doc, "TestingFile.txt");
             //File.WriteAllText(pathh, "Hello my dear friend");
+
+            WriteLine("--------------------------------");
+
+
+            //Memory Stream
+            MemoryStream ms = new MemoryStream();
+            ms.WriteByte(65); // A
+            ms.WriteByte(66); // B
+            ms.WriteByte(67); // C
+
+            ms.Position = 0;
+            int value;
+            int count = 0;
+            while ((value = ms.ReadByte()) != -1)
+            {
+                Write((char)value);
+                count++;
+
+            }
+            WriteLine("\n Length of count is : " + count);
+
+            MemoryStream ms1 = new MemoryStream();
+            string text = "Hello I am Vishal sharma from Rohtak.";
+            byte[] data1 = Encoding.UTF8.GetBytes(text);
+            ms1.Write(data1, 0, data1.Length);
+            ms1.Position = 0;
+            //int value1;
+            //while ((value1 = ms1.ReadByte()) != -1)
+            //{
+            //    Write((char)value1);
+            //}
+            byte[] buffer = new byte[ms1.Length];
+            ms1.Read(buffer, 0, buffer.Length);
+            string result = Encoding.UTF8.GetString(buffer);
+            WriteLine(result + " ");
+
+            //MemoryStream ms2 = new MemoryStream();
+            //string text2 = "Hello Vishal Sharma";
+            //byte[] data2 = Encoding.UTF8.GetBytes(text2);
+            //ms2.Write(data2, 0, data2.Length);
+            ////ms2.Position = 12;
+            //ms2.Seek(6, SeekOrigin.Begin);
+            //byte[] buffer1 = new byte[ms2.Length];
+            //ms2.Read(buffer1, 0, buffer1.Length);
+            //string result2 = Encoding.UTF8.GetString(buffer1);
+            //WriteLine(result2);
+
+            MemoryStream ms2 = new MemoryStream();
+            string text2 = "Hello Vishal Sharma";
+            byte[] data2 = Encoding.UTF8.GetBytes(text2);
+            ms2.Write(data2, 0, data2.Length);
+            //ms2.Position = 12;
+            ms2.Seek(-6, SeekOrigin.End);
+            byte[] buffer1 = new byte[ms2.Length];
+            ms2.Read(buffer1, 0, buffer1.Length);
+            string result2 = Encoding.UTF8.GetString(buffer1);
+            WriteLine(result2);
+
+            // ToArray():
+            // ✔️ MemoryStream ka poora data return karta hai (exact length)
+            // ✔️ Position ignore karta hai
+            // ✔️ Safe copy deta hai (no garbage)
+            // 👉 Use jab full data chahiye ho
+
+            //use ToArray
+            MemoryStream ak = new MemoryStream();
+            string c = "Hlo Vishal sharma it's nice to hear you are safe in your country.";
+            byte[] dataa = Encoding.UTF8.GetBytes(c);
+            ak.Write(dataa,0,dataa.Length);
+
+            ak.SetLength(4);
+
+            byte[] resultArr = ak.ToArray();
+            string result11 = Encoding.UTF8.GetString(resultArr);
+
+            WriteLine("\n["+result11+"]");
+
+            // GetBuffer():
+            // ⚠️ Internal buffer return karta hai (capacity ke saath)
+            // ❌ Extra unused bytes (garbage) aa sakte hain
+            // ✔️ Fast hai (copy nahi banata)
+            // 👉 Use only jab performance important ho aur length handle kare
+            byte[] result12 = ak.GetBuffer();
+;
+            Write("GetBuffer: [" + Encoding.UTF8.GetString(result12) + "]");
+
+            /*
+             MemoryStream Summary:
+
+             - Write → data store in memory
+             - Read → data read (Position based)
+             - ToArray → full safe data
+             - GetBuffer → raw memory (handle carefully)
+             - SetLength → data cut/resize
+             - Position/Seek → pointer control
+             - Overwrite → replace (delete nahi karta)
+
+             👉 Rule:
+             Full data → ToArray()
+             Control → Read()
+
+             */
+            WriteLine("------------------------------------");
+
+
+            //Binary Writer or Binary Reader
+
+            using (MemoryStream aj = new MemoryStream())
+            using (BinaryWriter bw = new BinaryWriter(aj))
+            {
+                bw.Write(11);
+                bw.Write("Hello");
+                bw.Write("I am from Rohtak");
+                bw.Write("Pursuing MCA");
+                aj.Position = 0;
+
+                using (BinaryReader br = new BinaryReader(aj))
+                {
+                    WriteLine(br.ReadInt32());
+                    WriteLine(br.ReadString());
+                    WriteLine(br.ReadString());
+                    WriteLine(br.ReadString());
+
+                }
+            }
+
+ 
+
+
+
+
+
+
+
+
+
 
 
 

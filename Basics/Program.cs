@@ -694,8 +694,12 @@ class Practice
         practicefiles pv = new practicefiles();
         pv.createFiles1();
         WriteLine("------------------------------------");
-        FileManagementPracticeagain fp = new FileManagementPracticeagain();
-        fp.CreateFile();
+        //FileManagementPracticeagain fp = new FileManagementPracticeagain();
+        //fp.CreateFile();
+        WriteLine("------------------------------");
+        CompressDecompress cd = new CompressDecompress();
+        cd.Compress_Decom();
+        cd.ziprac();
 
 
 
