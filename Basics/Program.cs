@@ -304,7 +304,7 @@ class Practice
         //using Basics.France;
         //using Tx=Basics.Texas;Now we can use easily 
 
-        Paris p1 = new();
+        Paris2 p1 = new();
         Tx.Paris p2 = new();
 
         Student1 s1 = new Student1("Vishal sharma");
@@ -699,7 +699,10 @@ class Practice
         WriteLine("------------------------------");
         CompressDecompress cd = new CompressDecompress();
         cd.Compress_Decom();
-        cd.ziprac();
+        //cd.ziprac();
+        cd.GzipPract();
+        cd.zpFile();
+        cd.Zarc();
 
 
 

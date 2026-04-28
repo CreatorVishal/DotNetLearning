@@ -1,0 +1,3 @@
+Hello Vishal Sharma
+Thia is a new file created using FileInfo class.
+This is an appended line to the existing file.

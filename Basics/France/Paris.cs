@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Basics.France
 {
-    internal class Paris
+    internal class Paris2
     {
     }
 }
