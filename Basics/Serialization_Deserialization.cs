@@ -19,6 +19,15 @@ namespace Basics
         [JsonIgnore]
         public double amount { get; set; }
     }
+
+
+    class Student11
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public string Course { get; set; }
+
+    }
 }
 
 

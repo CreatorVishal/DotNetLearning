@@ -741,6 +741,42 @@ class Practice
         {
             WriteLine(dataa[0].name);
         }
+
+        var options1 = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNameCaseInsensitive = true,
+        };
+        Student11 sk1 = new Student11 { Name = "Vishal sharma", Age = 23, Course = "MCA" };
+        string jsonf = JsonSerializer.Serialize(sk1,options1);
+
+        WriteLine(jsonf);
+        //created file (file me save kr diya )
+        File.WriteAllText("jsonprac.json", jsonf);
+
+        //read 
+        string datajson = File.ReadAllText("jsonprac.json");
+
+        //deserialize
+        var objj1 = JsonSerializer.Deserialize<Student11>(datajson, options1);
+        if (objj1 != null)
+        {
+            WriteLine(objj1.Name);
+            WriteLine(objj1.Age);
+        }
+
+
+
+        //var des = JsonSerializer.Deserialize<Student11>(jsonf,options1);
+        //WriteLine("------------------");
+        //if (des != null)
+        //{
+        //    WriteLine(des.Age);
+        //}
+
+
+
     }
 }
 
