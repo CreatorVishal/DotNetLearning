@@ -389,9 +389,31 @@ namespace Basics
             }
 
 
+           
 
 
 
+
+
+        }
+        //Brotli 
+        
+        public void BrotliPrac()
+        {
+            using (FileStream fs = new FileStream("sk.br",FileMode.Create))
+            using(BrotliStream bs= new BrotliStream(fs,CompressionMode.Compress))
+            using (StreamWriter sw = new StreamWriter(bs))
+            {
+                sw.Write("Hello Vishal Brotli version");
+            }
+
+            // decompress
+            using (FileStream fs = new FileStream("sk.br", FileMode.Open))
+            using (BrotliStream bs = new BrotliStream(fs, CompressionMode.Decompress))
+            using (StreamReader sr = new StreamReader(bs))
+            {
+                Console.WriteLine(sr.ReadToEnd());
+            }
         }
 
     }

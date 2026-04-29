@@ -2,6 +2,9 @@
 using Tx=Basics.Texas;
 using Basics.Oops;
 using Basics;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 
 record order(int age , double salary,string fullName);
  internal record Job {
@@ -697,16 +700,47 @@ class Practice
         //FileManagementPracticeagain fp = new FileManagementPracticeagain();
         //fp.CreateFile();
         WriteLine("------------------------------");
-        CompressDecompress cd = new CompressDecompress();
-        cd.Compress_Decom();
-        //cd.ziprac();
-        cd.GzipPract();
-        cd.zpFile();
-        cd.Zarc();
+        //CompressDecompress cd = new CompressDecompress();
+        //cd.Compress_Decom();
+        ////cd.ziprac();
+        //cd.GzipPract();
+        //cd.zpFile();
+        //cd.Zarc();
+        WriteLine("--------------------------");
+        //cd.BrotliPrac();
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = true, // pretty JSON
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Name → name
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, // null ignore
+            //PropertyNameCaseInsensitive = true, // deserialization me flexible
+            IncludeFields = true // fields bhi include (yaha needed nahi but demo ke liye)
+        };
+
+        Serialization_Deserialization sd = new Serialization_Deserialization { age = 23, name = "Vishal sharma" };
+        string json = JsonSerializer.Serialize(sd, options);
+            WriteLine(json);
+
+        Serialization_Deserialization objj= JsonSerializer.Deserialize <Serialization_Deserialization > (json);
+        WriteLine(objj.name);
 
 
 
 
+        List<Serialization_Deserialization> list = new List<Serialization_Deserialization>
+        {
+            new Serialization_Deserialization{age=40,name="Rana" },
+            new Serialization_Deserialization{age=44,name="Rana Kumar" }
+
+        };
+        string json2 = JsonSerializer.Serialize(list);
+        WriteLine(json2);
+
+        var dataa = JsonSerializer.Deserialize<List<Serialization_Deserialization>>(json2);
+        if (dataa != null)
+        {
+            WriteLine(dataa[0].name);
+        }
     }
 }
 
