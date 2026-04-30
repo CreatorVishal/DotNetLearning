@@ -775,6 +775,9 @@ class Practice
         //    WriteLine(des.Age);
         //}
 
+        GenricPractice dr = new GenricPractice();
+
+
 
 
     }
