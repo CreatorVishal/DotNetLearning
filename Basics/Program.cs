@@ -776,6 +776,8 @@ class Practice
         //}
 
         GenricPractice dr = new GenricPractice();
+        NonGenericCollectionPractice cp = new NonGenericCollectionPractice();
+        GenericCollectionPractice Gp = new GenericCollectionPractice();
 
 
 
