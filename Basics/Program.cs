@@ -778,7 +778,9 @@ class Practice
         GenricPractice dr = new GenricPractice();
         NonGenericCollectionPractice cp = new NonGenericCollectionPractice();
         GenericCollectionPractice Gp = new GenericCollectionPractice();
+        WriteLine("----------------------------------------");
 
+        LinqPractice lp = new LinqPractice();
 
 
 
