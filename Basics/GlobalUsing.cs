@@ -5,3 +5,4 @@ global using System.Text;
 global using System.IO;
 global using Basics.Animal;
 global using Basics;
+global using System.Linq;

@@ -782,6 +782,10 @@ class Practice
 
         LinqPractice lp = new LinqPractice();
 
+       
+
+     
+
 
 
     }
