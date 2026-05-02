@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Reflection;
 namespace Basics
 {
     internal class LinqPractice
@@ -168,23 +169,137 @@ namespace Basics
                   new RealWorldProblem { Name = "Amit", Marks = 45, Age = 19 },
                   new RealWorldProblem { Name = "Rahul", Marks = 90, Age = 23 },
                   new RealWorldProblem { Name = "Neha", Marks = 60, Age = 21 },
-                  new RealWorldProblem { Name = "Priya", Marks = 30, Age = 18 }
+                  new RealWorldProblem { Name = "Priya", Marks = 30, Age = 18 },
+                  new RealWorldProblem { Name = "Deepika", Marks = 80, Age = 21 }
             };
             var ress = students.Where(x => x.Marks > 50 && x.Age > 20);
-            foreach(var item in ress)
+            foreach (var item in ress)
             {
-                WriteLine(item.Name+" "+item.Marks);
+                WriteLine(item.Name + " " + item.Marks);
             }
             WriteLine();
 
+            var grp = students.GroupBy(x => x.Marks);
+            foreach (var item in grp)
+            {
+                WriteLine("Marks --  " + item.Key);
+                foreach (var student in item)
+                {
+                    WriteLine(student.Name + " " + student.Age);
+                }
+
+            }
+
+
+            //Join
+
+            List<Stu> dict1 = new List<Stu>()
+                {
+                    new Stu{ Id = 1, Names = "Vishal" },
+                    new Stu { Id = 2, Names = "Amit" },
+                    new Stu { Id = 3, Names = "Rahul" },
+                    new Stu { Id = 4, Names = "Neha" },
+                    new Stu { Id = 5, Names = "Priya" },
+                    new Stu { Id = 6, Names = "Deepika" },
+                    new Stu { Id = 7, Names = "Rohit" },
+
+
+                };
+            List<Course> dict2 = new List<Course>()
+                    {
+                        new Course { Id = 1, Name = "C#" },
+                        new Course { Id = 2, Name = "Java" },
+                        new Course { Id = 3, Name = "Python" },
+                        new Course { Id = 4, Name = "JavaScript" },
+                        new Course { Id = 5, Name = "C++" },
+                        new Course { Id = 6, Name = "Ruby" },
+                        new Course { Id = 8, Name = "Go" },
+                    };
+            WriteLine("----------------------------------------------");
+            //var joiner = dict1.Join(dict2, s => s.Id, c => c.Id, (s, c) => new
+            //{
+            //    s.Names,
+            //    c.Name
+            //});
+
+            //foreach (var item in joiner)
+            //{
+            //    WriteLine(item.Names + " -- " + item.Name);
+            //}
+          var  joiner= from s in dict1
+                       join c in dict2
+                       on s.Id equals c.Id
+                       select new
+                       {
+                           s.Names,
+                            c.Name
+                       };
+            foreach (var item in joiner)
+            {
+                WriteLine(item.Names + " -- " + item.Name);
+            }
+
+            WriteLine("------------------------------------------------------");
+
+            //even number 
+            var listEven = list.Where(x => x % 2 == 0);
+            foreach (var item in listEven)
+            {
+                Write(item + " ");
+            }
+            WriteLine();
+            //double the number in list
+            var listDouble = list.Select(x => x * 2);
+            foreach (var item in listDouble)
+            {
+                Write(item + " ");
+            }
+            WriteLine();
+
+            //Filtering + Sorting
+            var filterSort = list.Where(x => x > 50).OrderBy(x => x);
+            foreach (var item in filterSort)
+            {
+                Write(item + " ");
+
+            }
+            WriteLine();
+
+            WriteLine("Max value in list: " + list.Max());
+            WriteLine("Min value in list: " + list.Min());
+            WriteLine("---------------------------------------------");
+
+            var resul = students.GroupBy(x => x.Marks);
+            foreach (var item in resul)
+            {
+                WriteLine("Marks" + item.Key);
+                foreach (var item2 in item)
+                {
+                    WriteLine(item2.Name);
+                }
+            }
+
+           
+            
+        }
+   
+        public class RealWorldProblem
+        {
+            public string Name;
+            public int Age;
+            public int Marks;
+
         }
 
+        class Stu
+        {
+            public int Id;
+            public string Names;
+        }
+        class Course
+        {
+            public int Id;
+            public string Name;
+        }
     }
-    public class RealWorldProblem
-    {
-        public string Name;
-        public int Age;
-        public int Marks;
-
-   }
 }
