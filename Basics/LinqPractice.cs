@@ -278,11 +278,121 @@ namespace Basics
                     WriteLine(item2.Name);
                 }
             }
+            WriteLine("------------------------------------------------------");
+            List<int> list4 = new List<int>() { 10,20,30,40,50,60,30,20,40};
+            var resGrp = list4.GroupBy(x => x);
+            foreach(var group in resGrp)
+            {
+                WriteLine("Number : " + group.Key);
+                foreach(var item in group)
+                {
+                    Write(item + " ");
+                }
+                WriteLine();
+            }
+            WriteLine();
+            //Query Syntax for Join
 
-           
-            
+            var result12 =
+                from s in dict1
+                join c in dict2
+                on s.Id equals c.Id
+                select new
+                {
+                    s.Names,
+                    c.Name
+                };
+            foreach(var item in result12)
+            {
+                WriteLine(item.Names + " -- " + item.Name);
+            }
+            WriteLine();
+            //-----------------------------------------------------------
+            var ress12 = dict1.Join(dict2,
+                s => s.Id,
+                c => c.Id,
+                (s, c) => new
+                {
+                    s.Names,
+                    c.Name
+                }
+                );
+            foreach (var item in ress12)
+            {
+                WriteLine(item.Names + " -- " + item.Name);
+            }
+            WriteLine();
+            //Level 1--Where, Select, OrderBy, Take, Skip
+
+            List<int> list5 = new List<int>() { 10, 20,  60, 70, 30, 40, 50, 80, 90, 100 };
+            //Where
+            var resWhere = list5.Where(x => x > 50);
+            foreach (var item in resWhere)
+            {
+                Write(item + " ");
+            }
+            //Select 
+            var resSelect = list5.Select(x => x * 3);
+            foreach (var item in resSelect)
+            {
+                Write(item + " ");
+            }
+            WriteLine();
+            //OrderBy
+            var resOrderBy = list5.OrderBy(x => x);
+            foreach (var item in resOrderBy)
+            {
+                Write(item + " ");
+            }
+            WriteLine();
+
+            //Take
+            var resTake = list5.Take(5);
+            foreach (var item in resTake) { 
+                Write(item + " ");
+            }
+            WriteLine();
+
+            //skip
+            var resSkip = list5.Skip(5);
+            foreach (var item in resSkip)
+            {
+                Write(item + " ");
+            }
+            WriteLine();
+
+            //combo 
+            var resCombo = list5.Where(x => x > 50).OrderBy(x => x).Take(3);
+            foreach (var item in resCombo)
+            {
+                Write(item + " ");
+            };
+            WriteLine();
+
+            //Level 2
+
+            //ThenBy method is used to perform a secondary sorting operation on a sequence that has already been sorted using the OrderBy method. It allows you to specify an additional sorting criterion to further order the elements in the sequence when there are multiple elements with the same key in the primary sorting operation.
+            var resThenBy = students.OrderBy(x => x.Marks).ThenBy(x => x.Age);
+            foreach (var item in resThenBy)
+            {
+                WriteLine(item.Name + " " + item.Marks + " " + item.Age);
+            }
+            WriteLine();
+            //ThenByDescending
+            var resThenByDesc = students.OrderBy(x => x.Marks).ThenByDescending(x => x.Age);
+            foreach (var item in resThenByDesc)
+            {
+                WriteLine(item.Name + " " + item.Marks + " " + item.Age);
+            }
+            WriteLine();
+
+
+
+
         }
-   
+
+
+
         public class RealWorldProblem
         {
             public string Name;
