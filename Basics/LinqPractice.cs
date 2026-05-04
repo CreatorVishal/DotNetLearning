@@ -18,6 +18,7 @@ namespace Basics
             //Where with Multiple conditions
             var result2 = list.Where(x => x > 10 && x < 50);
 
+
             foreach (var item in result2)
             {
                 Write(item + " ");
@@ -369,7 +370,7 @@ namespace Basics
             };
             WriteLine();
 
-            //Level 2
+            //Level 2 - ThenBy, ThenByDescending,GroupBy,Join,GroupJoin,Reverse,DefaultIfEmpty
 
             //ThenBy method is used to perform a secondary sorting operation on a sequence that has already been sorted using the OrderBy method. It allows you to specify an additional sorting criterion to further order the elements in the sequence when there are multiple elements with the same key in the primary sorting operation.
             var resThenBy = students.OrderBy(x => x.Marks).ThenBy(x => x.Age);
@@ -385,7 +386,270 @@ namespace Basics
                 WriteLine(item.Name + " " + item.Marks + " " + item.Age);
             }
             WriteLine();
+            WriteLine("------------------------------------------------");
+            //GroupBy
+            var resGrpBy = students.GroupBy(x => x.Marks);
+            foreach(var group in resGrpBy)
+            {
+                Console.Write("Marks: " + group.Key+" ");
 
+
+                foreach (var item in group)
+                {
+                    Write(item.Name+ " ");
+                }
+                WriteLine();
+            }
+            WriteLine();
+
+            List<int> listt = new List<int>() { 10, 20, 10, 30, 20 };
+            var resListt = listt.GroupBy(x => x);
+            foreach(var grp3 in resListt)
+            {
+                Write(grp3.Key+" --> ");
+                foreach(var item in grp3)
+                {
+                    Write(" "+item);
+                }
+                WriteLine();
+
+            }
+            WriteLine();
+
+            //Reverse
+            var resReverse = listt.AsEnumerable().Reverse();
+            foreach(var resT in resReverse)
+            {
+                WriteLine(resT + " ");
+            }
+
+            WriteLine("------------------------------------------------------------------------------------------");
+
+            //Join
+
+
+            var resJoin = dict1.Join(dict2,
+                s => s.Id,
+                c => c.Id,
+                (s, c) => new
+                {
+                    s.Names,
+                    c.Name
+                });
+            foreach(var item in resJoin)
+            {
+                WriteLine(item.Names+ "-->"+item.Name+" ");
+            }
+            WriteLine();
+            WriteLine("--------------------------------------");
+            //Left JOin 
+            var resu12 =
+    from s in dict1
+    join c in dict2
+    on s.Id equals c.Id into grp17
+    from c1 in grp17.DefaultIfEmpty()
+    select new
+    {
+        s.Names,
+        Course = c1 == null ? "No Course" : c1.Name
+    };
+            foreach(var resss in resu12)
+            {
+                WriteLine(resss.Names + "-->" + resss.Course);
+            }
+            WriteLine();
+
+            WriteLine("----------------------");
+
+
+            //Level 3 Distinct,Union,Intersect,Except
+
+            //Distinct
+            List<int> ll = new List<int>() { 10, 20, 10, 20, 20, 20, 20, 30, 30, 30, 40 };
+            List<int> ll2 = new List<int>() { 10, 20, 45,50, 30, 30, 30, 40 };
+            var resDist = ll.Distinct();
+            foreach(var item in resDist)
+            {
+                Write(item + " ");
+            }
+            WriteLine("--------------------------------");
+
+            //Union
+            var resUnion = ll.Union(ll2);
+            WriteLine("Union-->");
+            foreach(var item in resUnion)
+            {
+                Write(item+" ");
+            }
+            WriteLine("---------------------------------------");
+
+            //Intersect
+            var resIntersect= ll.Intersect(ll2);
+            foreach(var item in resIntersect)
+            {
+                WriteLine(item);
+            }
+
+            WriteLine("-----------------------------------------");
+
+            //Except
+            List<int> l1 = new List<int>() { 10, 20, 30, 40 };
+            List<int> l2 = new List<int>() {  20, 30};
+
+            var resExcept = l1.Except(l2);
+            foreach(var item in resExcept)
+            {
+                Write(item+" ");
+            }
+            WriteLine();
+
+            //-----Level-4 DistinctBy,UnionBy, IntersectBy,ExceptBy 
+
+            //DistinctBy--specific property ke basis pr 
+
+            var resDistinctBy = students.DistinctBy(x=>x.Age);
+            foreach(var item in resDistinctBy)
+            {
+                WriteLine(item.Name+" "+item.Age);
+            }
+
+            List<Student> lst1 = new List<Student>()
+            {
+                new Student { Id = 1, Name = "Vishal", Marks = 80 },
+        new Student { Id = 2, Name = "Amit", Marks = 60 },
+        new Student { Id = 3, Name = "Rahul", Marks = 90 }
+            };
+            List<Student> lst2 = new List<Student>()
+    {
+        new Student { Id = 4, Name = "Deepika", Marks = 80 },
+        new Student { Id = 5, Name = "Neha", Marks = 70 },
+        new Student { Id = 6, Name = "Priya", Marks = 60 }   
+    };
+
+            WriteLine("-------------------------------------------------------------");
+
+            //UnionBy
+            var resIUnionBy = lst1.UnionBy(lst2,x=>x.Marks);
+            foreach(var item in resIUnionBy)
+            {
+                Write(item.Name + "--> " + item.Marks);
+            }
+            WriteLine();
+            //IntersectBy
+
+            var resIntersectBy = lst1.IntersectBy(lst2.Select(x => x.Marks), x => x.Marks);
+            foreach(var item in resIntersectBy)
+            {
+                WriteLine(item.Name+"---> "+item.Marks);
+            }
+            WriteLine();
+
+            //ExceptBy
+
+            var resExceptBy = lst1.ExceptBy(lst2.Select(x => x.Marks),x=> x.Marks);
+            foreach(var item in resExceptBy)
+            {
+                WriteLine(item.Name + "-->" + item.Marks);
+            }
+            WriteLine();
+
+            //----Level5 SelectMany, Aggregate , Zip ,Chunk, ToLookup
+
+            //SelectMany
+
+            //first way- normal
+            List<string> ll1 = new List<string>() { "Ab", "CD" };
+            var resSM = ll1.SelectMany(x=>x);
+            foreach(var s in resSM)
+            {
+                WriteLine(s+" ");
+            }
+            //second way
+            List<string> l12 = new List<string>() { "Hi Vishal", "Hello World" };
+            var resSM2 = l12.SelectMany(x => x.Split(' '));
+            foreach (var item in resSM2)
+            {
+                WriteLine(item + " ");
+            }
+
+            //3rd way
+
+            List<Stt1> S1= new List<Stt1>()
+{
+    new Stt1 { Name="Vishal", Subject = new List<string>{"Math","CS"} },
+    new Stt1 { Name="Amit", Subject = new List<string>{"English","Physics"} }
+};
+            var resSmany = S1.SelectMany(x=>x.Subject);
+            foreach (var item in resSmany)
+            {
+                WriteLine(item + " ");
+            }
+
+            //pair
+            var ResSelectmany = S1.SelectMany(
+                s => s.Subject,
+                (s, Sub) => new
+                {
+                    s.Name,
+                    Subject = Sub
+                }
+                );
+
+            foreach (var item in ResSelectmany)
+            {
+                WriteLine(item.Name + " --> " + item.Subject);
+            }
+            WriteLine("-----------------------------------------------------");
+
+            //Aggregate
+            List<int> Aggr = new List<int>() { 10, 20, 30, 40 };
+            var resAgg = Aggr.Aggregate((a, b) => a + b);
+            var resAgg2 = Aggr.Aggregate((a, b) => a * b);
+            WriteLine(resAgg+" "+resAgg2);
+
+            //Zip
+            List<string> names = new List<string>() { "Vishal", "Amit", "Rahul" };
+            List<int> marks = new List<int>() { 80, 60, 90 };
+
+            var resZip = names.Zip(marks, (n, m) => new
+            {
+                Name = n,
+                Mark = m
+
+            });
+            foreach(var item in resZip)
+            {
+                WriteLine(item.Name + " " + item.Mark);
+            }
+
+            WriteLine();
+            //Chunk
+            List<int> A1 = new List<int>() { 10, 20, 30, 40, 50, 60 };
+            var resChunk = A1.Chunk(2);
+            foreach(var grp22 in resChunk)
+            {
+                foreach(var item in grp22)
+                {
+                    Write(item+" ");
+                }
+                WriteLine();
+            }
+
+            //ToLookup
+
+            var reslookup = students.ToLookup(x=>x.Marks);
+            //foreach(var item in reslookup[80])
+            //{
+            //    Write(item.Name+" ");
+            //}
+            foreach(var items in reslookup)
+            {
+                WriteLine("Marks" + items.Key);
+                foreach(var item in items)
+                {
+                    WriteLine(item.Name);
+                }
+            }
 
 
 
@@ -410,6 +674,18 @@ namespace Basics
         {
             public int Id;
             public string Name;
+        }
+        class Student
+        {
+            public int Id;
+            public string Name;
+            public int Marks;
+        }
+
+        class Stt1
+        {
+            public string Name;
+            public List<string> Subject;
         }
     }
 }
