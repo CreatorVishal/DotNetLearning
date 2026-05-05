@@ -602,42 +602,42 @@ class Practice
         WriteLine("Mul: " + calc.Multiply(10, 5));
         WriteLine("Div: " + calc.Divide(10, 5));
 
-        //Generics
+       // //Generics
 
 
 
-        Box<int> b1 = new Box<int>();
-        b1.Value = 123;
-        b1.Value = 2345;
-        Box<string> b2 = new Box<string>() ;
-        b2.Value = "Hello";
-        b2.Value = "Vishal";  
+       // Box<int> b1 = new Box<int>();
+       // b1.Value = 123;
+       // b1.Value = 2345;
+       // Box<string> b2 = new Box<string>() ;
+       // b2.Value = "Hello";
+       // b2.Value = "Vishal";  
         
-        WriteLine(b1.Value);
-        WriteLine(b2.Value);
+       // WriteLine(b1.Value);
+       // WriteLine(b2.Value);
 
-        int x22 = 10;
-        int y22 = 20;
+       // int x22 = 10;
+       // int y22 = 20;
 
-        Box<int> box = new Box<int>();
-       WriteLine("Before: " + x22 + " " + y22);
-        box.swap4(ref x22, ref y22);
-        WriteLine("After: " + x22 + " " + y22);
+       // Box<int> box = new Box<int>();
+       //WriteLine("Before: " + x22 + " " + y22);
+       // box.swap4(ref x22, ref y22);
+       // WriteLine("After: " + x22 + " " + y22);
 
-        Pair<string, int> pair = new Pair<string, int>();
-        pair.First= "Vishal";
-        pair.Second = 23;
-        pair.Display22();
+       // Pair<string, int> pair = new Pair<string, int>();
+       // pair.First= "Vishal";
+       // pair.Second = 23;
+       // pair.Display22();
 
-        Store<int>  sr= new Store<int>();
-        sr.Add22(10);
+       // Store<int>  sr= new Store<int>();
+       // sr.Add22(10);
 
-        //WriteLine(sr.Get());
+       // //WriteLine(sr.Get());
 
-        UserInput1.GetUserInput();
+       // UserInput1.GetUserInput();
 
-        DirectoryInfo ss1= new DirectoryInfo(@"D:\\DotNetLearningAllfiles\\CreatorVishal\\DotNetLearning\\Basics\\subfolderr");
-        ss1.Create();
+       // DirectoryInfo ss1= new DirectoryInfo(@"D:\\DotNetLearningAllfiles\\CreatorVishal\\DotNetLearning\\Basics\\subfolderr");
+       // ss1.Create();
 
         //FileInfo f1 = new FileInfo("Ok.txt");
 
@@ -694,8 +694,8 @@ class Practice
         //h1.Eat();
         //h1.Run1();
 
-        practicefiles pv = new practicefiles();
-        pv.createFiles1();
+        //practicefiles pv = new practicefiles();
+        //pv.createFiles1();
         WriteLine("------------------------------------");
         //FileManagementPracticeagain fp = new FileManagementPracticeagain();
         //fp.CreateFile();
@@ -708,63 +708,63 @@ class Practice
         //cd.Zarc();
         WriteLine("--------------------------");
         //cd.BrotliPrac();
-        var options = new JsonSerializerOptions
-        {
-            WriteIndented = true, // pretty JSON
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Name → name
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, // null ignore
-            //PropertyNameCaseInsensitive = true, // deserialization me flexible
-            IncludeFields = true // fields bhi include (yaha needed nahi but demo ke liye)
-        };
+        //var options = new JsonSerializerOptions
+        //{
+        //    WriteIndented = true, // pretty JSON
+        //    PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Name → name
+        //    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, // null ignore
+        //    //PropertyNameCaseInsensitive = true, // deserialization me flexible
+        //    IncludeFields = true // fields bhi include (yaha needed nahi but demo ke liye)
+        //};
 
-        Serialization_Deserialization sd = new Serialization_Deserialization { age = 23, name = "Vishal sharma" };
-        string json = JsonSerializer.Serialize(sd, options);
-            WriteLine(json);
+        //Serialization_Deserialization sd = new Serialization_Deserialization { age = 23, name = "Vishal sharma" };
+        //string json = JsonSerializer.Serialize(sd, options);
+        //    WriteLine(json);
 
-        Serialization_Deserialization objj= JsonSerializer.Deserialize <Serialization_Deserialization > (json);
-        WriteLine(objj.name);
-
-
+        //Serialization_Deserialization objj= JsonSerializer.Deserialize <Serialization_Deserialization > (json);
+        //WriteLine(objj.name);
 
 
-        List<Serialization_Deserialization> list = new List<Serialization_Deserialization>
-        {
-            new Serialization_Deserialization{age=40,name="Rana" },
-            new Serialization_Deserialization{age=44,name="Rana Kumar" }
 
-        };
-        string json2 = JsonSerializer.Serialize(list);
-        WriteLine(json2);
 
-        var dataa = JsonSerializer.Deserialize<List<Serialization_Deserialization>>(json2);
-        if (dataa != null)
-        {
-            WriteLine(dataa[0].name);
-        }
+        //List<Serialization_Deserialization> list = new List<Serialization_Deserialization>
+        //{
+        //    new Serialization_Deserialization{age=40,name="Rana" },
+        //    new Serialization_Deserialization{age=44,name="Rana Kumar" }
 
-        var options1 = new JsonSerializerOptions
-        {
-            WriteIndented = true,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            PropertyNameCaseInsensitive = true,
-        };
-        Student11 sk1 = new Student11 { Name = "Vishal sharma", Age = 23, Course = "MCA" };
-        string jsonf = JsonSerializer.Serialize(sk1,options1);
+        //};
+        //string json2 = JsonSerializer.Serialize(list);
+        //WriteLine(json2);
 
-        WriteLine(jsonf);
-        //created file (file me save kr diya )
-        File.WriteAllText("jsonprac.json", jsonf);
+        //var dataa = JsonSerializer.Deserialize<List<Serialization_Deserialization>>(json2);
+        //if (dataa != null)
+        //{
+        //    WriteLine(dataa[0].name);
+        //}
 
-        //read 
-        string datajson = File.ReadAllText("jsonprac.json");
+        //var options1 = new JsonSerializerOptions
+        //{
+        //    WriteIndented = true,
+        //    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        //    PropertyNameCaseInsensitive = true,
+        //};
+        //Student11 sk1 = new Student11 { Name = "Vishal sharma", Age = 23, Course = "MCA" };
+        //string jsonf = JsonSerializer.Serialize(sk1,options1);
 
-        //deserialize
-        var objj1 = JsonSerializer.Deserialize<Student11>(datajson, options1);
-        if (objj1 != null)
-        {
-            WriteLine(objj1.Name);
-            WriteLine(objj1.Age);
-        }
+        //WriteLine(jsonf);
+        ////created file (file me save kr diya )
+        //File.WriteAllText("jsonprac.json", jsonf);
+
+        ////read 
+        //string datajson = File.ReadAllText("jsonprac.json");
+
+        ////deserialize
+        //var objj1 = JsonSerializer.Deserialize<Student11>(datajson, options1);
+        //if (objj1 != null)
+        //{
+        //    WriteLine(objj1.Name);
+        //    WriteLine(objj1.Age);
+        //}
 
 
 
@@ -775,16 +775,74 @@ class Practice
         //    WriteLine(des.Age);
         //}
 
-        GenricPractice dr = new GenricPractice();
-        NonGenericCollectionPractice cp = new NonGenericCollectionPractice();
-        GenericCollectionPractice Gp = new GenericCollectionPractice();
-        WriteLine("----------------------------------------");
+        //GenricPractice dr = new GenricPractice();
+        //NonGenericCollectionPractice cp = new NonGenericCollectionPractice();
+        //GenericCollectionPractice Gp = new GenericCollectionPractice();
+        //WriteLine("----------------------------------------");
 
-        LinqPractice lp = new LinqPractice();
+        //LinqPractice lp = new LinqPractice();
 
-       
+        //----------------------------------------------
+        WriteLine("--------------------------------------------------------");
+        Apractice ap = new Apractice();
+        ap.Age = 24;
+        ap.Marks = 98;
+        ap.Name= "Vishal sharma";
+        ap.Display();
+        ap.Division(10, 3);
+        ap.CheckEvenorOdd(10);
+        ap.Largest(10, 20, 15);
+        ap.Grade(98);
+        ap.Sumtillend(5);
+        ap.Reverse(344);
 
-     
+        Students ss1 = new Students();
+        ss1.Name = "Vishal sharma";
+        ss1.Marks = 99;
+        ss1.ShowResults();
+        //first way to encapsulate is by using properties with private fields
+        Stud sd = new Stud();
+        sd.SetMarks(78);
+        Console.WriteLine("Marks: " + sd.GetMarks());
+
+        //second way to encapsulate Property with backing field + validation
+        stud2 sd2 = new stud2(101);
+        sd2.Marks = 89;
+        Console.WriteLine("Marks: " + sd2.Marks);
+        WriteLine(sd2.id);
+        // sd2.id = 34; // This line will cause a compilation error because 'id' has only a getter and no setter.
+        WriteLine("---------------------------------------------");
+
+        //Constructor
+
+        Joker jk = new Joker();
+        Joker jk1 = new Joker("Vishal Ops");
+        WriteLine(jk1.Name);
+
+        Joker jk2 = new Joker("Vishal Op", 23);
+        WriteLine(jk2.Name);
+        WriteLine(jk2.Age);
+
+        //copy constructor
+        Joker jk3 = new Joker(jk2);
+        WriteLine("Copy constructor");
+        WriteLine(jk3.Name);
+        WriteLine(jk3.Age);
+        WriteLine("----------------------Inheritance----------------------------");
+        stu su1 = new stu();
+        //su1.Name = "Rahul";
+        //su1.Marks = 34;
+
+        //su1.ShowName();
+        //su1.ShowMarks();
+        su1.Show();// child ka method call hoga 
+
+        person p111 = new stu();
+        p111.Show(); //isme abhi to parent ka  call hoga qki virtual or override nhi h but agar hmne parent me virtual or child me override kr diya to child ka call hoga
+
+
+
+
 
 
 
