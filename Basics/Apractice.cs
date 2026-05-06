@@ -241,6 +241,58 @@ namespace Basics
         {
             WriteLine("Child class method called");
         }
+
+
+    }
+
+    class Carc
+    {
+        public string Brand;
+        public int Speed;
+        public string Color;
+        public void Start()
+        {
+            WriteLine($"{Brand} Started");
+        }
+        public void Stop()
+        {
+            WriteLine($"{Brand} Stopped");
+        }
+        public void Display()
+        {
+            WriteLine($"Brand: {Brand}, Speed: {Speed} km/h, Color: {Color}");
+        }
+
+    }
+    class Calculator66{
+        public void Add2(int a, int b)
+        {
+            WriteLine($"Sum: {a + b}");
+        }
+        public void Add2(int a , int b,int c)
+        {
+            WriteLine($"Sum: {a + b + c}");
+        }
+        public void Add2(double a , double b)
+        {
+            WriteLine($"Sum: {a + b}");
+        }
+    }
+
+    //Method Overriding
+    class Animal11
+    {
+        public virtual void Sound()
+        {
+            WriteLine("Animal sound");
+        }
+    }
+    class Dog11 : Animal11
+    {
+        public override void Sound()
+        {
+            WriteLine("Dog Sound");
+        }
     }
 
 

@@ -416,6 +416,14 @@ namespace Basics
             }
             WriteLine();
 
+            listt.Reverse();
+            WriteLine("Reversed list----------------------------------------------------------------------------");
+                foreach(var item in listt)
+                {
+                    Write(item + " ");
+            }
+
+
             //Reverse
             var resReverse = listt.AsEnumerable().Reverse();
             foreach(var resT in resReverse)
