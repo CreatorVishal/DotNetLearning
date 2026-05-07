@@ -840,7 +840,7 @@ class Practice
         //person p111 = new stu();
         //p111.Show(); //isme abhi to parent ka  call hoga qki virtual or override nhi h but agar hmne parent me virtual or child me override kr diya to child ka call hoga
         WriteLine("--------------------------------------------------------------");
-        //        Linq1 l1 = new Linq1();
+        Linq1 l1 = new Linq1();
 
         //        List<int> nums = new List<int>()
         //{
@@ -858,21 +858,21 @@ class Practice
         //            Console.Write(item + " ");
         //        }
 
-        Calculator66 cs = new Calculator66();
-        cs.Add2(10, 20, 30);
+        //Calculator66 cs = new Calculator66();
+        //cs.Add2(10, 20, 30);
 
-        Carc cr1 = new Basics.Carc();
-        cr1.Brand = "Fortuner";
-        cr1.Speed=200;
-        cr1.Color="Black";
-        cr1.Start();
-        cr1.Display();
-        WriteLine("---------------------------------------");
-        //Dog11 dg11 = new Dog11();
-        ////dg11.Sound();//isme child class ka method call hoga. 
-        Animal11 ad11 = new Dog11();
-        //ad11.Sound();// isme Parent class ka method call hoga qki virtual nhi lgaya h 
-        ad11.Sound();
+        //Carc cr1 = new Basics.Carc();
+        //cr1.Brand = "Fortuner";
+        //cr1.Speed=200;
+        //cr1.Color="Black";
+        //cr1.Start();
+        //cr1.Display();
+        //WriteLine("---------------------------------------");
+        ////Dog11 dg11 = new Dog11();
+        //////dg11.Sound();//isme child class ka method call hoga. 
+        //Animal11 ad11 = new Dog11();
+        ////ad11.Sound();// isme Parent class ka method call hoga qki virtual nhi lgaya h 
+        //ad11.Sound();
 
 
 
