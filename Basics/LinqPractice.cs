@@ -417,7 +417,7 @@ namespace Basics
             WriteLine();
 
             listt.Reverse();
-            WriteLine("Reversed list----------------------------------------------------------------------------");
+            WriteLine("Reversed list---->");
                 foreach(var item in listt)
                 {
                     Write(item + " ");
@@ -431,7 +431,7 @@ namespace Basics
                 WriteLine(resT + " ");
             }
 
-            WriteLine("------------------------------------------------------------------------------------------");
+            WriteLine("---------------------");
 
             //Join
 

@@ -457,7 +457,7 @@ class Practice
         Generics<int> obj445 = new Generics<int>();
         obj445.Run<int, string>(10, "Vishal");
 
-        DelegatesPrac Dele = new();
+        //DelegatesPrac Dele = new();
 
         Func<int, float, float> M = (a, b) => a * b;
 
@@ -873,6 +873,12 @@ class Practice
         //Animal11 ad11 = new Dog11();
         ////ad11.Sound();// isme Parent class ka method call hoga qki virtual nhi lgaya h 
         //ad11.Sound();
+        WriteLine("---------------------------------------"); 
+        Program09 op = new Program09();
+       Program09.Notify n = op.Email;
+        n += op.Sms;
+        n();
+
 
 
 
