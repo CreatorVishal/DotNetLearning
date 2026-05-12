@@ -879,9 +879,40 @@ class Practice
         n += op.Sms;
         n();
 
+        try
+        {
+            int a = 10;
+            int b = 0;
 
+            int c = a / b;
 
+            Console.WriteLine(c);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error Aaya");
 
+            Console.WriteLine(ex.Message);
+        }
+
+        Console.WriteLine("Program End");
+
+        Student110 st10 = new Student110();
+        st10.name="Vishal sharma";
+        st10.age = 24;
+        st10.marks = 99;
+        st10.Show();
+
+        Laptop lp1 = new Laptop("Dell", 50000, "16GB");
+        lp1.show();
+        INotification OP = new EmailNotification();
+        INotification OP2 = new SmsNotification();
+        OP.Send(); 
+        OP2.Send();
+
+        Enc ec = new Enc();
+        ec.Age = -1;
+        WriteLine(ec.Age);
 
 
 
