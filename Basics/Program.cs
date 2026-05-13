@@ -873,50 +873,56 @@ class Practice
         //Animal11 ad11 = new Dog11();
         ////ad11.Sound();// isme Parent class ka method call hoga qki virtual nhi lgaya h 
         //ad11.Sound();
-        WriteLine("---------------------------------------"); 
-        Program09 op = new Program09();
-       Program09.Notify n = op.Email;
-        n += op.Sms;
-        n();
+        WriteLine("---------------------------------------");
+        // Program09 op = new Program09();
+        //Program09.Notify n = op.Email;
+        // n += op.Sms;
+        // n();
 
-        try
-        {
-            int a = 10;
-            int b = 0;
+        // try
+        // {
+        //     int a = 10;
+        //     int b = 0;
 
-            int c = a / b;
+        //     int c = a / b;
 
-            Console.WriteLine(c);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error Aaya");
+        //     Console.WriteLine(c);
+        // }
+        // catch (Exception ex)
+        // {
+        //     Console.WriteLine("Error Aaya");
 
-            Console.WriteLine(ex.Message);
-        }
+        //     Console.WriteLine(ex.Message);
+        // }
 
-        Console.WriteLine("Program End");
+        // Console.WriteLine("Program End");
 
-        Student110 st10 = new Student110();
-        st10.name="Vishal sharma";
-        st10.age = 24;
-        st10.marks = 99;
-        st10.Show();
+        // Student110 st10 = new Student110();
+        // st10.name="Vishal sharma";
+        // st10.age = 24;
+        // st10.marks = 99;
+        // st10.Show();
 
-        Laptop lp1 = new Laptop("Dell", 50000, "16GB");
-        lp1.show();
-        INotification OP = new EmailNotification();
-        INotification OP2 = new SmsNotification();
-        OP.Send(); 
-        OP2.Send();
+        // Laptop lp1 = new Laptop("Dell", 50000, "16GB");
+        // lp1.show();
+        // INotification OP = new EmailNotification();
+        // INotification OP2 = new SmsNotification();
+        // OP.Send(); 
+        // OP2.Send();
 
-        Enc ec = new Enc();
-        ec.Age = -1;
-        WriteLine(ec.Age);
+        // Enc ec = new Enc();
+        // ec.Age = -1;
+        // WriteLine(ec.Age);
 
+        //------------------------------------------
 
-
-
+        //Electronics e1 = new Electronics("Samsung", 50000);
+        Electronics e1 = new Electronics();
+        e1.Brand = "Samsung";
+        e1.Price = 400000;
+        e1.ShowElectronics();
+        //e1.ShowElectronics();
+        //e1.Price = -20000;
 
 
     }
