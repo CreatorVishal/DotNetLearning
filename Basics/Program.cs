@@ -923,6 +923,27 @@ class Practice
         e1.ShowElectronics();
         //e1.ShowElectronics();
         //e1.Price = -20000;
+        //Bike1 b1 = new Bike1();
+        //b1.Brand="Yamaha";
+        //b1.Price = 150000;
+        //b1.Start();
+        //b1.Ride();
+        //------------------------------------------------
+        WriteLine("---------------------------------------");
+        //Practicee pr1 = new Practicee();
+        Practicee pr2 = new Practicee("Rahul");
+        //pr2.Show1();
+        //Practicee pr3 = new Practicee("Vishal", 23);
+        //pr3.Show1();
+        Mobile1 mm1 = new Mobile1();
+
+
+        //--------------------------------------
+        Calculator2 c12 = new Calculator2();
+
+        WriteLine(c12.Add12(10, 20));
+
+       WriteLine(c12.Add12(10, 20, 30));
 
 
     }
