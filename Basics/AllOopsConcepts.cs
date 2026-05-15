@@ -51,7 +51,7 @@ namespace Basics
 
     public class Vehicle1
     {
-      public string Brand { get; set; }
+        public string Brand { get; set; }
         public int Price { get; set; }
         public void Start()
         {
@@ -81,10 +81,10 @@ namespace Basics
         //{
         //    Console.WriteLine("Static Constructor");
         //}
-        public Practicee(string Name):this()
+        public Practicee(string Name) : this()
         {
             WriteLine("I am a parameterized constructor");
-        } 
+        }
         public Practicee(string Name, int Price)
         {
             this.Name = Name;
@@ -107,7 +107,7 @@ namespace Basics
 
     public class Mobile1 : Electronics1
     {
-        public Mobile1() :base()
+        public Mobile1() : base()
         {
             WriteLine("Mobile Constructor");
         }
@@ -127,4 +127,65 @@ namespace Basics
             return a + b + c;
         }
     }
+
+    //Method overriding
+    class vehicle2
+    {
+        public virtual void Start()
+        {
+            WriteLine("Starting vehicle...");
+        }
+    }
+    class Car32 : vehicle2
+    {
+        public override void Start()
+        {
+            WriteLine("Starting car...");
+        }
+    }
+
+    //Access Modifiers
+
+    class BankAccount
+    {
+        //Private access modifier: Only accessible within the class
+        private int balance = 50000;
+        public void show()
+        {
+            WriteLine($"Balance: {balance}");
+        }
+    }
+    public class Animal22
+    {
+        //Protected access modifier: Accessible within the class and its derived classes
+        protected string species = "Mammal";
+    }
+    public class Pet : Animal22
+    {
+        public void ShowSpecies1()
+        {
+            WriteLine($"Species: {species}");
+        }
+    }
+    //Abstract class and Methods
+    public abstract class  Animal12
+    {
+        public abstract void sound();
+
+        public void eat()
+        {
+            WriteLine("Eating...");
+        }
+
+
+    }
+    public class Dog23 : Animal12
+    {
+        public override void sound()
+        {
+            WriteLine("Dog barks");
+        }
+    }
+
+
 }

@@ -945,7 +945,18 @@ class Practice
 
        WriteLine(c12.Add12(10, 20, 30));
 
+        vehicle2 vh = new Car32();
+        vh.Start();
 
+        //--------------------------------4
+        BankAccount ba = new BankAccount();
+        //ba.Balance = 200000;// ye private h isliye access nhi hoga 
+        //WriteLine(ba.Balance);
+        ba.show();
+        //------------------------------
+        Pet p13 = new Pet();
+
+        p13.ShowSpecies1();
     }
 }
 
