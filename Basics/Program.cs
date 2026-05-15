@@ -957,6 +957,18 @@ class Practice
         Pet p13 = new Pet();
 
         p13.ShowSpecies1();
+
+        //-------------------------------
+        Dog23 d = new Dog23();
+        d.sound();
+        d.eat();
+        //-------------------------------------------------
+        //Mobile m1 = new Mobile();
+        //m1.TakePhoto();
+        //m1.PlayMusic();
+        ICamera m1 = new Mobile();
+        m1.TakePhoto();
+       
     }
 }
 

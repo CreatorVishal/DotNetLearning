@@ -187,5 +187,28 @@ namespace Basics
         }
     }
 
+    //Interface
+    interface ICamera
+    {
+        void TakePhoto();
+    }
+
+    interface IMusic
+    {
+        void PlayMusic();
+    }
+    class Mobile : ICamera, IMusic
+    {
+        public void TakePhoto()
+        {
+            Console.WriteLine("Photo Taken");
+        }
+
+        public void PlayMusic()
+        {
+            Console.WriteLine("Music Playing");
+        }
+    }
+
 
 }
