@@ -968,7 +968,21 @@ class Practice
         //m1.PlayMusic();
         ICamera m1 = new Mobile();
         m1.TakePhoto();
-       
+        //------------------------------------
+        Student009 sa1 = new Student009();
+        sa1.Id=101;
+        sa1.Name = "Vishal ....";
+        sa1.Course = "BCA";
+        sa1.Study();
+        sa1.Show();
+        WriteLine("----------------------------------");
+        Mobile009 mk1 = new Mobile009("Iphone",120000,8);
+        mk1.ShowMobileDetails();
+        WriteLine("---------------------------------------");
+        BankAccount009 ba01 = new BankAccount009();
+        ba01.Deposit(5000);
+        ba01.Withdraw(2000);
+        ba01.CheckBalance();
     }
 }
 

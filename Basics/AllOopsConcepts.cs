@@ -211,4 +211,91 @@ namespace Basics
     }
 
 
+    //----------Test---------
+    //Q1
+    public class Student009
+    {
+        public int Id{ get; set; }
+        public string Name { get; set; }
+        public string Course { get; set; }
+
+
+        public void Show()
+        {
+            WriteLine($"Id: {Id}");
+           WriteLine($"Name: {Name}");
+           WriteLine($"Course: {Course}");
+
+        }
+        public void Study()
+        {
+            WriteLine($"{Name} is Studying");
+        }
+    }
+    //Q2
+    public class Mobile009
+    {
+        public string Brand { get; set; }
+        public int Price { get; set; }
+        public int Ram { get; set; }
+
+        public void ShowMobileDetails()
+        {
+            WriteLine($"Brand :{Brand}");
+            WriteLine($"Price :{Price}");
+            WriteLine($"Ram : {Ram}");
+        }
+        public Mobile009(string Brand,int Price,int Ram)
+        {
+            this.Brand = Brand;
+            this.Price = Price;
+            this.Ram = Ram;
+
+        }
+    }
+
+    //Q3
+    public class BankAccount009
+    {
+        public string AccountHolder { get; set; }
+
+        private int Balance;
+
+        public void Deposit(int amount)
+        {
+            if (amount <= 0)
+            {
+                WriteLine("Please enter a valid amount");
+                return;
+            }
+
+            Balance += amount;
+
+            WriteLine($"{amount} Deposited Successfully");
+        }
+
+        public void Withdraw(int amount)
+        {
+            if (amount <= 0)
+            {
+                WriteLine("Invalid Withdraw Amount");
+                return;
+            }
+
+            if (amount > Balance)
+            {
+                WriteLine("Insufficient Balance");
+                return;
+            }
+
+            Balance -= amount;
+
+            WriteLine($"{amount} Withdraw Successfully");
+        }
+
+        public void CheckBalance()
+        {
+            WriteLine($"Current Balance : {Balance}");
+        }
+    }
 }
