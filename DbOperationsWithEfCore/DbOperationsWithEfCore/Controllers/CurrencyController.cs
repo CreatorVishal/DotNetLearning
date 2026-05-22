@@ -21,5 +21,17 @@ namespace DbOperationsWithEfCore.Controllers
 
             return Ok(data);
         }
+        [HttpGet("{id}")]
+        public IActionResult GetCurrencyById(int id)
+        {
+            var currency = _context.Currencies.FirstOrDefault(x => x.Id == id);
+
+            if (currency == null)
+            {
+                return NotFound("Currency not found");
+            }
+
+            return Ok(currency);
+        }
     }
 }

@@ -25,10 +25,14 @@ namespace DbOperationsWithEfCore.Data
                 new Language() { Id = 4, Title = "Urdu", Description = "Urdu" }
 
                 );
+            modelBuilder.Entity<Employee>().ToTable("Employees");
         }
         public DbSet<Book> Books { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<BookPrice> BookPrices { get; set; }
         public DbSet<Currency>Currencies { get; set; }
+
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }
