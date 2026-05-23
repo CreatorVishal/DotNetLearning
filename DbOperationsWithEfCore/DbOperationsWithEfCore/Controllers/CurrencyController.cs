@@ -1,4 +1,4 @@
-﻿using DbOperationsWithEfCore.Data;
+﻿using DbOperationsWithEfCore.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DbOperationsWithEfCore.Controllers
@@ -7,24 +7,26 @@ namespace DbOperationsWithEfCore.Controllers
     [Route("api/[controller]")]
     public class CurrencyController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly ICurrencyService _currencyService;
 
-        public CurrencyController(AppDbContext context)
+        // DI Here
+        public CurrencyController(ICurrencyService currencyService)
         {
-            _context = context;
+            _currencyService = currencyService;
         }
 
         [HttpGet]
         public IActionResult GetCurrencies()
         {
-            var data = _context.Currencies.ToList();
+            var data = _currencyService.GetAllCurrencies();
 
             return Ok(data);
         }
+
         [HttpGet("{id}")]
         public IActionResult GetCurrencyById(int id)
         {
-            var currency = _context.Currencies.FirstOrDefault(x => x.Id == id);
+            var currency = _currencyService.GetCurrencyById(id);
 
             if (currency == null)
             {
@@ -32,6 +34,14 @@ namespace DbOperationsWithEfCore.Controllers
             }
 
             return Ok(currency);
+        }
+
+        [HttpGet("count")]
+        public IActionResult GetCurrencyCount()
+        {
+            var count = _currencyService.GetCurrencyCount();
+
+            return Ok(count);
         }
     }
 }

@@ -1,4 +1,5 @@
 using DbOperationsWithEfCore.Data;
+using DbOperationsWithEfCore.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace DbOperationsWithEfCore
@@ -14,6 +15,9 @@ namespace DbOperationsWithEfCore
                 options.UseSqlServer(
                     builder.Configuration.GetConnectionString("DefaultConnection"))
             );
+
+            // Dependency Injection
+            builder.Services.AddScoped<ICurrencyService, CurrencyService>();
 
             // Add services to the container.
             builder.Services.AddControllers();
