@@ -42,7 +42,7 @@ namespace DbOperationsWithEfCore.Data
         public decimal Fees { get; set; }
 
 
-        // DATE TYPE
+        // DATE TYPE 
         [DataType(DataType.Date)]
         public DateTime DOB { get; set; }
 

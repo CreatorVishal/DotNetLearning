@@ -10,3 +10,4 @@
         public Currency Currency { get; set; }
     }
 }
+ 
