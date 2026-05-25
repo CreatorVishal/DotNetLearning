@@ -983,6 +983,13 @@ class Practice
         ba01.Deposit(5000);
         ba01.Withdraw(2000);
         ba01.CheckBalance();
+
+        WriteLine("----------------------");
+        Employee emp = new Employee();
+
+        emp.Code();
+        emp.Test();
+
     }
 }
 

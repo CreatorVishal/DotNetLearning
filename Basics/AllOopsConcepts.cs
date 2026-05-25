@@ -298,4 +298,27 @@ namespace Basics
             WriteLine($"Current Balance : {Balance}");
         }
     }
+    interface IDeveloper
+    {
+        void Code();
+    }
+
+    interface ITester
+    {
+        void Test();
+    }
+
+    // Multiple inheritance using interfaces
+    class Employee : IDeveloper, ITester
+    {
+        public void Code()
+        {
+            Console.WriteLine("Employee is writing code");
+        }
+
+        public void Test()
+        {
+            Console.WriteLine("Employee is testing software");
+        }
+    }
 }
