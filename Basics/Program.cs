@@ -989,6 +989,13 @@ class Practice
 
         emp.Code();
         emp.Test();
+        
+        //Employee111 emp111 = new Employee111();
+
+        //emp111.Salary = 50000;
+
+        //emp111.Show();
+   
 
     }
 }

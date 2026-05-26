@@ -321,4 +321,26 @@ namespace Basics
             Console.WriteLine("Employee is testing software");
         }
     }
+    //class Employee111
+    //{
+    //    private int salary;
+
+    //    public int Salary
+    //    {
+    //        get { return salary; }
+
+    //        set
+    //        {
+    //            if (value > 0)
+    //            {
+    //                salary = value;
+    //            }
+    //        }
+    //    }
+
+    //    public void Show()
+    //    {
+    //        Console.WriteLine("Salary: " + salary);
+    //    }
+    //}
 }
