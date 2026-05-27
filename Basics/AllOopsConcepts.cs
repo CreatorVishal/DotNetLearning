@@ -321,6 +321,29 @@ namespace Basics
             Console.WriteLine("Employee is testing software");
         }
     }
+    class Engine
+    {
+        public void StartEngine()
+        {
+            Console.WriteLine("Engine Started");
+        }
+    }
+
+    class Car22
+    {
+        private Engine engine;
+
+        public Car22()
+        {
+            engine = new Engine();
+        }
+
+        public void StartCar()
+        {
+            engine.StartEngine();
+            Console.WriteLine("Car Started");
+        }
+    }
     //class Employee111
     //{
     //    private int salary;
