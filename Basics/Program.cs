@@ -999,6 +999,13 @@ class Practice
         Car22 c122 = new Car22();
 
         c122.StartCar();
+        //------------------------------
+        Employee150 emp150 = new Employee150();
+
+        emp150.Code();
+        emp150.Test();
+
+        Console.ReadLine();
 
 
     }

@@ -366,4 +366,26 @@ namespace Basics
     //        Console.WriteLine("Salary: " + salary);
     //    }
     //}
+    interface IDeveloper150
+    {
+        void Code();
+    }
+
+    interface ITester150
+    {
+        void Test();
+    }
+
+    class Employee150 : IDeveloper150, ITester150
+    {
+        public void Code()
+        {
+            Console.WriteLine("Employee is writing code");
+        }
+
+        public void Test()
+        {
+            Console.WriteLine("Employee is testing software");
+        }
+    }
 }
