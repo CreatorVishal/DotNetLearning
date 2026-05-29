@@ -1011,6 +1011,8 @@ class Practice
         Calculator1234 c = new Calculator1234();
         c.Show();
 
+        Console.WriteLine(MathHelper.Square(5));
+
 
     }
 }

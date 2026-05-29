@@ -395,4 +395,11 @@ namespace Basics
             Console.WriteLine("Sealed Class Example");
         }
     }
+    public static class MathHelper
+    {
+        public static int Square(int num)
+        {
+            return num * num;
+        }
+    }
 }
