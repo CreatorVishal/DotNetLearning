@@ -388,4 +388,11 @@ namespace Basics
             Console.WriteLine("Employee is testing software");
         }
     }
+    public sealed class Calculator1234
+    {
+        public void Show()
+        {
+            Console.WriteLine("Sealed Class Example");
+        }
+    }
 }

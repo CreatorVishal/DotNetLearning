@@ -1007,6 +1007,10 @@ class Practice
 
         Console.ReadLine();
 
+        //--------------------------
+        Calculator1234 c = new Calculator1234();
+        c.Show();
+
 
     }
 }
