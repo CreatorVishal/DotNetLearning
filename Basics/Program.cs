@@ -1013,7 +1013,19 @@ class Practice
 
         Console.WriteLine(MathHelper.Square(5));
 
+        WriteLine("-------------------------------------");
+        StudentX stuObj = new StudentX();
+        stuObj.ShowPerson();
+        stuObj.Study();
 
+        EmployeeX empObj = new EmployeeX();
+        empObj.ShowPerson();
+        empObj.Work();
+
+        Programmer progObj = new Programmer();
+        progObj.Breathe();
+        progObj.Think();
+        progObj.Code();
     }
 }
 

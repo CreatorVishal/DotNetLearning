@@ -402,4 +402,53 @@ namespace Basics
             return num * num;
         }
     }
+    //Hierarchical Inheritance
+    public class PersonX
+    {
+        public void ShowPerson()
+        {
+            Console.WriteLine("I am Person");
+        }
+    }
+
+    public class StudentX : PersonX
+    {
+        public void Study()
+        {
+            Console.WriteLine("Student is studying");
+        }
+    }
+
+    public class EmployeeX : PersonX
+    {
+        public void Work()
+        {
+            Console.WriteLine("Employee is working");
+        }
+    }
+    //Multilevel inheritance
+    public class LivingThing
+    {
+        public void Breathe()
+        {
+            Console.WriteLine("Breathing...");
+        }
+    }
+
+    public class HumanBeing : LivingThing
+    {
+        public void Think()
+        {
+            Console.WriteLine("Thinking...");
+        }
+    }
+
+    public class Programmer : HumanBeing
+    {
+        public void Code()
+        {
+            Console.WriteLine("Writing Code...");
+        }
+    }
+
 }
