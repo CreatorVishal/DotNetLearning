@@ -450,5 +450,29 @@ namespace Basics
             Console.WriteLine("Writing Code...");
         }
     }
+    public class LibraryShelf
+    {
+        private string[] books = new string[3];
+
+        public string this[int index]
+        {
+            get
+            {
+                return books[index];
+            }
+            set
+            {
+                books[index] = value;
+            }
+        }
+
+        public void DisplayBooks()
+        {
+            foreach (string book in books)
+            {
+                Console.WriteLine(book);
+            }
+        }
+    }
 
 }

@@ -1026,6 +1026,14 @@ class Practice
         progObj.Breathe();
         progObj.Think();
         progObj.Code();
+        //------------------------------
+        LibraryShelf shelf = new LibraryShelf();
+
+        shelf[0] = "C# Programming";
+        shelf[1] = "ASP.NET Core";
+        shelf[2] = "SQL Server";
+
+        shelf.DisplayBooks();
     }
 }
 
