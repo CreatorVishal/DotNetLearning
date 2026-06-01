@@ -1040,6 +1040,20 @@ class Practice
         NotificationManager manager = new NotificationManager(service);
 
         manager.Notify();
+        WriteLine("---------------------------------------");
+
+        Course c1 = new Course("MCA", 24);
+        Course c2 = new Course("BCA", 36);
+
+        UniversityStudent s1 = new UniversityStudent("Vishal", 90, c1);
+        UniversityStudent s2 = new UniversityStudent("Rahul", 85, c2);
+
+        UniversityManager manager = new UniversityManager();
+
+        manager.AddStudent(s1);
+        manager.AddStudent(s2);
+
+        manager.ShowAllStudents();
     }
 }
 

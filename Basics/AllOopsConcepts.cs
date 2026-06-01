@@ -309,7 +309,7 @@ namespace Basics
     }
 
     // Multiple inheritance using interfaces
-    class Employee : IDeveloper, ITester
+    class Employee1111 : IDeveloper, ITester
     {
         public void Code()
         {
@@ -501,5 +501,77 @@ namespace Basics
             _messageService.SendMessage();
         }
     }
+    public class Course
+    {
+        public string CourseName { get; set; }
+        public int DurationMonths { get; set; }
 
+        public Course(string courseName, int durationMonths)
+        {
+            CourseName = courseName;
+            DurationMonths = durationMonths;
+        }
+
+        public void ShowCourse()
+        {
+            Console.WriteLine($"Course : {CourseName}");
+            Console.WriteLine($"Duration : {DurationMonths} Months");
+        }
+    }
+
+    public class UniversityStudent
+    {
+        private int marks;
+
+        public string StudentName { get; set; }
+
+        public int Marks
+        {
+            get { return marks; }
+            set
+            {
+                if (value >= 0 && value <= 100)
+                    marks = value;
+                else
+                    Console.WriteLine("Invalid Marks");
+            }
+        }
+
+        public Course StudentCourse { get; set; }
+
+        public UniversityStudent(string name, int marks, Course course)
+        {
+            StudentName = name;
+            Marks = marks;
+            StudentCourse = course;
+        }
+
+        public void DisplayStudent()
+        {
+            Console.WriteLine($"Name : {StudentName}");
+            Console.WriteLine($"Marks : {Marks}");
+            Console.WriteLine($"Course : {StudentCourse.CourseName}");
+        }
+    }
+
+    public class UniversityManager
+    {
+        private List<UniversityStudent> students = new();
+
+        public void AddStudent(UniversityStudent student)
+        {
+            students.Add(student);
+        }
+
+        public void ShowAllStudents()
+        {
+            Console.WriteLine("===== Student List =====");
+
+            foreach (var student in students)
+            {
+                student.DisplayStudent();
+                Console.WriteLine("------------------");
+            }
+        }
+    }
 }
