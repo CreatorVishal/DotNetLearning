@@ -474,5 +474,32 @@ namespace Basics
             }
         }
     }
+    public interface IMessageService
+    {
+        void SendMessage();
+    }
+
+    public class WhatsAppService : IMessageService
+    {
+        public void SendMessage()
+        {
+            Console.WriteLine("Message Sent Through WhatsApp");
+        }
+    }
+
+    public class NotificationManager
+    {
+        private readonly IMessageService _messageService;
+
+        public NotificationManager(IMessageService messageService)
+        {
+            _messageService = messageService;
+        }
+
+        public void Notify()
+        {
+            _messageService.SendMessage();
+        }
+    }
 
 }

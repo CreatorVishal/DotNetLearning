@@ -1034,6 +1034,12 @@ class Practice
         shelf[2] = "SQL Server";
 
         shelf.DisplayBooks();
+
+        IMessageService service = new WhatsAppService();
+
+        NotificationManager manager = new NotificationManager(service);
+
+        manager.Notify();
     }
 }
 
