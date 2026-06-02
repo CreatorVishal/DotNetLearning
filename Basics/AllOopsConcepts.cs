@@ -574,4 +574,43 @@ namespace Basics
             }
         }
     }
+    public class BankDemo
+    {
+        private double balance;
+
+        public BankDemo(double amount)
+        {
+            balance = amount;
+        }
+
+        public void Withdraw(double amount)
+        {
+            if (amount > balance)
+            {
+                throw new Exception("Insufficient Balance");
+            }
+
+            balance -= amount;
+            Console.WriteLine($"Withdraw Success. Remaining Balance = {balance}");
+        }
+    }
+    public class Distance
+    {
+        public int Meter { get; set; }
+
+        public Distance(int meter)
+        {
+            Meter = meter;
+        }
+
+        public static Distance operator +(Distance d1, Distance d2)
+        {
+            return new Distance(d1.Meter + d2.Meter);
+        }
+
+        public void Show()
+        {
+            Console.WriteLine($"Distance = {Meter} Meter");
+        }
+    }
 }

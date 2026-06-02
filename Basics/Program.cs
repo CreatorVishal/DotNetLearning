@@ -1042,18 +1042,34 @@ class Practice
         manager.Notify();
         WriteLine("---------------------------------------");
 
-        Course c1 = new Course("MCA", 24);
-        Course c2 = new Course("BCA", 36);
+        //Course c1111 = new Course("MCA", 24);
+        //Course c1111 = new Course("BCA", 36);
 
-        UniversityStudent s1 = new UniversityStudent("Vishal", 90, c1);
-        UniversityStudent s2 = new UniversityStudent("Rahul", 85, c2);
+        //UniversityStudent s11 = new UniversityStudent("Vishal", 90, c1);
+        //UniversityStudent s21 = new UniversityStudent("Rahul", 85, c2);
 
-        UniversityManager manager = new UniversityManager();
+        //UniversityManager manager = new UniversityManager();
 
-        manager.AddStudent(s1);
-        manager.AddStudent(s2);
+        //manager.AddStudent(s11);
+        //manager.AddStudent(s21);
 
-        manager.ShowAllStudents();
+        //manager.ShowAllStudents();
+        BankDemo acc = new BankDemo(5000);
+
+        try
+        {
+            acc.Withdraw(7000);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        Distance d111 = new Distance(100);
+        Distance d2 = new Distance(200);
+
+        Distance d3 = d111 + d2;
+
+        d3.Show();
     }
 }
 
