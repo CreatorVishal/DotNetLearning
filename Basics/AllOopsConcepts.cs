@@ -613,4 +613,32 @@ namespace Basics
             Console.WriteLine($"Distance = {Meter} Meter");
         }
     }
+    public class DepartmentInfo
+    {
+        public string DepartmentName { get; set; }
+
+        public DepartmentInfo(string departmentName)
+        {
+            DepartmentName = departmentName;
+        }
+    }
+
+    public class EmployeeRecord
+    {
+        public string EmployeeName { get; set; }
+
+        public DepartmentInfo Department { get; set; }
+
+        public EmployeeRecord(string employeeName, DepartmentInfo department)
+        {
+            EmployeeName = employeeName;
+            Department = department;
+        }
+
+        public void ShowDetails()
+        {
+            Console.WriteLine($"Employee : {EmployeeName}");
+            Console.WriteLine($"Department : {Department.DepartmentName}");
+        }
+    }
 }

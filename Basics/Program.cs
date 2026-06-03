@@ -985,10 +985,10 @@ class Practice
         ba01.CheckBalance();
 
         WriteLine("----------------------");
-        Employee emp = new Employee();
+        //Employee emp = new Employee();
 
-        emp.Code();
-        emp.Test();
+        //emp.Code();
+        //emp.Test();
 
         //Employee111 emp111 = new Employee111();
 
@@ -1070,6 +1070,11 @@ class Practice
         Distance d3 = d111 + d2;
 
         d3.Show();
+        DepartmentInfo dep = new DepartmentInfo("Cyber Security");
+
+        EmployeeRecord emp = new EmployeeRecord("Vishal Sharma", dep);
+
+        emp.ShowDetails();
     }
 }
 
