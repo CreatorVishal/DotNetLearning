@@ -641,4 +641,28 @@ namespace Basics
             Console.WriteLine($"Department : {Department.DepartmentName}");
         }
     }
+    public class SingletonVault
+    {
+        private static SingletonVault instance;
+
+        private SingletonVault()
+        {
+            Console.WriteLine("Vault Created");
+        }
+
+        public static SingletonVault GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new SingletonVault();
+            }
+
+            return instance;
+        }
+
+        public void ShowMessage()
+        {
+            Console.WriteLine("Only One Vault Instance Exists");
+        }
+    }
 }

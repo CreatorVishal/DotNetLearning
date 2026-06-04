@@ -1075,6 +1075,19 @@ class Practice
         EmployeeRecord emp = new EmployeeRecord("Vishal Sharma", dep);
 
         emp.ShowDetails();
+        SingletonVault obj1 = SingletonVault.GetInstance();
+        SingletonVault obj2222 = SingletonVault.GetInstance();
+
+        obj1.ShowMessage();
+
+        if (obj1 == obj2222)
+        {
+            Console.WriteLine("Same Object Reference");
+        }
+        else
+        {
+            Console.WriteLine("Different Objects");
+        }
     }
 }
 
