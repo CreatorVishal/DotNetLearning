@@ -1088,6 +1088,37 @@ class Practice
         {
             Console.WriteLine("Different Objects");
         }
+
+        //--------------------------------
+        RACA rca1 = new RACA();
+        Level2 lvl2 = new Level2();
+        OOPMastery Op = new OOPMastery();
+        EmployeeEnc enc = new EmployeeEnc();
+        enc.Age = -20;
+        WriteLine(enc.Age);
+        //----------------------
+        TeamLead tl = new TeamLead();
+
+        WriteLine(tl.Name);
+
+        tl.Login();
+        tl.Code();
+        tl.ManageTeam();
+
+        WriteLine("----------------");
+
+        HRManager hr = new HRManager();
+
+        hr.Login();
+        hr.HireEmployee();
+
+        WriteLine("----------------");
+
+        CyberSecurityAnalyst cs = new CyberSecurityAnalyst();
+
+        cs.Login();
+        cs.MonitorThreats();
+        Animall1 ask1 = new Dogg1();
     }
 }
 
