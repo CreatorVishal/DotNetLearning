@@ -1119,6 +1119,281 @@ class Practice
         cs.Login();
         cs.MonitorThreats();
         Animall1 ask1 = new Dogg1();
+
+        Animall2 anm2 = new Dog216();
+        DeveloperAbs dvp1 = new DeveloperAbs();
+        dvp1.login();
+        dvp1.Work();
+        Manager mng1 = new Manager();
+        mng1.AttendMeeting();
+        mng1.Work();
+        mng1.study();
+        WriteLine(Calculator1.Add(34, 33));
+        //-----------------------------------------------
+        //EmployeeManager emp = new EmployeeManager();
+
+        //emp.AddEmployee();
+        //---------------------------------------------------
+        University.Student Nrs = new University.Student();
+
+        Nrs.Display();
+
+        Employeee empj = new Employeee();
+
+        empj.Age = 25;
+
+        WriteLine(empj.Age);
+        //-----------------------
+        //Student_Info SI1 = new Student_Info();
+        //SI1.id = 101;
+        //SI1.name = "Vishal sharma";
+        //SI1.age = 25;
+        //WriteLine(SI1.id);
+        //WriteLine(SI1.name);
+        //WriteLine(SI1.age);
+        //----------------------------OR----------------------
+        //Object Initializer
+        Student_Info SI1 = new Student_Info()
+        {
+            id = 101,
+            name = "Vishal sharma",
+            age = 25
+        };
+        WriteLine(SI1.id);
+        WriteLine(SI1.name);
+        WriteLine(SI1.age);
+        //------------------------------------
+        Company cc1 = new Company();
+        WriteLine(cc1.CompanyName);
+        //-------------------------------
+        Data da1 = new Data()
+        {
+            Name = "Vs"
+        };
+        //da1.Name="RS"------>NamedWaitHandleOptions possible 
+        //----------------
+        List<string> listt = new List<string>()
+        {
+            "Vishal",
+            "Montu",
+            "Sunny"
+        };
+        foreach(string i in listt)
+        {
+            WriteLine(" "+ i + " ");
+        }
+        //-----------------------------------
+        var namee = "Vishal";
+        var agee = 24;
+        WriteLine(namee);
+
+        WriteLine(agee);
+
+        WriteLine(namee.GetType());
+
+        WriteLine(agee.GetType());
+        //----------------------
+        //Anonymous type
+        var stu = new
+        {
+            name = "Naresh Raja",
+            Roll_no = 23,
+            age = 45
+
+        };
+        WriteLine(stu.name);
+        WriteLine(stu.Roll_no);
+        WriteLine(stu.age);
+        //-------------------------------------
+        "Vishal".Greet();
+        //-------------------------
+        drama dma1 = new()
+        {
+            id=101,
+            age=23
+        };
+        drama dma2 = new()
+        {
+            id = 101,
+            age = 23
+        };
+        WriteLine(dma1 == dma2);
+        //------------Dynamic----------------
+        dynamic dataq = 10;
+
+        WriteLine(dataq);
+
+        dataq = "Vishal";
+
+        WriteLine(dataq);
+
+        dataq = 99.99;
+
+        WriteLine(dataq);
+        Level5 l5 = new Level5();
+        MyDelegate del = l5.Show;
+        del();
+
+        //------------------
+        MCDel mcd = new MCDel();
+        multiDelegates dele1 = mcd.show1;
+        dele1+= mcd.show2;
+        dele1 += mcd.show3;
+        dele1();
+        //------------------------Anonymous Method-------
+        delee dlg = delegate ()
+        {
+            WriteLine("Anonymous method");
+        };
+        dlg();
+        //----------------------------
+        Ac ac1 = new Ac();
+        Action asd = ac1.ShowMe;
+        asd();
+
+        //------With one parameter --------
+        Ac ac2 = new Ac();
+        Action<string> asd1 = ac2.Welcome;
+        asd1("Vishal sharma");
+
+        //With multiple parameter
+        Ac ac3 = new Ac();
+        Action<string,int> asd2 = ac2.Details;
+        asd2("Vishal sharma",25);
+
+        //----------------------
+        FuncDel delFun = new FuncDel();
+        Func<int, int, int> fn1 = delFun.Add;
+        int result33=fn1(34, 40);
+        WriteLine(result33);
+
+        //--------------------
+        PFunc pf1 = new PFunc();
+        Predicate<int> delpred = pf1.IsAdult;
+        WriteLine(delpred(20));
+        WriteLine(delpred(16));
+
+        //--------------Lambda function-----------
+        // Action Lambda
+        Action login = () =>
+        {
+            WriteLine("Employee Logged In");
+        };
+
+        login();
+
+
+        // Func Lambda
+        Func<int, int, int> salaryCalc = (salary, bonus) =>
+        {
+            return salary + bonus;
+        };
+
+        WriteLine(salaryCalc(50000, 10000));
+
+
+        // Predicate Lambda
+        Predicate<int> promotionCheck = (experience) =>
+        {
+            return experience >= 3;
+        };
+
+        WriteLine(promotionCheck(5));
+        WriteLine(promotionCheck(1));
+        //------------------------------------
+        JioMobile jio1 = new JioMobile();
+        jio1.BatteryFull += () =>
+        {
+            WriteLine("Notification : Battery Full");
+        };
+        jio1.BatteryFull += () =>
+        {
+            WriteLine("Sound Played ");
+        };
+        jio1.BatteryFull += () =>
+        {
+            WriteLine("Popup opened ");
+        };
+
+        jio1.ChargeBattery();
+        //-----------------------------
+        //Level6-->Generics
+        Container1<int> bx1 = new Container1<int>();
+        bx1.Value = 36;
+        WriteLine(bx1.Value);
+
+        Container1<string> bx2 = new Container1<string>();
+        bx2.Value = "John";
+        WriteLine(bx2.Value);
+
+        //----------------------------
+        // Integer Store
+        StorageBox<int> numBox = new StorageBox<int>();
+
+        numBox.Data = 500;
+
+        WriteLine(numBox.Data);
+
+
+        // String Store
+        StorageBox<string> nameBox = new StorageBox<string>();
+
+        nameBox.Data = "Vishal Sharma";
+
+        WriteLine(nameBox.Data);
+
+
+        // Custom Class Store
+        StorageBox<LaptopInfo> laptopBox =
+        new StorageBox<LaptopInfo>();
+
+        laptopBox.Data = new LaptopInfo()
+        {
+            Id = 101,
+            Brand = "Dell"
+        };
+
+        WriteLine(laptopBox.Data.Id);
+
+        WriteLine(laptopBox.Data.Brand);
+        //----------------Generic Method----------
+        DataPrinter dp1 = new DataPrinter();
+        dp1.PrintData<int>(100);
+        dp1.PrintData("Ramu Kaka");
+        dp1.PrintData(99.99);
+
+        //------------------
+        StudentStore ss131 = new StudentStore();
+        StudentData stu2131 = new StudentData()
+        {
+            Id = 101,
+            Name = "Vishal"
+        };
+        ss131.Save(stu2131);
+        TeacherStore tst1 = new TeacherStore();
+        TeacherData td11 = new TeacherData()
+        {
+            Id = 303,
+            Name = "Rampal"
+        };
+        tst1.Save(td11);
+        //-----------------------------------
+       
+        DataManager<StudentRecord> dm1 =
+        new DataManager<StudentRecord>();
+
+        StudentRecord sr1 = new StudentRecord()
+        {
+            Id = 101,
+            Name = "Vishal Sharma"
+        };
+
+        dm1.Save(sr1);
+
+
+
+
+
     }
 }
 
