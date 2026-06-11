@@ -1389,6 +1389,39 @@ class Practice
         };
 
         dm1.Save(sr1);
+        //---------------------------
+        //Arraylist
+        ALPractice alp1 = new ALPractice();
+        //HashTable
+        HTPractice htp1 = new HTPractice();
+        //List
+        LPractice lp1 = new LPractice();
+        //Dictionary
+        DPractice dictPrac = new DPractice();
+        //Queue
+        QPractice qp1 = new QPractice();
+        //Stack
+        SPractice sp1 = new SPractice();
+        //HashSet
+        HashSetPractice hsp1 = new HashSetPractice();
+
+        //--------------------------------
+        IEnumPractice iep1 = new IEnumPractice();
+        IEnumerable<int> numm1 = iep1.GetNumbers();
+        foreach(var num in numm1)
+        {
+            WriteLine(num);
+        }
+
+        //----------
+        InterfaceCollectionPractice IP1 = new InterfaceCollectionPractice();
+
+        //-------------------------------------
+        LPractice1 LP1 = new LPractice1();
+        //--------------------------------------File handling ----------
+        ReviseFileHandling Rf1 = new ReviseFileHandling();
+
+
 
 
 

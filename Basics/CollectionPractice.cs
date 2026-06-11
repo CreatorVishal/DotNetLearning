@@ -239,16 +239,6 @@ namespace Basics
                 Write(i + " ");
             }
 
-
-
-
-
-
-
-
-
-
-
         }
 
 

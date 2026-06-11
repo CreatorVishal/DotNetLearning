@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -590,19 +591,19 @@ namespace Basics
         public int age { get; set; }
     }
     public delegate void MyDelegate();
-   
+
     public class Level5
     {
         //---------------------------DELEGATES----------
         //step-1 Delegate
-       
+
         //step2- Method
         public void Show()
         {
             WriteLine("Showing Something...");
         }
 
-       
+
     }
     //------------MultiCast Delegate--------
     public delegate void multiDelegates();
@@ -610,7 +611,8 @@ namespace Basics
 
     public class MCDel
     {
-        public void show1() {
+        public void show1()
+        {
             WriteLine("Showing 1....");
 
         }
@@ -650,10 +652,10 @@ namespace Basics
     //Func
     public class FuncDel
     {
-        public int Add(int a , int b)
+        public int Add(int a, int b)
         {
             return a + b;
-        } 
+        }
     }
 
     //Predicate
@@ -761,6 +763,714 @@ namespace Basics
             WriteLine("Data Saved Successfully");
         }
     }
+    //Collection
+    //-------------------------------Non Generic Collection---------------------------
+    //1.ArrayList
+    //2.HashTable
+    //------ARRAYLIST
+    public class ALPractice
+    {
+        public void ShowArrayList(ArrayList arr)
+        {
+            foreach (var item in arr)
+            {
+                WriteLine(item);
+            }
+
+            WriteLine("----------------");
+        }
+        public ALPractice()
+        {
+            ArrayList arrlist1 = new ArrayList();
+            //Add()
+            arrlist1.Add(45);
+            arrlist1.Add("Rohit");
+            arrlist1.Add(45.99);
+            ShowArrayList(arrlist1);
+            //AddRange()->ek sath multiple item add
+            arrlist1.AddRange(new object[]
+            {
+                "Rahul",
+                "Aman",
+                 500
+            });
+            ShowArrayList(arrlist1);
+
+            //Insert()-->specific position pr kuch add krna ho to 
+            arrlist1.Insert(1, "Vishal Sharma from Rohtak");
+            ShowArrayList(arrlist1);
+
+            //InsertRange()
+            arrlist1.InsertRange(1, new object[]
+            {
+                "Hi",
+                "Hello",
+                "Success"
+
+            });
+            ShowArrayList(arrlist1);
+            //Remove & RemoveAt
+            arrlist1.Remove("Hi");
+            arrlist1.RemoveAt(1);
+            ShowArrayList(arrlist1);
+
+            //RemoveRange
+            arrlist1.RemoveRange(1, 2);
+            ShowArrayList(arrlist1);
+
+            //Contains
+            WriteLine(arrlist1.Contains(45));
+
+            //indexof
+            WriteLine(arrlist1.IndexOf(45));
+
+            //Clear -->sb kuch clear kr dega
+
+            //Count
+            WriteLine(arrlist1.Count);
+
+            //Sort
+            ArrayList nums = new ArrayList();
+
+            nums.Add(50);
+            nums.Add(20);
+            nums.Add(10);
+
+            nums.Sort();
+            ShowArrayList(nums);
+            nums.Reverse();
+            ShowArrayList(nums);
+
+            //Clone
+            ArrayList nums2 = (ArrayList)nums.Clone();
+            ShowArrayList(nums2);
+
+            //toarray
+            object[] data1 = nums2.ToArray();
+            foreach (var ob in nums2)
+            {
+                WriteLine(" " + ob + " ");
+            }
+
+
+
+
+
+        }
+    }
+    public class HTPractice
+    {
+        public HTPractice()
+        {
+            Hashtable ht = new Hashtable();
+
+            ht.Add(101, "Vishal");
+            ht.Add(102, "Rahul");
+            ht.Add(103, "Aman");
+
+            foreach (DictionaryEntry item in ht)
+            {
+                WriteLine($"{item.Key} : {item.Value}");
+            }
+
+            WriteLine("----------------");
+
+            WriteLine(ht[101]);
+
+            WriteLine(ht.ContainsKey(102));
+
+            WriteLine(ht.ContainsValue("Aman"));
+
+            WriteLine(ht.Count);
+
+            ht.Remove(102);
+
+            foreach (DictionaryEntry item in ht)
+            {
+                WriteLine($"{item.Key} : {item.Value}");
+            }
+        }
+    }
+    //--------------------------------Generic collection----------------------
+    public class LPractice
+    {
+        public LPractice()
+        {
+            List<string> names = new List<string>();
+
+            names.Add("Vishal");
+
+            names.Add("Rahul");
+
+            names.AddRange(new List<string>()
+            {
+                "Aman",
+                "Rohit"
+            });
+
+            names.Insert(1, "Naresh");
+
+            names.Remove("Aman");
+
+            WriteLine(names.Contains("Rahul"));
+
+            WriteLine(names.IndexOf("Rahul"));
+
+            WriteLine(names.Count);
+
+            names.Sort();
+
+            names.Reverse();
+
+            names.ForEach(x =>
+            {
+                WriteLine(x);
+            });
+
+            WriteLine("----------------");
+
+            List<int> nums =
+            new List<int>()
+            {
+                10,20,30,40,50
+            };
+
+            WriteLine(
+            nums.Find(x => x > 25)
+            );
+
+            var allNums =
+            nums.FindAll(x => x > 25);
+
+            foreach (var item in allNums)
+            {
+                WriteLine(item);
+            }
+
+            WriteLine(
+            nums.Exists(x => x > 40)
+            );
+
+            int[] arr =
+            nums.ToArray();
+
+            foreach (var item in arr)
+            {
+                WriteLine(item);
+            }
+        }
+
+    }
+    //Dictionary
+    public class DPractice
+    {
+        public DPractice()
+        {
+            Dictionary<int, string> students =
+new Dictionary<int, string>();
+
+            students.Add(101, "Vishal");
+
+            students.Add(102, "Rahul");
+
+            students[103] = "Aman";
+
+            WriteLine(students.Count);
+
+            WriteLine(
+            students.ContainsKey(101)
+            );
+
+            WriteLine(
+            students.ContainsValue("Rahul")
+            );
+
+            if (students.TryGetValue(
+            101,
+            out string name))
+            {
+                WriteLine(name);
+            }
+
+            students[101] = "Vishal Sharma";
+
+            foreach (var item in students)
+            {
+                WriteLine(
+                $"{item.Key} : {item.Value}");
+            }
+
+            students.Remove(102);
+
+            WriteLine("After Remove");
+
+            foreach (var item in students)
+            {
+                WriteLine(
+                $"{item.Key} : {item.Value}");
+            }
+
+            foreach (var key in students.Keys)
+            {
+                WriteLine(key);
+            }
+
+            foreach (var value in students.Values)
+            {
+                WriteLine(value);
+            }
+        }
+    }
+    //---------------QUEUE-------
+    public class QPractice
+    {
+        public QPractice()
+        {
+
+            Queue<string> q =
+            new Queue<string>();
+
+            q.Enqueue("Vishal");
+
+            q.Enqueue("Rahul");
+
+            q.Enqueue("Aman");
+
+            foreach (var item in q)
+            {
+                WriteLine(item);
+            }
+
+            WriteLine("---------");
+
+            WriteLine(q.Peek());
+
+            WriteLine("---------");
+
+            WriteLine(q.Dequeue());
+
+            WriteLine("---------");
+
+            foreach (var item in q)
+            {
+                WriteLine(item);
+            }
+
+            WriteLine(q.Count);
+
+            WriteLine(
+            q.Contains("Rahul")
+            );
+        }
+
+    }
+
+    //Stack
+    public class SPractice
+    {
+        public SPractice()
+        {
+            Stack<string> stq = new Stack<string>();
+            stq.Push("Vishal");
+
+            stq.Push("Rahul");
+
+            stq.Push("Aman");
+            //-----
+            foreach (var item in stq)
+            {
+                WriteLine(item);
+            }
+
+            WriteLine("--------");
+
+            WriteLine(stq.Peek());
+
+            WriteLine("--------");
+
+            WriteLine(stq.Pop());
+
+            WriteLine("--------");
+
+            foreach (var item in stq)
+            {
+                WriteLine(item);
+            }
+
+            WriteLine(stq.Count);
+
+            WriteLine(
+            stq.Contains("Rahul")
+            );
+        }
+
+
+    }
+    //HashSet
+    public class HashSetPractice
+    {
+        public HashSetPractice()
+        {
+            HashSet<string> users =
+            new HashSet<string>();
+
+            users.Add("Vishal");
+
+            users.Add("Rahul");
+
+            users.Add("Vishal");
+
+            foreach (var item in users)
+            {
+                WriteLine(item);
+            }
+
+            WriteLine("---------");
+
+            WriteLine(
+            users.Contains("Rahul")
+            );
+
+            WriteLine(users.Count);
+
+            users.Remove("Rahul");
+
+            WriteLine("---------");
+
+            foreach (var item in users)
+            {
+                WriteLine(item);
+            }
+
+            HashSet<string> team1 =
+            new HashSet<string>()
+            {
+            "Vishal",
+            "Rahul"
+            };
+
+            HashSet<string> team2 =
+            new HashSet<string>()
+            {
+            "Rahul",
+            "Aman"
+            };
+
+            team1.UnionWith(team2);
+
+            WriteLine("Union");
+
+            foreach (var item in team1)
+            {
+                WriteLine(item);
+            }
+        }
+    }
+
+    //SortedList--->done
+    //LinkedList--->done
+
+    //---------------------------IENUMERABLE PRACTICE-------------------
+    public class IEnumPractice
+    {
+        public IEnumPractice()
+        {
+            List<string> ls1 = new List<string>()
+            {
+                "Vishal",
+                "Rahu Don",
+                "Keshav"
+            };
+            IEnumerable<string> dt1 = ls1;
+            foreach (var i in dt1)
+            {
+                WriteLine(" " + i + " ");
+            }
+            //dt1.Add("")------>error dega 
+            //-----------------------------IENUMARATOR-------
+
+            List<string> names =
+        new List<string>()
+        {
+            "Vishal",
+            "Rahul",
+            "Aman"
+        };
+
+            IEnumerator<string> en =
+            names.GetEnumerator();
+
+            while (en.MoveNext())
+            {
+                WriteLine(en.Current);
+            }
+
+            en.Reset();
+
+            WriteLine("After Reset");
+
+            while (en.MoveNext())
+            {
+                WriteLine(en.Current);
+            }
+        }
+        public IEnumerable<int> GetNumbers()
+        {
+            return new List<int>()
+            {
+                10,
+                20,30,
+                40,
+            };
+        }
+        //----------------------------------------------------------------
+
+
+
+    }
+    //ICollection or IList
+    public class InterfaceCollectionPractice
+    {
+        public InterfaceCollectionPractice()
+        {
+            ICollection<string> c1 =
+            new List<string>();
+
+            c1.Add("Vishal");
+            c1.Add("Rahul");
+
+            WriteLine(c1.Count);
+
+            //--------------------------------
+
+            IList<string> l1 =
+            new List<string>();
+
+            l1.Add("Vishal");
+            l1.Add("Rahul");
+            l1.Add("Aman");
+
+            WriteLine(l1[0]);
+
+            l1.Insert(1, "Keshav");
+
+            l1.RemoveAt(0);
+
+            foreach (var item in l1)
+            {
+                WriteLine(item);
+            }
+        }
+    }
+    //---------------------------------------------------
+    //LINQ
+    public class LPractice1
+    {
+        public void ShowData<T>(IEnumerable<T> data)
+        {
+            foreach (var item in data)
+            {
+                WriteLine(item);
+            }
+
+            WriteLine("------------");
+        }
+        public LPractice1()
+        {
+
+            //Where()
+            List<int> ll1 = new List<int>()
+            {
+                10,20,30,10,10,20,70,40,50,60,70
+            };
+            var Result = ll1.Where(x => x > 25);
+
+            ShowData(Result);
+            //where+select 
+            var Result1 = ll1.Where(x => x > 30).Select(x => x + 2);
+            ShowData(Result1);
+
+            //OrderBy
+            var res2 = ll1.OrderBy(x => x);
+            ShowData(res2);
+            //orderBy descending
+            var res3 = ll1.OrderByDescending(x => x);
+            ShowData(res3);
+            //First & FirstorDefault 
+
+            //var res4 = ll1.First(x => x > 100);--Exception aayega 
+            var res4 = ll1.First(x => x > 20);
+            WriteLine(res4);
+
+            //FirstorDefault--->agr na bhi mila to 0 return krega exception nhi dega 
+            var res5 = ll1.FirstOrDefault(x => x > 100);
+            WriteLine(res5);
+
+            //-----------last & lastorDefault---->Done
+            //Single & singleordefault
+            //var res6 = ll1.Single(x => x == 20);
+            //WriteLine(res6);
+
+            //SingleOrDefault 
+            var res7 = ll1.SingleOrDefault(x => x == 100);//0
+            //var res7 = ll1.SingleOrDefault(x => x >20);-------------->isme exception dega 
+            WriteLine(res7);
+
+            //ANY
+            var res8 = ll1.Any(x => x > 25);
+            WriteLine(res8);
+
+            //All 
+            var res9 = ll1.All(x => x > 2);
+            var res10 = ll1.All(x => x > 40);
+            WriteLine(res9);
+            WriteLine(res10);
+            WriteLine(ll1.Count);
+            //Aggregate
+            WriteLine(ll1.Sum());
+
+            WriteLine(ll1.Average());
+
+            WriteLine(ll1.Min());
+            WriteLine(ll1.Max());
+            WriteLine("------------------------------------");
+            var res11 = ll1.Take(3);
+            foreach (var item in res11)
+            {
+                WriteLine(item);
+            }
+            WriteLine("------------------------------------");
+
+            var res12 = ll1.Skip(3);
+            foreach (var item in res12)
+            {
+                WriteLine(item);
+            }
+            //Distinct
+            WriteLine("----------------------------------------");
+            var res13 = ll1.Distinct();
+            ShowData(res13);
+            //Group by
+            List<Employee> employees =
+        new List<Employee>()
+        {
+            new Employee()
+            {
+                Id = 1,
+                Name = "Vishal",
+                Department = "IT",
+                Salary = 50000
+            },
+
+            new Employee()
+            {
+                Id = 2,
+                Name = "Rahul",
+                Department = "HR",
+                Salary = 30000
+            },
+
+            new Employee()
+            {
+                Id = 3,
+                Name = "Aman",
+                Department = "IT",
+                Salary = 60000
+            },
+
+            new Employee()
+            {
+                Id = 4,
+                Name = "Rohit",
+                Department = "HR",
+                Salary = 35000
+            },
+
+            new Employee()
+            {
+                Id = 5,
+                Name = "Keshav",
+                Department = "IT",
+                Salary = 70000
+            }
+        };
+
+            var groups =
+            employees.GroupBy(
+            x => x.Department
+            );
+
+            foreach (var group in groups)
+            {
+                WriteLine(
+                $"Department : {group.Key}"
+                );
+
+                foreach (var emp in group)
+                {
+                    WriteLine(
+                    $"{emp.Name} - {emp.Salary}"
+                    );
+                }
+
+                WriteLine("----------------");
+                // ThenBy() --> Secondary Sorting
+                // Example:
+                // City same ho to Name ke hisab se sort karo
+
+                // ThenByDescending() --> Secondary Descending Sorting
+
+                // Contains() --> Check item exists or not
+
+                // Distinct() --> Remove duplicate records
+
+                // Union() --> Merge 2 collections and remove duplicates
+
+                // Intersect() --> Common records between 2 collections
+
+                // Except() --> Records in first collection but not in second
+
+                // SelectMany() --> Flatten nested collections
+                // Example:
+                // List<List<int>> => List<int>
+
+                // ToList() --> Convert LINQ result into List<T>
+
+                // ToDictionary() --> Convert collection into Dictionary<TKey,TValue>
+
+                // GroupBy() --> Group records by common property
+                // Example:
+                // Department wise employees
+
+                // Join() --> Combine data from 2 collections
+                // Similar to SQL Inner Join
+
+                // Aggregate() --> Custom calculation on collection
+                // Example:
+                // Total sum using custom logic
+
+                // OfType<T>() --> Filter only specific type objects
+
+                // Cast<T>() --> Convert collection type
+
+                // Zip() --> Combine 2 collections item by item
+
+                // Chunk() --> Divide collection into small batches
+
+                // ------------------------------------------------------------
+            }
+        }
+        public class Employee
+        {
+            public int Id { get; set; }
+
+            public string Name { get; set; }
+
+            public string Department { get; set; }
+
+            public int Salary { get; set; }
+        }
+
+    }
 
 }
-   
