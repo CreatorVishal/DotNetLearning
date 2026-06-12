@@ -165,21 +165,80 @@ namespace Basics
 
             //-------------------------------------File stream-----------
             //1.Create
-            using FileStream fss1 = new FileStream("Tomy.txt", FileMode.Create);
-            WriteLine("Done");
+            {
+                using FileStream fss1 = new FileStream("Tomy.txt", FileMode.Create);
+                WriteLine("Done");
 
-            byte[] data2 = Encoding.UTF8.GetBytes("Hello Vishal sharma");
-            fss1.Write(data2, 0, data2.Length);
+                byte[] data2 = Encoding.UTF8.GetBytes("Hello Vishal sharma");
+                fss1.Write(data2, 0, data2.Length);
+            }
+            {
+                //Read 
+                using FileStream fss2 = new FileStream("Tomy.txt", FileMode.Open);
 
-            //Read 
-            using FileStream fss2 = new FileStream("Tomy.txt",FileMode.Open);
+                byte[] readData = new byte[fss2.Length];
+                fss2.Read(readData, 0, readData.Length);
 
-            byte[] readData = new byte[fss2.Length];
-            fss2.Read(readData, 0, readData.Length);
+                string result = Encoding.UTF8.GetString(readData);
+                WriteLine(result);
+                WriteLine(fss2.Position);
+            }
+            //Append
+            {
+                using FileStream fss3 = new FileStream("Tomy.txt", FileMode.Append);
+                byte[] data4 = Encoding.UTF8.GetBytes("\n New Data h ye wala ");
+                fss3.Write(data4, 0, data4.Length);
+            }
+            //----------------------------------------------------------------------------------
+            //-------------------StreamWriter
+            {
+                using StreamWriter sw1 = new StreamWriter("Tomy.txt", true);
+                sw1.AutoFlush = true;
+                sw1.Write("Hi Vinod kumar this side ");
 
-            string result = Encoding.UTF8.GetString(readData);
-            WriteLine(result);
+                sw1.WriteLine("Next Line me Print hoga ");
+                sw1.WriteLine($"DateTime: {DateTime.Now}");
 
+                               
+            }
+            //{
+            //    using FileStream fss4 = new FileStream("EmployeeLog.txt", FileMode.Create);
+               
+            //}--iski need nhi h ha stream writer khud file create krta h
+            {
+               using  StreamWriter sws1 = new StreamWriter("EmployeeLog.txt", true);
+                sws1.AutoFlush = true;
+
+                sws1.WriteLine("Employee Login");
+                sws1.WriteLine($"Name: Vishal");
+                sws1.WriteLine($"Time:{DateTime.Now}");
+            }
+
+
+            //---------------------------------StreamReader
+            {
+                using StreamReader sr1= new StreamReader("Tomy.txt");
+                string OneLine = sr1.ReadLine();
+                WriteLine(OneLine);
+                string Data6 = sr1.ReadToEnd();
+                WriteLine(Data6);                
+
+                WriteLine(sr1.EndOfStream);
+
+                
+            }
+            {
+                using StreamReader sr2 = new StreamReader("EmployeeLog.txt");
+                while (!sr2.EndOfStream)
+                {
+                    string Line1 = sr2.ReadLine();
+                    WriteLine(Line1);
+                }
+                int ch1 = sr2.Read();
+                WriteLine(ch1);//-1
+                int peekCh = sr2.Peek();
+                WriteLine(peekCh);//-1
+            }
 
 
 

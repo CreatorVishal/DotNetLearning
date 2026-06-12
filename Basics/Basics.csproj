@@ -18,6 +18,9 @@
 	<ItemGroup>
 		<Using Include="System.Console" Static="true" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="StudentFolder\" />
+	</ItemGroup>
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
