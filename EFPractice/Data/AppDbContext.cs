@@ -15,7 +15,7 @@ namespace EFPractice.Data
             optionsBuilder.UseSqlServer(
                 "Server=.;Database=EmployeeDb150;Trusted_Connection=True;TrustServerCertificate=True");
         }
-
+        //Fluent api
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>()
