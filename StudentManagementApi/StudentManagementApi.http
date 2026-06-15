@@ -4,3 +4,11 @@ GET {{StudentManagementApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+POST {{StudentManagementApi_HostAddress}}/api/course
+Content-Type: application/json
+
+{
+  "id": 4,
+  "courseName": "B.Tech",
+  "duration": 4
+}
