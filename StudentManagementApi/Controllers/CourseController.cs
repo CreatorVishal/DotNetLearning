@@ -36,22 +36,35 @@ namespace StudentManagementApi.Controllers
 
         };
         [HttpGet("{id}")]
-        public Course  GetCourseById(int id)
+        public IActionResult GetCourseById(int id)
         {
-            return (courses.FirstOrDefault(x => x.Id == id));
-        }
-        [HttpPost]
-        public string AddCourse(Course course)
-        {
-            courses.Add(course);
+            if (id <= 0)
+            {
+                return BadRequest("Invalid Id");
+            }
 
-            return "Course Added Successfully";
+            var course = courses.FirstOrDefault(x => x.Id == id);
+
+            if (course == null)
+            {
+                return NotFound("Course Not Found");
+            }
+
+            return Ok(course);
         }
-        [HttpGet]
-        public List<Course> GetCourses()
-        {
-            return courses;
-        }
+
+        //[HttpPost]
+        //public string AddCourse(Course course)
+        //{
+        //    courses.Add(course);
+
+        //    return "Course Added Successfully";
+        //}
+        //[HttpGet]
+        //public List<Course> GetCourses()
+        //{
+        //    return courses;
+        //}
 
     }
 }
