@@ -1,4 +1,6 @@
 
+using StudentManagementApi.Services;
+
 namespace StudentManagementApi
 {
     public class Program
@@ -12,6 +14,7 @@ namespace StudentManagementApi
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            builder.Services.AddSingleton<CourseService>();
 
             var app = builder.Build();
 
@@ -20,6 +23,7 @@ namespace StudentManagementApi
             {
                 app.MapOpenApi();
             }
+           
 
             app.UseHttpsRedirection();
 
