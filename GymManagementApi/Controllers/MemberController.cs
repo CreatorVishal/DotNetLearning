@@ -7,19 +7,47 @@ namespace GymManagementApi.Controllers;
 [Route("api/[controller]")]
 public class MemberController : ControllerBase
 {
-    [HttpGet]
-    public Member Get()
+    private static List<Member> members = new()
     {
-        return new Member
+        new Member
         {
             Id = 1,
             Name = "Vishal",
-            Age = 22
-        };
+            Age = 23,
+            MembershipType = "Gold",
+        },
+
+        new Member
+        {
+            Id = 2,
+            Name = "Rahul",
+            Age = 25,
+            MembershipType = "Silver"
+        }
+    };
+
+    [HttpGet]
+    public List<Member> GetMembers()
+    {
+        return members;
     }
     [HttpGet("{id}")]
-    public string GetById(int id)
+    public IActionResult GetMemberById(int id)
     {
-        return $"Member Id = {id}";
+        var member = members.FirstOrDefault(m => m.Id == id);
+
+        if (member == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(member);
     }
+    [HttpPost]
+     public IActionResult AddMember(Member member)
+    {
+        members.Add(member);
+        return Ok(member);
+    }
+
 }
