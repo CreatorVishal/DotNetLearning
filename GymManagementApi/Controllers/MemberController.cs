@@ -47,7 +47,9 @@ public class MemberController : ControllerBase
      public IActionResult AddMember(Member member)
     {
         members.Add(member);
+        
         return Ok(member);
     }
+   
 
 }
