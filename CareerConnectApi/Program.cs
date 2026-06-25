@@ -1,6 +1,8 @@
 
 using CareerConnectApi.Data;
+using CareerConnectApi.Extensions;
 using CareerConnectApi.Interfaces;
+using CareerConnectApi.Middlewares;
 using CareerConnectApi.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,21 +31,80 @@ namespace CareerConnectApi
             {
                 app.MapOpenApi();
             }
+            app.UseMiddleware<ExceptionMiddleware>();
+            app.UseLoggingMiddleware();
+            app.UseMiddleware<TimingMiddleware>();
 
-            app.Use(async (context, next) =>
-            {
-                Console.WriteLine("Request Aayi");
+            //Custom Middleware
+            //app.Use(async (context, next) =>
+            //{
+            //    Console.WriteLine($"Method : {context.Request.Method}");
+            //    Console.WriteLine($"Path : {context.Request.Path}");
+            //    Console.WriteLine($"QueryString  : {context.Request.QueryString}");
+            //    Console.WriteLine($"Scheme: {context.Request.Scheme}");
 
-                await next();
+            //    await next();
+            //    // next = next middleware ka RequestDelegate
 
-                Console.WriteLine("Response Gayi");
-            });
+            //    Console.WriteLine("1st Response ");
+            //    Console.WriteLine($"Status Code : {context.Response.StatusCode}");
+            //});
+            //app.Use(async (context, next) =>
+            //{
+            //    Console.WriteLine("2nd Request Aayi");
 
+            //    await next();
+
+            //    Console.WriteLine("2nd Response ");
+            //});
+            //app.Use(async (context, next) =>
+            //{
+            //    Console.WriteLine("3rd Request Aayi");
+
+            //    await next();
+
+            //    Console.WriteLine("3rd Response ");
+            //});
+
+            //app.UseWhen(
+            //    context => context.Request.Path == "/testing1", branch =>
+            //    {
+            //        branch.Use(async (context, next) =>
+            //        {
+            //            Console.WriteLine("Only for testing");
+            //            await next();
+            //        });
+
+            //    });
+            //------------------------------------------
+
+            //app.Use()->Can continue pipeline
+            //app.Run()->Always terminates pipeline
+            //app.Map("/test", testApp =>
+            //{
+            //    testApp.Run(async context =>
+            //    {
+            //        await context.Response.WriteAsync("Hello From Test Pipeline");
+            //    });
+            //});
+            //app.Map("/Aijobs", AiJobsApp =>
+            //{
+            //    AiJobsApp.Run(async context =>
+            //    {
+            //        await context.Response.WriteAsync("This page is Under Maintenance");
+            //    });
+            //});
+            // Built-in Middleware
             app.UseHttpsRedirection();
-
+            //Security Middleware
             app.UseAuthorization();
 
+            //app.Run(async context =>
+            //{
+            //    await context.Response.WriteAsync("Website Under Maintenance");
+            //});
 
+            //Endpoint Middleware
             app.MapControllers();
 
             app.Run();

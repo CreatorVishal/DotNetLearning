@@ -15,7 +15,7 @@ namespace CareerConnectApi.Services
             
         public List<Job> GetAllJobs()
         {
-            return _context.Jobs.ToList();
+            throw new Exception("DataBase not connected ");
         }
         public void AddJob(Job job)
         {
