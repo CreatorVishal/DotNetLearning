@@ -1,10 +1,10 @@
-
 using CareerConnectApi.Data;
-using CareerConnectApi.Extensions;
 using CareerConnectApi.Interfaces;
 using CareerConnectApi.Middlewares;
 using CareerConnectApi.Services;
 using Microsoft.EntityFrameworkCore;
+using CareerConnectApi.Models;
+using CareerConnectApi.Endpoints;
 
 namespace CareerConnectApi
 {
@@ -23,6 +23,7 @@ namespace CareerConnectApi
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
             builder.Services.AddScoped<IJobService, JobService>();
+            builder.Services.AddScoped<ICompanyService,CompanyService>();
 
             var app = builder.Build();
 
@@ -32,7 +33,7 @@ namespace CareerConnectApi
                 app.MapOpenApi();
             }
             app.UseMiddleware<ExceptionMiddleware>();
-            app.UseLoggingMiddleware();
+            app.UseMiddleware<LoggingMiddleware>();
             app.UseMiddleware<TimingMiddleware>();
 
             //Custom Middleware
@@ -103,7 +104,22 @@ namespace CareerConnectApi
             //{
             //    await context.Response.WriteAsync("Website Under Maintenance");
             //});
+            app.MapGet("/hello", () =>
+            {
+                return Results.Ok("Hello from Minimal Api..");
 
+            });
+            app.MapGet("/jobs", () =>
+            {
+                return Results.Ok("Jobs..");
+            });
+            //-----------------------
+            app.MapPost("/jobs", (Job job) =>
+            {
+                return Results.Ok(job);
+            });
+            app.MapCompanyEndpoints();
+            app.MapUserEndpoints();
             //Endpoint Middleware
             app.MapControllers();
 
