@@ -2,6 +2,9 @@
 using CareerConnectApi.Models;
 using Microsoft.EntityFrameworkCore;
 using CareerConnectApi.Interfaces;
+using CareerConnectApi.Filters;
+using CareerConnectApi.DTOs;
+using FluentValidation;
 namespace CareerConnectApi.Endpoints
 {
     public static class CompanyEndpoints
@@ -19,35 +22,49 @@ namespace CareerConnectApi.Endpoints
             {
                 var companies = await db.Companies.AsNoTracking().ToListAsync(ct);
                 return Results.Ok(companies);
-            });
+            }).AddEndpointFilter<CompanyFilter>();
 
             companies.MapGet("/{id:int}", async (int id, AppDbContext db) =>
             {
                 var company = await db.Companies.FindAsync(id);
-                if(company is null)
+                if (company is null)
                 {
                     return Results.NotFound();
                 }
                 return Results.Ok(company);
 
-            });
+            })
+            //Second way
+            .AddEndpointFilter(async (context, next) =>
+             {
+                 Console.WriteLine("Before");
+
+                 var result = await next(context);
+
+                 Console.WriteLine("After");
+
+                 return result;
+             });
             //----------------------------------------------------------
             //endpoints.MapPost("/companies", (Company company) =>
             //{
             //    return Results.Ok(company);
 
             //});
-            companies.MapPost("/companies",async (AppDbContext db , Company company) =>
-            {
-                db.Companies.Add(company);
-                await db.SaveChangesAsync();
-                return Results.Created($"/companies/{company.Id}",company);
-            });
+            //---------------------------------
+
+            //companies.MapPost("/",async (AppDbContext db , Company company) =>
+            //{
+            //    db.Companies.Add(company);
+            //    await db.SaveChangesAsync();
+            //    return Results.Created($"/companies/{company.Id}",company);
+            //});
+
             //---------------------------------------------------
             companies.MapPut("/{id:int}", async (int id, Company company, AppDbContext db) =>
             {
                 var existingCompany = await db.Companies.FindAsync(id);
-                if(existingCompany is null)
+                if (existingCompany is null)
                 {
                     return Results.NotFound();
                 }
@@ -60,9 +77,9 @@ namespace CareerConnectApi.Endpoints
             companies.MapDelete("/{id:int}", async (int id, AppDbContext db) =>
             {
                 var existCompany = await db.Companies.FindAsync(id);
-                if(existCompany is null)
+                if (existCompany is null)
                 {
-                    return Results.NotFound("Already Null");  
+                    return Results.NotFound("Already Null");
                 }
                 db.Companies.Remove(existCompany);
                 await db.SaveChangesAsync();
@@ -93,7 +110,7 @@ namespace CareerConnectApi.Endpoints
                 return Results.Ok(new
                 {
                     Path = context.Request.Path,
-                    Method= context.Request.Method,
+                    Method = context.Request.Method,
 
                 });
 
@@ -103,13 +120,13 @@ namespace CareerConnectApi.Endpoints
                 return Results.Ok(context.Request.Host);
             });
             //QueryString
-            companies.MapGet("/query", ( HttpContext context) =>
+            companies.MapGet("/query", (HttpContext context) =>
             {
                 return Results.Ok(context.Request.QueryString);
 
             });
             //header
-            companies.MapGet("/headers",(HttpContext context) =>
+            companies.MapGet("/headers", (HttpContext context) =>
             {
                 return Results.Ok(context.Request.Headers);
             });
@@ -131,32 +148,62 @@ namespace CareerConnectApi.Endpoints
                 return Results.Ok("Check console...");
             });
 
-            companies.MapGet("/logger",(ILogger<Program> logger) =>
-            {   
-                logger.LogInformation("Fetching Companies"); 
+            companies.MapGet("/logger", (ILogger<Program> logger) =>
+            {
+                logger.LogInformation("Fetching Companies");
                 logger.LogWarning("Warning");
-                logger.LogError( "Error" );
+                logger.LogError("Error");
                 logger.LogCritical("Critical");
                 return Results.Ok("Check Console");
             });
             //--------------------------------------------------------------
-            companies.MapGet("/config",(IConfiguration config) =>
-            {   
+            companies.MapGet("/config", (IConfiguration config) =>
+            {
                 var company = config["CompanySettings:CompanyName"];
                 var version = config["CompanySettings:Version"];
-                var owner =  config["CompanySettings:Owner"];
-                return Results.Ok(   
-                    new{
+                var owner = config["CompanySettings:Owner"];
+                return Results.Ok(
+                    new
+                    {
                         company,
                         version,
                         owner
                     });
             });
             //--------------------------------------
-            companies.MapGet("/service",async (ICompanyService service) =>
+            companies.MapGet("/service", async (ICompanyService service) =>
             {
-                var companies = await service .GetAllCompaniesAsync();
+                var companies = await service.GetAllCompaniesAsync();
                 return Results.Ok(companies);
+            });
+            companies.MapPost("/", async (AppDbContext db, CreateCompanyDto dto, IValidator<CreateCompanyDto> validator) =>
+            {
+                var validation =
+
+await validator.ValidateAsync(dto);
+
+                if (!validation.IsValid)
+                {
+
+                    return Results.ValidationProblem(
+
+                    validation.ToDictionary()
+
+                    );
+
+                }
+                var company = new Company
+                {
+                    CompanyName = dto.CompanyName,
+                    Email = dto.Email,
+                    CreatedAt = DateTime.UtcNow,
+                    IsDeleted = false,
+                    PasswordHash = "",
+
+                };
+                db.Companies.Add(company);
+                await db.SaveChangesAsync();
+                return Results.Ok(company);
             });
 
 

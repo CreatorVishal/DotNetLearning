@@ -5,6 +5,8 @@ using CareerConnectApi.Services;
 using Microsoft.EntityFrameworkCore;
 using CareerConnectApi.Models;
 using CareerConnectApi.Endpoints;
+using CareerConnectApi.Validators;
+using FluentValidation;
 
 namespace CareerConnectApi
 {
@@ -17,21 +19,38 @@ namespace CareerConnectApi
             // Add services to the container.
 
             builder.Services.AddControllers();
+            //--------------
+            //builder.Services.AddDbContext<AppDbContext>(options =>
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            //-----------------------------------------------------------------
+            builder.Services.AddValidatorsFromAssemblyContaining<CreateCompanyValidator>();
 
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            //DbContextPool
+            builder.Services.AddDbContextPool<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));//( poolSize: 64)
+
+            //-------------DbContextFactory---------
+
+            //builder.Services.AddDbContextFactory<AppDbContext>(options =>
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            //------------------------------------
+
+
+
+
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+            //builder.Services.AddOpenApi();
+
             builder.Services.AddScoped<IJobService, JobService>();
             builder.Services.AddScoped<ICompanyService,CompanyService>();
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.MapOpenApi();
-            }
+            //if (app.Environment.IsDevelopment())
+            //{
+            //    app.MapOpenApi();
+            //}
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseMiddleware<LoggingMiddleware>();
             app.UseMiddleware<TimingMiddleware>();

@@ -2,7 +2,7 @@
 
 public class CompanyFilter: IEndpointFilter
 {
-
+    //first way
     public async ValueTask<object?>
         InvokeAsync(EndpointFilterInvocationContext context,EndpointFilterDelegate next)
     {

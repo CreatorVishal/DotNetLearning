@@ -4,7 +4,9 @@
   </Folder>
   <Project Path="AdventureClubDb/AdventureClubDb.csproj" Id="dd6149fe-be62-40e2-985c-6e80de90f385" />
   <Project Path="Basics/Basics.csproj" />
+  <Project Path="CareerConnectApi/CareerConnectApi.csproj" Id="5583b6d0-7b23-40b8-981f-3e7a454c182d" />
   <Project Path="DbOperationsWithEfCore/DbOperationsWithEfCore/DbOperationsWithEfCore.csproj" />
   <Project Path="EFPractice/EFPractice.csproj" Id="c9b08970-2ba3-4867-b073-a1647cc8e27f" />
   <Project Path="ReviseEFagain/ReviseEFagain.csproj" Id="0841b715-ca99-4c74-aded-061de78dee75" />
+  <Project Path="StudentManagementApi/StudentManagementApi.csproj" Id="59e43593-cfec-46e5-97e1-0d487e4a075e" />
 </Solution>

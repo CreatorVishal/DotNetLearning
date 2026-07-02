@@ -10,8 +10,8 @@ namespace AdventureClubDb.Configuration
     {
         public void Configure(EntityTypeBuilder<Course> builder)
         {
-            builder.Property(x => x.Title)
-                   .HasMaxLength(100);
+            //builder.Property(x => x.Title)
+            //       .HasMaxLength(100);
         }
     }
 }
