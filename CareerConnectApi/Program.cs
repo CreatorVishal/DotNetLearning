@@ -7,6 +7,10 @@ using CareerConnectApi.Models;
 using CareerConnectApi.Endpoints;
 using CareerConnectApi.Validators;
 using FluentValidation;
+using Microsoft.IdentityModel.Tokens;
+
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace CareerConnectApi
 {
@@ -43,6 +47,7 @@ namespace CareerConnectApi
 
             builder.Services.AddScoped<IJobService, JobService>();
             builder.Services.AddScoped<ICompanyService,CompanyService>();
+            builder.Services.AddScoped<JwtService>();
 
             var app = builder.Build();
 
@@ -116,6 +121,43 @@ namespace CareerConnectApi
             //});
             // Built-in Middleware
             app.UseHttpsRedirection();
+            builder.Services
+.AddAuthentication(
+JwtBearerDefaults.AuthenticationScheme)
+
+.AddJwtBearer(options =>
+{
+
+    options.TokenValidationParameters =
+    new TokenValidationParameters
+    {
+
+        ValidateIssuer = true,
+
+        ValidateAudience = true,
+
+        ValidateLifetime = true,
+
+        ValidateIssuerSigningKey = true,
+
+        ValidIssuer =
+    builder.Configuration["Jwt:Issuer"],
+
+        ValidAudience =
+    builder.Configuration["Jwt:Audience"],
+
+        IssuerSigningKey =
+    new SymmetricSecurityKey(
+
+    Encoding.UTF8.GetBytes(
+
+    builder.Configuration["Jwt:Key"]
+
+    ))
+
+    };
+
+});
             //Security Middleware
             app.UseAuthorization();
 

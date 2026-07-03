@@ -205,6 +205,20 @@ await validator.ValidateAsync(dto);
                 await db.SaveChangesAsync();
                 return Results.Ok(company);
             });
+            companies.MapGet("/secure",
+
+() =>
+{
+
+    return Results.Ok(
+
+    "Secret Data"
+
+    );
+
+})
+
+.RequireAuthorization();
 
 
         }

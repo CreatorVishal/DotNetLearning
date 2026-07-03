@@ -4,6 +4,5 @@ namespace CareerConnectApi.Interfaces;
 
 public interface ICompanyService
 {
-    Task<List<Company>>
-    GetAllCompaniesAsync();
+    Task<List<Company>> GetAllCompaniesAsync();
 }
