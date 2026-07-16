@@ -1,104 +1,104 @@
 ﻿
-using CareerConnectApi.Data;
-using CareerConnectApi.DTOs;
-using CareerConnectApi.Models;
-using CareerConnectApi.Services;
-using Microsoft.EntityFrameworkCore;
-using System.Net;
+//using CareerConnectApi.Data;
+//using CareerConnectApi.DTOs;
+//using CareerConnectApi.Models;
+//using CareerConnectApi.Services;
+//using Microsoft.EntityFrameworkCore;
+//using System.Net;
 
-namespace CareerConnectApi.Endpoints
-{
-    public static class UserEndpoint
-    {
-        public static void MapUserEndpoints(this IEndpointRouteBuilder endpoints)
-        {
-            var users = endpoints.MapGroup("/users");
+//namespace CareerConnectApi.Endpoints
+//{
+//    public static class UserEndpoint
+//    {
+//        public static void MapUserEndpoints(this IEndpointRouteBuilder endpoints)
+//        {
+//            var users = endpoints.MapGroup("/users");
 
-            users.MapPost("/register",
+//            users.MapPost("/register",
 
-async (
+//async (
 
-AppDbContext db,
+//AppDbContext db,
 
-RegisterDto dto
+//RegisterDto dto
 
-) =>
-{
+//) =>
+//{
 
-    var user = new User
-    {
+//    var user = new User
+//    {
 
-        Name = dto.Name,
+//        Name = dto.Name,
 
-        Email = dto.Email,
+//        Email = dto.Email,
 
-        PasswordHash = dto.Password,
+//        PasswordHash = dto.Password,
 
-        Role = "User"
+       
 
-    };
+//    };
 
-    db.Users.Add(user);
+//    db.Users.Add(user);
 
-    await db.SaveChangesAsync();
+//    await db.SaveChangesAsync();
 
-    return Results.Ok(user);
+//    return Results.Ok(user);
 
-});
-            users.MapPost("/login",
+//});
+//            users.MapPost("/login",
 
-async (
+//async (
 
-AppDbContext db,
+//AppDbContext db,
 
-LoginDto dto,
+//LoginDto dto,
 
-JwtService jwtService
+//JwtService jwtService
 
-) =>
-{
+//) =>
+//{
 
-    var user = await db.Users
+//    var user = await db.Users
 
-    .FirstOrDefaultAsync(
+//    .FirstOrDefaultAsync(
 
-    u => u.Email == dto.Email);
+//    u => u.Email == dto.Email);
 
-    if (user is null)
+//    if (user is null)
 
-        return Results.BadRequest(
+//        return Results.BadRequest(
 
-        "User Not Found");
+//        "User Not Found");
 
-    if (user.PasswordHash
+//    if (user.PasswordHash
 
-    != dto.Password)
+//    != dto.Password)
 
-        return Results.BadRequest(
+//        return Results.BadRequest(
 
-        "Wrong Password");
+//        "Wrong Password");
 
-    var token =
+//    //var token =
 
-    jwtService.GenerateToken(user);
+//    //jwtService.GenerateToken(user);
 
-    return Results.Ok(
+//    return Results.Ok(
 
-    new
-    {
+//    new
+//    {
 
-        Token = token
+//        Token = token
 
-    });
+//    });
 
-});
-
-
+//});
 
 
 
 
-        }
 
-    }
-}
+
+//        }
+
+//    }
+//}

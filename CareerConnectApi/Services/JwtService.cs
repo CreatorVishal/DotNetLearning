@@ -1,4 +1,5 @@
-﻿using CareerConnectApi.Models;
+﻿using CareerConnectApi.Interfaces;
+using CareerConnectApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -6,63 +7,46 @@ using System.Text;
 
 namespace CareerConnectApi.Services;
 
-public class JwtService
+public class JwtService : IJwtService
 {
-    private readonly IConfiguration _config;
+    private readonly IConfiguration _configuration;
 
-    public JwtService(IConfiguration config)
+    public JwtService(IConfiguration configuration)
     {
-        _config = config;
+        _configuration = configuration;
     }
 
-    public string GenerateToken(User user)
+    public string GenerateToken(Employee employee)
     {
-        var key = _config["Jwt:Key"];
+        // Secret Key
+        var key = _configuration["Jwt:Key"]!;
 
-        var securityKey =
-            new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(key));
+        var securityKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(key));
 
-        var credentials =
-            new SigningCredentials(
-                securityKey,
-                SecurityAlgorithms.HmacSha256);
+        // Signing Credentials
+        var credentials = new SigningCredentials(
+            securityKey,
+            SecurityAlgorithms.HmacSha256);
 
-        var claims = new[]
+        // Claims
+        var claims = new List<Claim>
         {
-            new Claim(
-                ClaimTypes.Name,
-                user.Name),
-
-            new Claim(
-                ClaimTypes.Email,
-                user.Email),
-
-            new Claim(
-                ClaimTypes.Role,
-                user.Role)
+            new Claim(ClaimTypes.NameIdentifier, employee.Id.ToString()),
+            new Claim(ClaimTypes.Name, employee.Name),
+            new Claim(ClaimTypes.Email, employee.Email)
         };
 
-        var token =
-            new JwtSecurityToken(
+        // JWT Token
+        var token = new JwtSecurityToken(
+            issuer: _configuration["Jwt:Issuer"],
+            audience: _configuration["Jwt:Audience"],
+            claims: claims,
+            expires: DateTime.UtcNow.AddMinutes(
+                Convert.ToDouble(_configuration["Jwt:ExpiryInMinutes"])),
+            signingCredentials: credentials
+        );
 
-                issuer:
-                _config["Jwt:Issuer"],
-
-                audience:
-                _config["Jwt:Audience"],
-
-                claims:
-                claims,
-
-                expires:
-                DateTime.Now.AddHours(1),
-
-                signingCredentials:
-                credentials
-            );
-
-        return new JwtSecurityTokenHandler()
-            .WriteToken(token);
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }

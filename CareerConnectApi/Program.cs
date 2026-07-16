@@ -23,6 +23,8 @@ namespace CareerConnectApi
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<AppDbContextAuth>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             //--------------
             //builder.Services.AddDbContext<AppDbContext>(options =>
             //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -46,8 +48,31 @@ namespace CareerConnectApi
             //builder.Services.AddOpenApi();
 
             builder.Services.AddScoped<IJobService, JobService>();
-            builder.Services.AddScoped<ICompanyService,CompanyService>();
-            builder.Services.AddScoped<JwtService>();
+            builder.Services.AddScoped<ICompanyService, CompanyService>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddScoped<IJwtService, JwtService>();
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters =
+        new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+
+            IssuerSigningKey =
+                new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(
+                        builder.Configuration["Jwt:Key"]!))
+        };
+});
+
 
             var app = builder.Build();
 
@@ -121,44 +146,11 @@ namespace CareerConnectApi
             //});
             // Built-in Middleware
             app.UseHttpsRedirection();
-            builder.Services
-.AddAuthentication(
-JwtBearerDefaults.AuthenticationScheme)
+            app.MapEmployeeEndpoints();
 
-.AddJwtBearer(options =>
-{
 
-    options.TokenValidationParameters =
-    new TokenValidationParameters
-    {
-
-        ValidateIssuer = true,
-
-        ValidateAudience = true,
-
-        ValidateLifetime = true,
-
-        ValidateIssuerSigningKey = true,
-
-        ValidIssuer =
-    builder.Configuration["Jwt:Issuer"],
-
-        ValidAudience =
-    builder.Configuration["Jwt:Audience"],
-
-        IssuerSigningKey =
-    new SymmetricSecurityKey(
-
-    Encoding.UTF8.GetBytes(
-
-    builder.Configuration["Jwt:Key"]
-
-    ))
-
-    };
-
-});
             //Security Middleware
+            app.UseAuthentication();
             app.UseAuthorization();
 
             //app.Run(async context =>
@@ -180,7 +172,7 @@ JwtBearerDefaults.AuthenticationScheme)
                 return Results.Ok(job);
             });
             app.MapCompanyEndpoints();
-            app.MapUserEndpoints();
+            //app.MapUserEndpoints();
             //Endpoint Middleware
             app.MapControllers();
 
