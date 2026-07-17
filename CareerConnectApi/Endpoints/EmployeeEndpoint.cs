@@ -44,5 +44,12 @@ public static class EmployeeEndpoint
                 Token = token
             });
         });
+        employee.MapGet("/profile", () =>
+        {
+            return Results.Ok(new
+            {
+                Message = "Welcome to Employee Profile"
+            });
+        }).RequireAuthorization();
     }
 }

@@ -72,6 +72,7 @@ namespace CareerConnectApi
                         builder.Configuration["Jwt:Key"]!))
         };
 });
+            builder.Services.AddAuthorization();
 
 
             var app = builder.Build();
@@ -146,7 +147,7 @@ namespace CareerConnectApi
             //});
             // Built-in Middleware
             app.UseHttpsRedirection();
-            app.MapEmployeeEndpoints();
+            
 
 
             //Security Middleware
@@ -157,6 +158,7 @@ namespace CareerConnectApi
             //{
             //    await context.Response.WriteAsync("Website Under Maintenance");
             //});
+            app.MapEmployeeEndpoints();
             app.MapGet("/hello", () =>
             {
                 return Results.Ok("Hello from Minimal Api..");
