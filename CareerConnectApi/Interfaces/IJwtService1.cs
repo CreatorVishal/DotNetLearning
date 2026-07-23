@@ -2,8 +2,7 @@
 
 namespace CareerConnectApi.Interfaces;
 
-public interface IJwtService
+public interface IJwtService1
 {
-    string GenerateToken(Employee employee);
-
+    string GenerateToken(UserAccount user);
 }

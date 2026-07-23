@@ -1,5 +1,6 @@
 ﻿using CareerConnectApi.DTOs;
 using CareerConnectApi.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CareerConnectApi.Controllers;
@@ -29,5 +30,11 @@ public class AuthController : ControllerBase
         var result = await _authService.LoginAsync(request);
 
         return Ok(result);
+    }
+    [Authorize]
+    [HttpGet("profile")]
+    public IActionResult GetProfile()
+    {
+        return Ok("Welcome User");
     }
 }
