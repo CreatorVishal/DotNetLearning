@@ -57,10 +57,21 @@ public class AuthService : IAuthService
         {
             throw new Exception("Invalid password.");
         }
-        var token = _jwtService.GenerateToken(user);
+        var accessToken = _jwtService.GenerateToken(user);
+        var refreshToken = _jwtService.GenerateRefreshToken();
+        var refreshTokenEntity = new RefreshToken { 
+            Token=refreshToken,
+            ExpiryDate = DateTime.UtcNow.AddDays(7),
+            IsRevoked = false,
+            CreatedAt = DateTime.UtcNow,
+            UserAccountId = user.Id
+        };
+        _context.RefreshTokens.Add(refreshTokenEntity);
+        await _context.SaveChangesAsync();
         return new AuthResponseDto
         {
-            Token = token,
+            AccessToken = accessToken,
+            RefreshToken = refreshToken,
             Expiration = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["Jwt:ExpiryInMinutes"]))
         };
     }

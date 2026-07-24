@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Security.Cryptography;
 namespace CareerConnectApi.Services
 {
 
@@ -37,6 +38,13 @@ namespace CareerConnectApi.Services
             var tokenHandler = new JwtSecurityTokenHandler();
 
             return tokenHandler.WriteToken(token);
+        }
+        public string GenerateRefreshToken()
+        {
+            var randomBytes = RandomNumberGenerator.GetBytes(64);
+            return Convert.ToBase64String(randomBytes);
+            
+
         }
     }
 }
