@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using BankingSystemApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using BankingSystemApi.DTOs;
 namespace BankingSystemApi.Controllers
 {
     [ApiController]
@@ -74,9 +75,10 @@ namespace BankingSystemApi.Controllers
             return Ok(id);
         }
         [HttpPost]
-        public IActionResult CreateAccount()
+        public IActionResult CreateAccount(CreateAccountDto dto)
         {
-            return Ok("Account Created");
+            var account = _accountService.CreateAccount(dto);
+            return Ok(account);
         }
         [HttpPut("{id}")]
         public IActionResult UpdateAccount(int id)

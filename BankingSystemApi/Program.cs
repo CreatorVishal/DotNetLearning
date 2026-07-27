@@ -23,6 +23,7 @@ namespace BankingSystemApi
             builder.Services.AddScoped<IAccountService,AccountService>();
             //builder.Services.AddSingleton<IAccountService,AccountService>();
             //builder.Services.AddTransient<IAccountService,AccountService>();
+            builder.Services.AddScoped<ICustomerService,CustomerService>();
 
             // Add services to the container.
 
