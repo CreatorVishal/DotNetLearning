@@ -1,85 +1,128 @@
-# 🚀 C# & .NET Learning Journey
+# 🚀 C# & .NET Backend Learning Journey
 
-Welcome to my C# and .NET learning repository.
+Welcome to my C# and .NET Backend Learning Repository.
 
-This repository contains my practice programs, exercises, and concept implementations while learning C#, .NET, SQL Server, and Entity Framework Core. The goal of this repository is to build a strong foundation in backend development through hands-on coding and continuous practice.
+This repository contains my hands-on practice, concept revisions, and backend development implementations using C#, .NET, SQL Server, Entity Framework Core, and ASP.NET Core.
 
-## 📚 Topics Covered
+I have previously completed these technologies up to JWT Authentication, and this repository is focused on revising concepts from scratch with deeper understanding, clean architecture, and industry-level coding practices.
 
-### C# Fundamentals
+---
 
-* Variables & Data Types
-* Operators
-* Conditional Statements
-* Loops
-* Arrays
-* Strings
-* Methods
-* Classes & Objects
+# 📚 Topics Covered
 
-### Object-Oriented Programming (OOP)
+## C# Fundamentals
 
-* Encapsulation
-* Inheritance
-* Polymorphism
-* Abstraction
-* Interfaces
+- Variables & Data Types
+- Operators
+- Type Conversion
+- Conditional Statements
+- Loops
+- Arrays
+- Strings
+- Methods
+- Exception Handling
+- Classes & Objects
 
-### Advanced C#
+## Object-Oriented Programming (OOP)
 
-* Exception Handling
-* Collections
-* Generics
-* Delegates
-* Events
-* File Handling
-* Streams
-* Serialization & Deserialization
-* Memory Management
-* Compression & Decompression
-* LINQ
+- Encapsulation
+- Inheritance
+- Polymorphism
+- Abstraction
+- Interfaces
 
-### Database & Entity Framework Core
+## Advanced C#
 
-* DbContext
-* Entities
-* Migrations
-* CRUD Operations
-* LINQ with EF Core
-* Data Annotations
-* Fluent API
-* Change Tracker
-* One-to-One Relationships
-* One-to-Many Relationships
+- Collections
+- Generics
+- Delegates
+- Events
+- File Handling
+- Streams
+- Serialization & Deserialization
+- Memory Management
+- Compression & Decompression
+- LINQ
 
-## 🎯 Current Learning Focus
+## SQL Server
 
-* Entity Framework Core (Advanced)
-* ASP.NET Core MVC
-* ASP.NET Core Web API
-* Dependency Injection
-* Authentication & Authorization
+- Database Design
+- Constraints
+- Joins
+- Stored Procedures
+- Functions
+- Views
+- Transactions
 
-## 📈 Learning Objective
+## Entity Framework Core
 
-My goal is to become a skilled .NET Backend Developer by developing strong knowledge in:
+- DbContext
+- Entities
+- CRUD Operations
+- Migrations
+- Data Annotations
+- Fluent API
+- LINQ with EF Core
+- Change Tracker
+- One-to-One Relationship
+- One-to-Many Relationship
+- Many-to-Many Relationship
+- Loading Techniques
 
-* C#
-* .NET
-* SQL Server
-* Entity Framework Core
-* ASP.NET Core
-* Backend Development
+## ASP.NET Core Web API
 
-## 🔄 Repository Updates
+- ASP.NET Core Architecture
+- Routing
+- Controllers
+- Dependency Injection
+- Configuration
+- DTOs
+- CRUD APIs
+- Model Validation
+- Form Data
+- File Upload
+- REST API Design
+- Middleware
+- Exception Handling
+- Logging
+- Authentication (JWT)
+- Authorization
 
-This repository is regularly updated with:
+---
 
-* New concepts
-* Practice programs
-* Entity Framework Core exercises
-* Backend development learning code
+# 🎯 Current Focus
 
-More advanced topics and real-world projects will be added as I progress in my learning journey.
+Currently revising ASP.NET Core Web API from fundamentals to advanced concepts with an industry-level approach, followed by JWT Authentication, Clean Architecture, and real-world backend projects.
 
-⭐ Consistency, practice, and continuous improvement.
+---
+
+# 📈 Learning Goals
+
+My objective is to become a professional .NET Backend Developer by mastering:
+
+- C#
+- .NET
+- SQL Server
+- Entity Framework Core
+- ASP.NET Core
+- RESTful APIs
+- JWT Authentication
+- Clean Architecture
+- Backend Development Best Practices
+
+---
+
+# 🔄 Repository Updates
+
+This repository is continuously updated with:
+
+- Concept revisions
+- Practice implementations
+- Backend API development
+- Entity Framework Core exercises
+- Industry-level coding examples
+- Real-world projects
+
+Every commit reflects continuous learning, revision, and improvement toward becoming a professional .NET Backend Developer.
+
+⭐ Consistency • Practice • Revision • Continuous Improvement
