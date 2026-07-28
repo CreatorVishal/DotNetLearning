@@ -5,6 +5,7 @@ using BankingSystemApi.Models;
 using BankingSystemApi.Services;
 using BankingSystemApi.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using BankingSystemApi.Middlewares;
 namespace BankingSystemApi
 {
     public class Program
@@ -39,6 +40,7 @@ namespace BankingSystemApi
                 app.MapOpenApi();
             }
             Console.WriteLine($"Current Environment: {app.Environment.EnvironmentName}");
+            app.UseMiddleware<LoggingMiddleware>();
 
             app.UseHttpsRedirection();
 

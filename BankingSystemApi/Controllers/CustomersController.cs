@@ -13,9 +13,11 @@ namespace BankingSystemApi.Controllers
     public class CustomersController:ControllerBase
     {
         private readonly ICustomerService _customerService;
-        public CustomersController(ICustomerService customerService)
+        public IWebHostEnvironment _environment;
+        public CustomersController(ICustomerService customerService,IWebHostEnvironment environment)
         {
             _customerService = customerService;
+            _environment = environment;
         }
         [HttpGet]
         public ActionResult<List<Customer>> GetAllCustomer()
@@ -72,7 +74,9 @@ namespace BankingSystemApi.Controllers
         [HttpPost("register")]
         public IActionResult RegisterCustomer([FromForm] CustomerRegistrationDto dto)
         {
-            return Ok(dto.FullName);
+            var file = dto.AadhaarPhoto;
+            var originalFileName = file.FileName;
+            return Ok(originalFileName);
         }
     }
 }
