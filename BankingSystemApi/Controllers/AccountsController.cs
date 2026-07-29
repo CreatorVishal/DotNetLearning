@@ -1,8 +1,9 @@
-﻿using BankingSystemApi.Models;
-using Microsoft.Extensions.Options;
+﻿using BankingSystemApi.DTOs;
+using BankingSystemApi.Models;
+using BankingSystemApi.Services.Factories;
 using BankingSystemApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using BankingSystemApi.DTOs;
+using Microsoft.Extensions.Options;
 namespace BankingSystemApi.Controllers
 {
     [ApiController]
@@ -35,11 +36,13 @@ namespace BankingSystemApi.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly BankSettings _bankSettings;
-        public AccountsController(IAccountService accountService, IOptions<BankSettings> options)//constructor Injection 
+        private readonly AccountFactory _factory;
+
+        public AccountsController(IAccountService accountService, IOptions<BankSettings> options,AccountFactory factory)
         {
             _accountService = accountService;
             _bankSettings = options.Value;
-
+            _factory = factory;
         }
         [HttpGet]
         public IActionResult GetAccounts()
@@ -69,7 +72,7 @@ namespace BankingSystemApi.Controllers
         {
             return NoContent();
         }
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public IActionResult GetElementById(int id)
         {
             return Ok(id);
@@ -100,6 +103,15 @@ namespace BankingSystemApi.Controllers
         public IActionResult Filter([FromQuery]string city , bool isActive)
         {
             return Ok($"{city} {isActive}");
+        }
+        [HttpGet("create/{type}")]
+        public IActionResult Create(string type)
+        {
+            var service = _factory.GetAccountService(type);
+
+            var result = service.CreateAccount();
+
+            return Ok(result);
         }
     }
 }

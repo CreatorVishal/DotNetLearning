@@ -1,11 +1,11 @@
 using BankingSystemApi.Data;
-using Microsoft.Extensions.Options;
+using BankingSystemApi.Middlewares;
 using BankingSystemApi.Models;
-
 using BankingSystemApi.Services;
+using BankingSystemApi.Services.Factories;
 using BankingSystemApi.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using BankingSystemApi.Middlewares;
+using Microsoft.Extensions.Options;
 namespace BankingSystemApi
 {
     public class Program
@@ -25,6 +25,13 @@ namespace BankingSystemApi
             //builder.Services.AddSingleton<IAccountService,AccountService>();
             //builder.Services.AddTransient<IAccountService,AccountService>();
             builder.Services.AddScoped<ICustomerService,CustomerService>();
+            //builder.Services.AddScoped<ICustomerService, PremiumCustomerService>();
+            builder.Services.AddScoped<SavingAccountService>();
+            builder.Services.AddScoped<CurrentAccountService>();
+            builder.Services.AddScoped<SalaryAccountService>();
+
+            builder.Services.AddScoped<AccountFactory>();
+
 
             // Add services to the container.
 
