@@ -48,6 +48,7 @@ namespace BankingSystemApi
             }
             Console.WriteLine($"Current Environment: {app.Environment.EnvironmentName}");
             app.UseMiddleware<LoggingMiddleware>();
+            app.UseMiddleware<TimingMiddleware>();
 
             app.UseHttpsRedirection();
 
