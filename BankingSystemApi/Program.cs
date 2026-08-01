@@ -50,7 +50,10 @@ namespace BankingSystemApi
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseMiddleware<LoggingMiddleware>();
             app.UseMiddleware<TimingMiddleware>();
+            app.Map("/admin", appbuilder =>
+            {
 
+            })
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
