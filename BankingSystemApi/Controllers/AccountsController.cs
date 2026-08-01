@@ -113,6 +113,10 @@ namespace BankingSystemApi.Controllers
 
             return Ok(result);
         }
+        [HttpGet("error")]
+        public IActionResult Error() {
+            throw new Exception("Database Error");
+        }
     }
 }
 

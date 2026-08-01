@@ -47,6 +47,7 @@ namespace BankingSystemApi
                 app.MapOpenApi();
             }
             Console.WriteLine($"Current Environment: {app.Environment.EnvironmentName}");
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseMiddleware<LoggingMiddleware>();
             app.UseMiddleware<TimingMiddleware>();
 
