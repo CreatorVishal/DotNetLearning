@@ -1,4 +1,5 @@
 ﻿using BankingSystemApi.DTOs;
+using BankingSystemApi.Filters;
 using BankingSystemApi.Models;
 using BankingSystemApi.Services.Factories;
 using BankingSystemApi.Services.Interfaces;
@@ -32,13 +33,16 @@ namespace BankingSystemApi.Controllers
 
     //Results.Json();
 
+    //----------------------------
+    //Controller level Filters
+    [ServiceFilter(typeof(LoggingActionFilter))]
     public class AccountsController : ControllerBase
     {
         private readonly IAccountService _accountService;
         private readonly BankSettings _bankSettings;
         private readonly AccountFactory _factory;
 
-        public AccountsController(IAccountService accountService, IOptions<BankSettings> options,AccountFactory factory)
+        public AccountsController(IAccountService accountService, IOptions<BankSettings> options, AccountFactory factory)
         {
             _accountService = accountService;
             _bankSettings = options.Value;
@@ -100,7 +104,7 @@ namespace BankingSystemApi.Controllers
             return Ok($"Searching : {name}");
         }
         [HttpGet("Filter")]
-        public IActionResult Filter([FromQuery]string city , bool isActive)
+        public IActionResult Filter([FromQuery] string city, bool isActive)
         {
             return Ok($"{city} {isActive}");
         }
@@ -114,7 +118,8 @@ namespace BankingSystemApi.Controllers
             return Ok(result);
         }
         [HttpGet("error")]
-        public IActionResult Error() {
+        public IActionResult Error()
+        {
             throw new Exception("Database Error");
         }
     }

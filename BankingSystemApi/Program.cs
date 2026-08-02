@@ -1,4 +1,5 @@
 using BankingSystemApi.Data;
+using BankingSystemApi.Filters;
 using BankingSystemApi.Middlewares;
 using BankingSystemApi.Models;
 using BankingSystemApi.Services;
@@ -31,6 +32,7 @@ namespace BankingSystemApi
             builder.Services.AddScoped<SalaryAccountService>();
 
             builder.Services.AddScoped<AccountFactory>();
+            builder.Services.AddScoped<LoggingActionFilter>();
 
 
             // Add services to the container.
@@ -40,6 +42,7 @@ namespace BankingSystemApi
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -53,7 +56,7 @@ namespace BankingSystemApi
             app.Map("/admin", appbuilder =>
             {
 
-            })
+            });
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
