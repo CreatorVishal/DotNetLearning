@@ -32,17 +32,22 @@ namespace BankingSystemApi
             builder.Services.AddScoped<SalaryAccountService>();
 
             builder.Services.AddScoped<AccountFactory>();
-            builder.Services.AddScoped<LoggingActionFilter>();
+            //builder.Services.AddScoped<LoggingActionFilter>();
+            builder.Services.AddScoped<GlobalLoggingFilter>();  
 
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            //builder.Services.AddControllers();
+            builder.Services.AddControllers(options =>
+            {
+                options.Filters.Add<GlobalLoggingFilter>();
+            });
+
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
-
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

@@ -35,7 +35,11 @@ namespace BankingSystemApi.Controllers
 
     //----------------------------
     //Controller level Filters
-    [ServiceFilter(typeof(LoggingActionFilter))]
+    //[ServiceFilter(typeof(LoggingActionFilter))]
+    //[TypeFilter(typeof(LoggingActionFilter), Arguments = new object[]
+    //{
+    //            "AccountsModule"
+    //})]
     public class AccountsController : ControllerBase
     {
         private readonly IAccountService _accountService;

@@ -1,5 +1,6 @@
 ﻿using BankingSystemApi.Data;
 using BankingSystemApi.DTOs;
+using BankingSystemApi.Filters;
 using BankingSystemApi.Models;
 using BankingSystemApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,10 @@ namespace BankingSystemApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    //[TypeFilter(typeof(LoggingActionFilter),Arguments =new object[]
+    //{
+    //    "CustomersModule"
+    //})]
    
     public class CustomersController:ControllerBase
     {
