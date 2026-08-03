@@ -33,7 +33,8 @@ namespace BankingSystemApi
 
             builder.Services.AddScoped<AccountFactory>();
             //builder.Services.AddScoped<LoggingActionFilter>();
-            builder.Services.AddScoped<GlobalLoggingFilter>();  
+            builder.Services.AddScoped<GlobalLoggingFilter>();
+            builder.Services.AddScoped<AsyncLoggingFilter>(); 
 
 
             // Add services to the container.
@@ -42,6 +43,10 @@ namespace BankingSystemApi
             builder.Services.AddControllers(options =>
             {
                 options.Filters.Add<GlobalLoggingFilter>();
+            });
+            builder.Services.AddControllers(options =>
+            {
+                options.Filters.Add<AsyncLoggingFilter>();
             });
 
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

@@ -88,6 +88,10 @@ namespace BankingSystemApi.Controllers
         [HttpPost]
         public IActionResult CreateAccount(CreateAccountDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var account = _accountService.CreateAccount(dto);
             return Ok(account);
         }
@@ -126,6 +130,7 @@ namespace BankingSystemApi.Controllers
         {
             throw new Exception("Database Error");
         }
+       
     }
 }
 
