@@ -45,12 +45,14 @@ namespace BankingSystemApi.Controllers
         private readonly IAccountService _accountService;
         private readonly BankSettings _bankSettings;
         private readonly AccountFactory _factory;
+        private readonly ILogger<AccountsController> _logger;
 
-        public AccountsController(IAccountService accountService, IOptions<BankSettings> options, AccountFactory factory)
+        public AccountsController(IAccountService accountService, IOptions<BankSettings> options, AccountFactory factory,ILogger<AccountsController>logger)
         {
             _accountService = accountService;
             _bankSettings = options.Value;
             _factory = factory;
+            _logger = logger;
         }
         [HttpGet]
         public IActionResult GetAccounts()
@@ -88,11 +90,27 @@ namespace BankingSystemApi.Controllers
         [HttpPost]
         public IActionResult CreateAccount(CreateAccountDto dto)
         {
+            // TRACE
+            _logger.LogTrace("Entered CreateAccount() method");
+
             if (!ModelState.IsValid)
             {
+                _logger.LogWarning("Account creation validation failed for {Email}", dto.Email);
+
                 return BadRequest(ModelState);
             }
+            // DEBUG
+            _logger.LogDebug(
+                "Calling AccountService.CreateAccount() for {AccountHolderName}", dto.AccountHolderName);
+
+            // INFORMATION
+            _logger.LogInformation("Creating account for {AccountHolderName}",dto.AccountHolderName);
             var account = _accountService.CreateAccount(dto);
+            _logger.LogInformation("Account created successfully for {AccountHolderName}", dto.AccountHolderName); //Structured Logging
+
+            // TRACE
+            _logger.LogTrace("Exited CreateAccount() method");
+
             return Ok(account);
         }
         [HttpPut("{id}")]

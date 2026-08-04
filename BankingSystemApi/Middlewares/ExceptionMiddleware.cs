@@ -3,9 +3,11 @@
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        public ExceptionMiddleware(RequestDelegate next)
+        private readonly ILogger<ExceptionMiddleware> _logger;
+        public ExceptionMiddleware(RequestDelegate next,ILogger<ExceptionMiddleware>logger)
         {
             _next = next;
+            _logger = logger;
         }
         public async Task InvokeAsync(HttpContext context)
         {
@@ -15,7 +17,7 @@
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                _logger.LogError(ex, "Unhandled exception occurred while processing {Path}", context.Request.Path);
                 context.Response.StatusCode = 500;
 
                 await context.Response.WriteAsync("Something went wrong");

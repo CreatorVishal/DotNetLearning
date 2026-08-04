@@ -1,3 +1,4 @@
+using Serilog;
 using BankingSystemApi.Data;
 using BankingSystemApi.Filters;
 using BankingSystemApi.Middlewares;
@@ -46,11 +47,18 @@ namespace BankingSystemApi
             builder.Services.AddControllers(options =>
             {
                 options.Filters.Add<GlobalLoggingFilter>();
-            });
-            builder.Services.AddControllers(options =>
-            {
                 options.Filters.Add<AsyncLoggingFilter>();
+
             });
+            Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File(
+        "Logs/log-.txt",
+        rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+            builder.Host.UseSerilog();
 
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
