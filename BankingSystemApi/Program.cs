@@ -5,6 +5,8 @@ using BankingSystemApi.Models;
 using BankingSystemApi.Services;
 using BankingSystemApi.Services.Factories;
 using BankingSystemApi.Services.Interfaces;
+using BankingSystemApi.Validators;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 namespace BankingSystemApi
@@ -34,7 +36,8 @@ namespace BankingSystemApi
             builder.Services.AddScoped<AccountFactory>();
             //builder.Services.AddScoped<LoggingActionFilter>();
             builder.Services.AddScoped<GlobalLoggingFilter>();
-            builder.Services.AddScoped<AsyncLoggingFilter>(); 
+            builder.Services.AddScoped<AsyncLoggingFilter>();
+            builder.Services.AddValidatorsFromAssemblyContaining<CreateAccountValidator>();
 
 
             // Add services to the container.
