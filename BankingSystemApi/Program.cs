@@ -10,6 +10,7 @@ using BankingSystemApi.Validators;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Identity;
 namespace BankingSystemApi
 {
     public class Program
@@ -38,6 +39,8 @@ namespace BankingSystemApi
             //builder.Services.AddScoped<LoggingActionFilter>();
             builder.Services.AddScoped<GlobalLoggingFilter>();
             builder.Services.AddScoped<AsyncLoggingFilter>();
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             builder.Services.AddValidatorsFromAssemblyContaining<CreateAccountValidator>();
 
 
