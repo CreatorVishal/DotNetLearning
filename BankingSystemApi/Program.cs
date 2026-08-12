@@ -1,4 +1,7 @@
 using Serilog;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using BankingSystemApi.Data;
 using BankingSystemApi.Filters;
 using BankingSystemApi.Middlewares;
@@ -26,10 +29,10 @@ namespace BankingSystemApi
             builder.Services.Configure<BankSettings>(builder.Configuration.GetSection("BankSettings"));
 
             //Service LifeTimes
-            builder.Services.AddScoped<IAccountService,AccountService>();
+            builder.Services.AddScoped<IAccountService, AccountService>();
             //builder.Services.AddSingleton<IAccountService,AccountService>();
             //builder.Services.AddTransient<IAccountService,AccountService>();
-            builder.Services.AddScoped<ICustomerService,CustomerService>();
+            builder.Services.AddScoped<ICustomerService, CustomerService>();
             //builder.Services.AddScoped<ICustomerService, PremiumCustomerService>();
             builder.Services.AddScoped<SavingAccountService>();
             builder.Services.AddScoped<CurrentAccountService>();
@@ -41,7 +44,34 @@ namespace BankingSystemApi
             builder.Services.AddScoped<AsyncLoggingFilter>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+            builder.Services.AddScoped<IJwtService, JwtService>();
             builder.Services.AddValidatorsFromAssemblyContaining<CreateAccountValidator>();
+            var jwtKey = builder.Configuration["Jwt:Key"];
+            var jwtIssuer = builder.Configuration["Jwt:Issuer"];
+            var jwtAudience = builder.Configuration["Jwt:Audience"];
+
+            builder.Services
+                .AddAuthentication("Bearer")
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(jwtKey!)),
+
+                        ValidateIssuer = true,
+                        ValidIssuer = jwtIssuer,
+
+                        ValidateAudience = true,
+                        ValidAudience = jwtAudience,
+
+                        ValidateLifetime = true,
+
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
 
 
             // Add services to the container.
@@ -82,6 +112,7 @@ namespace BankingSystemApi
 
             });
             app.UseHttpsRedirection();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

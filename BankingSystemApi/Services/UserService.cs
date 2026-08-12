@@ -11,10 +11,12 @@ namespace BankingSystemApi.Services
     {
         private readonly BankingDbContext _context;
         private readonly IPasswordHasher<User> _passwordHasher;
-        public UserService(BankingDbContext context, IPasswordHasher<User> passwordHasher)
+        private readonly IJwtService _jwtService;
+        public UserService(BankingDbContext context, IPasswordHasher<User> passwordHasher, IJwtService jwtService)
         {
             _context = context;
             _passwordHasher = passwordHasher;
+            _jwtService = jwtService;
         }
         public async Task RegisterAsync(RegisterUserDto dto)
         {
@@ -48,6 +50,24 @@ namespace BankingSystemApi.Services
             // Step 6: Save User
             await _context.SaveChangesAsync();
 
+
+        }
+        //Login async
+        public async Task<string> LoginAsync(LoginUserDto dto)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x=>x.Email==dto.Email);
+
+            if (user == null)
+            {
+                return null;
+            }
+            var passwordResult= _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, dto.Password);
+            if (passwordResult ==PasswordVerificationResult.Failed)
+            {
+                return null;
+            }
+            var token = _jwtService.GenerateToken(user);
+            return token;
 
         }
     }

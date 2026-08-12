@@ -3,6 +3,7 @@ using BankingSystemApi.Filters;
 using BankingSystemApi.Models;
 using BankingSystemApi.Services.Factories;
 using BankingSystemApi.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 namespace BankingSystemApi.Controllers
@@ -40,6 +41,7 @@ namespace BankingSystemApi.Controllers
     //{
     //            "AccountsModule"
     //})]
+    
     public class AccountsController : ControllerBase
     {
         private readonly IAccountService _accountService;
@@ -54,6 +56,7 @@ namespace BankingSystemApi.Controllers
             _factory = factory;
             _logger = logger;
         }
+        [Authorize]
         [HttpGet]
         public IActionResult GetAccounts()
         {
