@@ -71,7 +71,15 @@ namespace BankingSystemApi
 
                         ClockSkew = TimeSpan.Zero
                     };
+                   
                 });
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("CanManageAccounts", policy =>
+                {
+                    policy.RequireClaim("Permission", "CanManageAccounts");
+                });
+            });
 
 
             // Add services to the container.

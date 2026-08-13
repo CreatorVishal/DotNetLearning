@@ -151,7 +151,26 @@ namespace BankingSystemApi.Controllers
         {
             throw new Exception("Database Error");
         }
-       
+        [HttpGet("admin")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult AdminOnly()
+        {
+            return Ok("Welcome Admin");
+        }
+        [HttpGet("customer")]
+        [Authorize(Roles ="Customer")]
+        public IActionResult CustomerOnly()
+        {
+            return Ok("Welcome Customer");
+        }
+
+        [HttpGet("manage")]
+        [Authorize(Policy = "CanManageAccounts")]
+        public IActionResult ManageAccounts()
+        {
+            return Ok("You have permission to manage accounts.");
+        }
+
     }
 }
 
