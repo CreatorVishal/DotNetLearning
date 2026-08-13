@@ -32,5 +32,17 @@ namespace BankingSystemApi.Controllers
             }
             return Ok(token);
         }
+        [HttpPost("refresh")]
+        public async Task<IActionResult> RefreshToken(RefreshTokenDto dto)
+        {
+            var result = await _service.RefreshTokenAsync(dto);
+
+            if (result == null)
+            {
+                return Unauthorized("Invalid or expired refresh token.");
+            }
+
+            return Ok(result);
+        }
     }
 }
