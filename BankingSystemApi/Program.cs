@@ -14,6 +14,8 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Identity;
+using BankingSystemApi.Data.Configurations;
+using Microsoft.AspNetCore.Http.HttpResults;
 namespace BankingSystemApi
 {
     public class Program
@@ -27,6 +29,7 @@ namespace BankingSystemApi
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.Configure<BankSettings>(builder.Configuration.GetSection("BankSettings"));
+            builder.Services.Configure<BankingSettings>(builder.Configuration.GetSection("BankingSettings"));
 
             //Service LifeTimes
             builder.Services.AddScoped<IAccountService, AccountService>();
@@ -42,6 +45,7 @@ namespace BankingSystemApi
             //builder.Services.AddScoped<LoggingActionFilter>();
             builder.Services.AddScoped<GlobalLoggingFilter>();
             builder.Services.AddScoped<AsyncLoggingFilter>();
+            builder.Services.AddScoped<ConfigurationTestService>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             builder.Services.AddScoped<IJwtService, JwtService>();
@@ -115,8 +119,27 @@ namespace BankingSystemApi
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseMiddleware<LoggingMiddleware>();
             app.UseMiddleware<TimingMiddleware>();
-            app.Map("/admin", appbuilder =>
+            //app.MapGet("config-test", (IConfiguration configuration) =>
+            //{
+            //    var bankName = configuration["Banking:BankName"];
+            //    var currency = configuration["Banking:Currency"];
+            //    var maxAmount = configuration["Banking:MaxTransactionAmount"];
+            //    return Results.Ok(new
+            //    {
+            //        BankName = bankName,
+            //        Currency = currency,
+            //        MaxTransactionAmount = maxAmount
+            //    });
+            //});
+            app.MapGet("config-test", (IOptions<BankingSettings> options) =>
             {
+                var settings = options.Value;
+                return Results.Ok(new
+                {
+                    settings.BankName,
+                    settings.Currency,
+                    settings.MaxTransactionAmount
+                } );
 
             });
             app.UseHttpsRedirection();

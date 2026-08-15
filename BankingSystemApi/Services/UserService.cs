@@ -10,7 +10,7 @@ namespace BankingSystemApi.Services
     public class UserService : IUserService
     {
         private readonly BankingDbContext _context;
-        private readonly IPasswordHasher _passwordHasher;
+        private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IJwtService _jwtService;
         public UserService(BankingDbContext context, IPasswordHasher<User> passwordHasher, IJwtService jwtService)
         {

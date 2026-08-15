@@ -1,17 +1,20 @@
 ﻿using BankingSystemApi.Data;
+using BankingSystemApi.Data.Configurations;
 using BankingSystemApi.DTOs;
 using BankingSystemApi.Models;
 using BankingSystemApi.Services.Interfaces;
+using Microsoft.Extensions.Options;
 
 namespace BankingSystemApi.Services
 {
     public class AccountService:IAccountService
     {
         private readonly BankingDbContext _dbContext;
-        public AccountService(BankingDbContext dbContext)
+        private readonly BankingSettings _settings;
+        public AccountService(BankingDbContext dbContext , IOptions<BankingSettings> options)
         {
             _dbContext = dbContext;
-
+            _settings = options.Value;
         }
         //public Guid ServiceId { get; } = Guid.NewGuid();
         public string GetAllAccounts()
@@ -21,6 +24,11 @@ namespace BankingSystemApi.Services
         }
         public Account CreateAccount(CreateAccountDto dto)
         {
+            if (dto.Balance > _settings.MaxTransactionAmount)
+            {
+                throw new Exception(
+                    $"Maximum allowed amount is {_settings.MaxTransactionAmount}");
+            }
             var account = new Account();
             account.AccountHolderName = dto.AccountHolderName;
             account.Email = dto.Email;
