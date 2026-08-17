@@ -1,0 +1,397 @@
+﻿                    ASP.NET CORE
+                         │
+                         ▼
+              ┌─────────────────────┐
+              │      CLIENT         │
+              │ Browser / Postman   │
+              │ Mobile / Frontend  │
+              └──────────┬──────────┘
+                         │ HTTP Request
+                         ▼
+              ┌─────────────────────┐
+              │      KESTREL       │
+              │   Web Server       │
+              └──────────┬──────────┘
+                         ▼
+              ┌─────────────────────┐
+              │    MIDDLEWARE      │
+              │ Exception Handling │
+              │ Logging            │
+              │ Authentication     │
+              │ Authorization      │
+              │ CORS               │
+              │ Custom Middleware  │
+              └──────────┬──────────┘
+                         ▼
+              ┌─────────────────────┐
+              │    ENDPOINT        │
+              │ Controller / API   │
+              │ Minimal API        │
+              └──────────┬──────────┘
+                         ▼
+              ┌─────────────────────┐
+              │     SERVICE        │
+              │ Business Logic     │
+              │ Validation         │
+              │ Mapping            │
+              └──────────┬──────────┘
+                         ▼
+              ┌─────────────────────┐
+              │   REPOSITORY /     │
+              │     EF CORE        │
+              │ DbContext          │
+              │ LINQ              │
+              └──────────┬──────────┘
+                         ▼
+              ┌─────────────────────┐
+              │     DATABASE       │
+              │    SQL SERVER      │
+              └─────────────────────┘
+              ------------------------------
+
+
+
+
+
+
+              ASP.NET CORE
+│
+├── 1. FOUNDATION
+│   ├── .NET Runtime
+│   ├── CLR
+│   ├── Kestrel
+│   ├── Hosting
+│   ├── Program.cs
+│   └── WebApplication Builder
+│
+├── 2. REQUEST PIPELINE
+│   ├── HTTP Request
+│   ├── Middleware
+│   ├── Routing
+│   ├── Authentication
+│   ├── Authorization
+│   └── Endpoint
+│
+├── 3. DEPENDENCY INJECTION
+│   ├── IServiceCollection
+│   ├── IServiceProvider
+│   ├── Singleton
+│   ├── Scoped
+│   └── Transient
+│
+├── 4. CONFIGURATION
+│   ├── appsettings.json
+│   ├── appsettings.Development.json
+│   ├── Environment Variables
+│   ├── IConfiguration
+│   └── IOptions<T>
+│
+├── 5. WEB API
+│   ├── Controller
+│   ├── Action
+│   ├── HTTP Methods
+│   │   ├── GET
+│   │   ├── POST
+│   │   ├── PUT
+│   │   ├── PATCH
+│   │   └── DELETE
+│   ├── Routing
+│   ├── Model Binding
+│   ├── DTO
+│   └── HTTP Status Codes
+│
+├── 6. BUSINESS LAYER
+│   ├── Interface
+│   ├── Service
+│   ├── Business Rules
+│   ├── Validation
+│   └── Mapping
+│
+├── 7. EF CORE
+│   ├── DbContext
+│   ├── DbSet
+│   ├── Entity
+│   ├── Relationships
+│   ├── Fluent API
+│   ├── LINQ
+│   ├── Tracking
+│   ├── AsNoTracking
+│   ├── Migration
+│   └── Seed Data
+│
+├── 8. SQL SERVER
+│   ├── Database
+│   ├── Table
+│   ├── Primary Key
+│   ├── Foreign Key
+│   ├── Index
+│   ├── JOIN
+│   ├── Stored Procedure
+│   └── Transactions
+│
+├── 9. AUTHENTICATION
+│   ├── User Registration
+│   ├── Password Hashing
+│   ├── Login
+│   ├── JWT
+│   ├── Access Token
+│   ├── Refresh Token
+│   └── Claims
+│
+├── 10. AUTHORIZATION
+│   ├── [Authorize]
+│   ├── Roles
+│   ├── Policies
+│   └── Claims-Based Authorization
+│
+├── 11. CROSS-CUTTING
+│   ├── Exception Handling
+│   ├── Logging
+│   ├── Serilog
+│   ├── CORS
+│   ├── Rate Limiting
+│   ├── Health Checks
+│   └── API Versioning
+│
+├── 12. VALIDATION & MAPPING
+│   ├── DataAnnotations
+│   ├── FluentValidation
+│   ├── AutoMapper
+│   └── Mapster
+│
+├── 13. API DOCUMENTATION
+│   ├── OpenAPI
+│   ├── Swagger
+│   └── Scalar
+│
+├── 14. ARCHITECTURE
+│   ├── Monolithic
+│   ├── Layered
+│   ├── Clean Architecture
+│   ├── Vertical Slice
+│   ├── CQRS
+│   └── Modular Monolith
+│
+├── 15. TESTING
+│   ├── Unit Testing
+│   ├── Integration Testing
+│   ├── Mocking
+│   └── API Testing
+│
+└── 16. DEPLOYMENT
+    ├── Build
+    ├── Publish
+    ├── IIS
+    ├── Docker
+    ├── Azure
+    ├── Environment Variables
+    └── CI/CD
+
+
+
+    ----------------------------------
+
+
+
+
+
+
+    CLIENT
+   │
+   │ POST /api/accounts
+   ▼
+CONTROLLER
+   │
+   │ DTO
+   ▼
+VALIDATOR
+   │
+   │ Valid?
+   ├──── NO ────► 400 Bad Request
+   │
+   ▼
+SERVICE
+   │
+   │ Business Logic
+   ▼
+REPOSITORY / DbContext
+   │
+   ▼
+EF CORE
+   │
+   │ SQL generated
+   ▼
+SQL SERVER
+   │
+   │ Result
+   ▼
+EF CORE
+   │
+   ▼
+SERVICE
+   │
+   │ Map Entity → DTO
+   ▼
+CONTROLLER
+   │
+   ▼
+200 / 201 / 204
+   │
+   ▼
+CLIENT
+
+----------------JWT ka flow ------------------
+REGISTER
+   │
+   ▼
+Password
+   │
+   ▼
+PasswordHasher
+   │
+   ▼
+User Table
+
+
+
+---------------
+
+
+
+
+LOGIN
+   │
+   ▼
+Email + Password
+   │
+   ▼
+User Lookup
+   │
+   ▼
+Password Verification
+   │
+   ▼
+Generate JWT
+   │
+   ├── UserId Claim
+   ├── Role Claim
+   └── Other Claims
+   │
+   ▼
+Access Token
+   │
+   ▼
+CLIENT
+
+
+
+------
+
+
+
+
+
+CLIENT
+   │
+   │ Authorization: Bearer <JWT>
+   ▼
+Authentication Middleware
+   │
+   ▼
+JWT Validate
+   │
+   ▼
+ClaimsPrincipal
+   │
+   ▼
+Authorization Middleware
+   │
+   ▼
+[Authorize]
+   │
+   ▼
+Controller
+
+
+-----------------PROGRAM.CS FLOW-----------------
+Program.cs
+│
+├── CreateBuilder()
+│
+├── Configuration
+│
+├── Logging
+│
+├── Register Services
+│   ├── AddControllers()
+│   ├── AddDbContext()
+│   ├── AddScoped()
+│   ├── AddAuthentication()
+│   ├── AddAuthorization()
+│   ├── AddSwagger/OpenAPI
+│   └── AddValidators()
+│
+├── builder.Build()
+│
+├── Configure Middleware
+│   ├── Exception Handler
+│   ├── HTTPS
+│   ├── Static Files
+│   ├── Routing
+│   ├── CORS
+│   ├── Authentication
+│   ├── Authorization
+│   └── MapControllers()
+│
+└── app.Run()
+
+
+--------------------FOLDER flow
+MyProject
+│
+├── Controllers
+│
+├── Services
+│   ├── Interfaces
+│   └── Implementations
+│
+├── DTOs
+│   ├── Requests
+│   └── Responses
+│
+├── Entities
+│
+├── Data
+│   ├── DbContext
+│   ├── Configurations
+│   └── Seeders
+│
+├── Repositories
+│   ├── Interfaces
+│   └── Implementations
+│
+├── Validators
+│
+├── Mappings
+│
+├── Middleware
+│
+├── Authentication
+│
+├── Extensions
+│
+├── Helpers
+│
+├── appsettings.json
+├── appsettings.Development.json
+└── Program.cs
+
+
+
+
+
+
+
+
+
+
