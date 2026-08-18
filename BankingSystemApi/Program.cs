@@ -119,18 +119,18 @@ namespace BankingSystemApi
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseMiddleware<LoggingMiddleware>();
             app.UseMiddleware<TimingMiddleware>();
-            app.MapGet("config-test", (IConfiguration configuration) =>
-            {
-                var bankName = configuration["Banking:BankName"];
-                var currency = configuration["Banking:Currency"];
-                var maxAmount = configuration["Banking:MaxTransactionAmount"];
-                return Results.Ok(new
-                {
-                    BankName = bankName,
-                    Currency = currency,
-                    MaxTransactionAmount = maxAmount
-                });
-            });
+            //app.MapGet("config-test", (IConfiguration configuration) =>
+            //{
+            //    var bankName = configuration["Banking:BankName"];
+            //    var currency = configuration["Banking:Currency"];
+            //    var maxAmount = configuration["Banking:MaxTransactionAmount"];
+            //    return Results.Ok(new
+            //    {
+            //        BankName = bankName,
+            //        Currency = currency,
+            //        MaxTransactionAmount = maxAmount
+            //    });
+            //});
             app.MapGet("config-test", (IOptions<BankingSettings> options) =>
             {
                 var settings = options.Value;
