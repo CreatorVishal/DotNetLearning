@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PeopleConnectApi.DTOs;
 using PeopleConnectApi.Interface;
 using PeopleConnectApi.Models;
@@ -15,6 +16,7 @@ namespace PeopleConnectApi.Controllers
         {
             _personService = personService;
         }
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<PersonResponse>>> GetAll()
         {
@@ -151,4 +153,13 @@ namespace PeopleConnectApi.Controllers
 //    var createdPerson = await _personService.AddAsync(person);
 
 //    return Ok(createdPerson);
+//}
+
+//[HttpGet]
+//public async Task<List<Person>> GetAllAsync()
+//{
+//    throw new Exception("Database crashed!");
+
+//    var people = await _personService.GetAllAsync();
+//    return people;
 //}

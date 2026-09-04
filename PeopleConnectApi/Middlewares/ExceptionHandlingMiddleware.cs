@@ -1,4 +1,6 @@
-﻿namespace PeopleConnectApi.Middlewares
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace PeopleConnectApi.Middlewares
 {
     public class ExceptionHandlingMiddleware
     {
@@ -17,13 +19,28 @@
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-
-                context.Response.StatusCode = 500;
-
-                await context.Response.WriteAsync(
-                    "Something went wrong.");
+                Console.WriteLine(ex.ToString());
+                await HandleExceptionAsync(context, ex);
             }
+        }
+
+        private static async Task HandleExceptionAsync(
+            HttpContext context,
+            Exception ex)
+        {
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+
+            var problemDetails = new ProblemDetails
+            {
+                Title = "Internal Server Error",
+                Status = 500,
+                Detail = "An unexpected error occurred.",
+                Instance = context.Request.Path
+            };
+
+            context.Response.ContentType = "application/problem+json";
+
+            await context.Response.WriteAsJsonAsync(problemDetails);
         }
     }
 }
