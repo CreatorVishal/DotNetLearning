@@ -4,6 +4,7 @@ namespace PeopleConnectApi.Interface
 {
     public interface ITokenService
     {
-        string GenerateToken(ApplicationUser user);
+        Task<string> GenerateTokenAsync (ApplicationUser user);
+        Task<string> GenerateRefreshTokenAsync();
     }
 }

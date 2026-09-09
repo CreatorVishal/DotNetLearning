@@ -118,6 +118,25 @@ namespace PeopleConnectApi.Controllers
 
             return NoContent();
         }
+        [Authorize]
+        [HttpGet("my-firstname")]
+        public IActionResult GetMyFName()
+        {
+            var firstName = User.FindFirst("FirstName")?.Value;
+            return Ok(firstName);
+        }
+        [Authorize(Policy ="ITDepartment")]
+        [HttpGet("it-data")]
+        public IActionResult GetITData()
+        {
+            return Ok("IT department access granted.");
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpGet("admin-data")]
+        public IActionResult GetAdminData()
+        {
+            return Ok("Admin access granted.");
+        }
     }
 }
 

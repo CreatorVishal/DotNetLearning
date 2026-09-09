@@ -28,6 +28,13 @@ namespace PeopleConnectApi.Controllers
 
             return Ok(response);
         }
+        [HttpPost("refresh")]
+        public async Task<ActionResult<LoginResponse>> Refresh(string refreshToken)
+        {
+            var response = await _authService.RefreshAsync(refreshToken);
+
+            return Ok(response);
+        }
 
     }
 }

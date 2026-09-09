@@ -9,66 +9,103 @@ using PeopleConnectApi.Repositories;
 using PeopleConnectApi.Services;
 using System.Text;
 
+
 namespace PeopleConnectApi
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Controllers
             builder.Services.AddControllers();
+
+            // Database
             builder.Services.AddDbContext<PeopleConnectDbContext>(options =>
             {
                 options.UseSqlServer(
                     builder.Configuration.GetConnectionString("DefaultConnection"));
             });
-            builder.Services.AddIdentityCore<ApplicationUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<PeopleConnectDbContext>().AddSignInManager<SignInManager<ApplicationUser>>();
 
+            // ASP.NET Core Identity
+            builder.Services
+                .AddIdentityCore<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<PeopleConnectDbContext>()
+                .AddSignInManager<SignInManager<ApplicationUser>>();
+
+            // Dependency Injection
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
             builder.Services.AddScoped<IPersonService, PersonService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<ITokenService, TokenService>();
-            builder.Services.AddAuthentication("Bearer")
+            // Email Service
+            builder.Services.Configure<EmailSettings>(
+                builder.Configuration.GetSection("EmailSettings"));
+
+            builder.Services.AddScoped<IEmailService, EmailService>();
+         
+
+            // Authentication - JWT
+            builder.Services
+                .AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
 
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
+                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        ValidAudience = builder.Configuration["Jwt:Audience"],
 
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(
-                    builder.Configuration["Jwt:Key"]!))
-        };
-    });
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(
+                                builder.Configuration["Jwt:Key"]!))
+                    };
+                });
 
-            builder.Services.AddAuthorization();
+            // Authorization
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ITDepartment", policy =>
+                {
+                    policy.RequireClaim("Department", "IT");
+                });
+            });
 
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+            // OpenAPI
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
+            using(var scope = app.Services.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                await IdentitySeeder.SeedRolesAsync(roleManager);
+            }
 
-            // Configure the HTTP request pipeline.
+            // OpenAPI
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
             }
+
+            // Custom Middleware
             app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseMiddleware<RequestLoggingMiddleware>();
             app.UseMiddleware<MaintenanceMiddleware>();
 
-            //app.UseHttpsRedirection();
+            // HTTPS
+            app.UseHttpsRedirection();
 
+            // Authentication MUST come before Authorization
+            app.UseAuthentication();
             app.UseAuthorization();
 
+            // Controllers
             app.MapControllers();
 
             app.Run();

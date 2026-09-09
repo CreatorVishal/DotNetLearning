@@ -11,5 +11,6 @@ namespace PeopleConnectApi.Models
         public DateTime CreatedAt { get; set; }
 
         public bool IsActive { get; set; } = true;
+        public string Department { get; set; } = string.Empty;
     }
 }

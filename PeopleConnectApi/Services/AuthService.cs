@@ -2,17 +2,22 @@
 using PeopleConnectApi.DTOs.Auth;
 using PeopleConnectApi.Interface;
 using PeopleConnectApi.Models;
+using PeopleConnectApi.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace PeopleConnectApi.Services
 {
     public class AuthService : IAuthService
+
     {
+        private readonly PeopleConnectDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ITokenService _tokenService;
-        public AuthService(UserManager<ApplicationUser> userManager,ITokenService tokenService)
+        public AuthService(UserManager<ApplicationUser> userManager,ITokenService tokenService, PeopleConnectDbContext context)
         {
             _userManager = userManager;
             _tokenService = tokenService;
+            _context = context;
         }
         public async Task<RegisterResponse> RegisterAsync(RegisterRequest request)
         {
@@ -30,6 +35,7 @@ namespace PeopleConnectApi.Services
                 Email=request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
+                Department=request.Department,
                 CreatedAt = DateTime.UtcNow,
                 IsActive = true
             };
@@ -39,9 +45,11 @@ namespace PeopleConnectApi.Services
                 var errors = string.Join(
                     ", ",
                     result.Errors.Select(error => error.Description));
+                
 
                 throw new ArgumentException(errors);
             }
+            await _userManager.AddToRoleAsync(user, "Employee");
             return new RegisterResponse
             {
                 Message = "User registered successfully.",
@@ -68,15 +76,69 @@ namespace PeopleConnectApi.Services
                 throw new UnauthorizedAccessException(
                     "Invalid email or password.");
             }
-            var token = _tokenService.GenerateToken(user);
+            var token = await _tokenService.GenerateTokenAsync(user);
+
+            var refreshToken = await _tokenService.GenerateRefreshTokenAsync();
+
+            var refreshTokenEntity = new RefreshToken
+            {
+                Token = refreshToken,
+                UserId = user.Id,
+                CreatedAt = DateTime.UtcNow,
+                ExpiresAt = DateTime.UtcNow.AddDays(7)
+            };
+
+            _context.RefreshTokens.Add(refreshTokenEntity);
+
+            await _context.SaveChangesAsync();
+
             return new LoginResponse
             {
                 Message = "Login successful.",
                 UserId = user.Id,
                 Email = user.Email!,
-                Token=token
+                Token = token,
+                RefreshToken = refreshToken
             };
 
-        } 
+        }
+        public async Task<LoginResponse> RefreshAsync(string refreshToken)
+        {
+            var storedToken = await _context.RefreshTokens
+                .FirstOrDefaultAsync(x => x.Token == refreshToken);
+
+            if (storedToken == null)
+            {
+                throw new UnauthorizedAccessException("Invalid refresh token.");
+            }
+
+            if (storedToken.ExpiresAt <= DateTime.UtcNow)
+            {
+                throw new UnauthorizedAccessException("Refresh token has expired.");
+            }
+
+            if (storedToken.RevokedAt != null)
+            {
+                throw new UnauthorizedAccessException("Refresh token has been revoked.");
+            }
+
+            var user = await _userManager.FindByIdAsync(storedToken.UserId);
+
+            if (user == null)
+            {
+                throw new UnauthorizedAccessException("User not found.");
+            }
+
+            var newAccessToken = await _tokenService.GenerateTokenAsync(user);
+
+            return new LoginResponse
+            {
+                Message = "Token refreshed successfully.",
+                UserId = user.Id,
+                Email = user.Email!,
+                Token = newAccessToken,
+                RefreshToken = refreshToken
+            };
+        }
     }
 }

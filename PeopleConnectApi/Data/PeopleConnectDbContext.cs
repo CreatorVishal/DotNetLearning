@@ -12,6 +12,7 @@ namespace PeopleConnectApi.Data
 
         }
         public DbSet<Person> Peoples { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
     }
 }

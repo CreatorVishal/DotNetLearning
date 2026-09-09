@@ -4,7 +4,8 @@ namespace PeopleConnectApi.Interface
 {
     public interface IAuthService
     {
-        public Task<RegisterResponse> RegisterAsync(RegisterRequest request);
-        public Task<LoginResponse> LoginAsync(LoginRequest request);
+        Task<RegisterResponse> RegisterAsync(RegisterRequest request);
+        Task<LoginResponse> LoginAsync(LoginRequest request);
+        Task<LoginResponse> RefreshAsync(string refreshToken);
     }
 }
