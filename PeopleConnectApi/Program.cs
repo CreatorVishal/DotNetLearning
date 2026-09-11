@@ -19,7 +19,9 @@ namespace PeopleConnectApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Controllers
-            builder.Services.AddControllers();
+            //builder.Services.AddControllers();
+            builder.Services.AddControllersWithViews();
+                
 
             // Database
             builder.Services.AddDbContext<PeopleConnectDbContext>(options =>
@@ -45,7 +47,8 @@ namespace PeopleConnectApi
                 builder.Configuration.GetSection("EmailSettings"));
 
             builder.Services.AddScoped<IEmailService, EmailService>();
-         
+            builder.Services.AddScoped<IEmailTemplateService, EmailTemplateService>();
+
 
             // Authentication - JWT
             builder.Services

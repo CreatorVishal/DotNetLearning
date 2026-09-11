@@ -7,17 +7,18 @@
     <UserSecretsId>c3f26c25-60a9-4b55-82bf-9ccfc78893cf</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="Templates\Emails\EmailConfirmation.cshtml" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Remove="Templates\Emails\EmailConfirmation.cshtml" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="Templates\Emails\EmailConfirmation.cshtml" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="Templates\Emails\EmailConfirmation.cshtml" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="10.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.10">
       <PrivateAssets>all</PrivateAssets>

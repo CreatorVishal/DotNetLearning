@@ -1,0 +1,38 @@
+﻿@model PeopleConnectApi.Models.EmailConfirmationModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Your Email</title>
+</head>
+
+<body>
+
+    <h1>Welcome to PeopleConnect, @Model.FirstName!</h1>
+
+    <p>
+        Thank you for creating your account with PeopleConnect.
+    </p>
+
+    <p>
+        Please confirm your email address by clicking the button below.
+    </p>
+
+    <p>
+        <a href="@Model.ConfirmationLink">
+            Confirm Email
+        </a>
+    </p>
+
+    <p>
+        If you did not create this account, you can safely ignore this email.
+    </p>
+
+    <p>
+        Regards,<br />
+        PeopleConnect Team
+    </p>
+
+</body>
+</html>
