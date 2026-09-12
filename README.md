@@ -296,7 +296,7 @@ Each commit represents another step in building stronger practical knowledge and
 **ASP.NET Core Web API** — Completed
 **JWT Authentication** — Completed
 **Email Service** — Completed
-**ASP.NET Core Identity** — In Progress
+**ASP.NET Core Identity- Completed 
 **Advanced Authorization** — In Progress
 **Clean Architecture** — Upcoming
 **Production-Level Backend Projects** — In Progress
