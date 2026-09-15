@@ -1,7 +1,9 @@
-﻿namespace PeopleConnectApi.Interface
+﻿using PeopleConnectApi.Models;
+
+namespace PeopleConnectApi.Interface
 {
     public interface IEmailService
     {
-        Task SendEmailAsync(string to, string subject, string body);
+        Task SendConfirmationEmailAsync(ApplicationUser user, string confirmationLink);
     }
 }

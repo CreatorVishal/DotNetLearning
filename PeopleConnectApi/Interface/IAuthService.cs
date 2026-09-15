@@ -7,5 +7,6 @@ namespace PeopleConnectApi.Interface
         Task<RegisterResponse> RegisterAsync(RegisterRequest request);
         Task<LoginResponse> LoginAsync(LoginRequest request);
         Task<LoginResponse> RefreshAsync(string refreshToken);
+        Task ConfirmEmailAsync(string userId, string token);
     }
 }

@@ -35,6 +35,15 @@ namespace PeopleConnectApi.Controllers
 
             return Ok(response);
         }
+        [HttpGet("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(
+           [FromQuery] string userId,
+           [FromQuery] string token)
+        {
+            await _authService.ConfirmEmailAsync(userId,token);
+
+            return Ok("Email confirmed successfully.");
+        }
 
     }
 }

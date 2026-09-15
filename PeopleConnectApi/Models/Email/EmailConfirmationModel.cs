@@ -1,4 +1,4 @@
-﻿namespace PeopleConnectApi.Models
+﻿namespace PeopleConnectApi.Models.Email
 {
     public class EmailConfirmationModel
     {

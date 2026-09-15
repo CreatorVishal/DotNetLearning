@@ -7,14 +7,6 @@
     <UserSecretsId>c3f26c25-60a9-4b55-82bf-9ccfc78893cf</UserSecretsId>
   </PropertyGroup>
 
-	<ItemGroup>
-		<Content Remove="Templates\Emails\EmailConfirmation.cshtml" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="Templates\Emails\EmailConfirmation.cshtml" />
-	</ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.10" />

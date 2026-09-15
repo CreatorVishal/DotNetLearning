@@ -5,6 +5,7 @@ using PeopleConnectApi.Data;
 using PeopleConnectApi.Interface;
 using PeopleConnectApi.Middlewares;
 using PeopleConnectApi.Models;
+using PeopleConnectApi.Providers;
 using PeopleConnectApi.Repositories;
 using PeopleConnectApi.Services;
 using System.Text;
@@ -21,7 +22,7 @@ namespace PeopleConnectApi
             // Controllers
             //builder.Services.AddControllers();
             builder.Services.AddControllersWithViews();
-                
+
 
             // Database
             builder.Services.AddDbContext<PeopleConnectDbContext>(options =>
@@ -35,7 +36,8 @@ namespace PeopleConnectApi
                 .AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<PeopleConnectDbContext>()
-                .AddSignInManager<SignInManager<ApplicationUser>>();
+                .AddSignInManager<SignInManager<ApplicationUser>>()
+                .AddDefaultTokenProviders(); ;
 
             // Dependency Injection
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
@@ -43,11 +45,13 @@ namespace PeopleConnectApi
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<ITokenService, TokenService>();
             // Email Service
-            builder.Services.Configure<EmailSettings>(
-                builder.Configuration.GetSection("EmailSettings"));
+            //-----------------------------
+            builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IEmailTemplateService, EmailTemplateService>();
+            builder.Services.AddScoped<IEmailSender,SmtpEmailSender>();
+            //--------------------------------
 
 
             // Authentication - JWT

@@ -1,84 +1,92 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using PeopleConnectApi.Interface;
-using System.IO;
 
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Routing;
+using PeopleConnectApi.Interface;
 namespace PeopleConnectApi.Services
 {
     public class EmailTemplateService : IEmailTemplateService
     {
-        private readonly IRazorViewEngine _razorViewEngine;
+        private readonly IRazorViewEngine _viewEngine;
         private readonly ITempDataProvider _tempDataProvider;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IWebHostEnvironment _environment;
 
         public EmailTemplateService(
-            IRazorViewEngine razorViewEngine,
+            IRazorViewEngine viewEngine,
             ITempDataProvider tempDataProvider,
-            IServiceProvider serviceProvider)
+            IServiceProvider serviceProvider,
+            IWebHostEnvironment environment)
         {
-            _razorViewEngine = razorViewEngine;
+            _viewEngine = viewEngine;
             _tempDataProvider = tempDataProvider;
             _serviceProvider = serviceProvider;
+            _environment = environment;
         }
 
         public async Task<string> RenderTemplateAsync<TModel>(
             string templateName,
             TModel model)
         {
-            var httpContext = new DefaultHttpContext
+            var templatePath = Path.Combine(
+                _environment.ContentRootPath,
+                "EmailTemplates",
+                $"{templateName}.cshtml");
+
+            if (!File.Exists(templatePath))
             {
-                RequestServices = _serviceProvider
-            };
+                throw new FileNotFoundException(
+                    $"Email template not found: {templatePath}");
+            }
+
+            var httpContext =
+                new DefaultHttpContext
+                {
+                    RequestServices = _serviceProvider
+                };
 
             var actionContext = new ActionContext(
                 httpContext,
-                new Microsoft.AspNetCore.Routing.RouteData(),
-                new Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor());
+                new RouteData(),
+                new ActionDescriptor());
 
-            var viewPath = Path.Combine(
-                Directory.GetCurrentDirectory(),
-                "Views",
-                "Emails",
-                $"{templateName}.cshtml");
+            await using var sw = new StringWriter();
 
-            var viewResult = _razorViewEngine.GetView(
+            var viewResult = _viewEngine.GetView(
                 executingFilePath: null,
-                viewPath: viewPath,
+                viewPath: $"/EmailTemplates/{templateName}.cshtml",
                 isMainPage: true);
 
             if (!viewResult.Success)
             {
-                throw new FileNotFoundException(
-                    $"Email template '{templateName}' was not found.",
-                    viewPath);
+                throw new InvalidOperationException(
+                    $"Could not find email template: {templateName}");
             }
 
-            await using var writer = new StringWriter();
-
             var viewDictionary = new ViewDataDictionary<TModel>(
-                metadataProvider: new EmptyModelMetadataProvider(),
-                modelState: new ModelStateDictionary())
+                new EmptyModelMetadataProvider(),
+                new ModelStateDictionary())
             {
                 Model = model
             };
 
-            var viewContext = new ViewContext(
+            var viewContext = new Microsoft.AspNetCore.Mvc.Rendering.ViewContext(
                 actionContext,
                 viewResult.View,
                 viewDictionary,
                 new TempDataDictionary(
                     httpContext,
                     _tempDataProvider),
-                writer,
+                sw,
                 new HtmlHelperOptions());
 
             await viewResult.View.RenderAsync(viewContext);
 
-            return writer.ToString();
+            return sw.ToString();
         }
     }
 }
