@@ -50,7 +50,8 @@ namespace PeopleConnectApi
 
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IEmailTemplateService, EmailTemplateService>();
-            builder.Services.AddScoped<IEmailSender,SmtpEmailSender>();
+            //builder.Services.AddScoped<IEmailSender,SmtpEmailSender>();
+            builder.Services.AddScoped<IEmailSender, MailKitEmailSender>();
             //--------------------------------
 
 
