@@ -2,6 +2,6 @@
 {
     public interface IEmailTemplateService
     {
-        Task<string> RenderTemplateAsync<TModel>(string templateName,TModel model);
+        Task<string> RenderTemplateAsync<TModel>(TModel model);
     }
 }

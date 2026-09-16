@@ -33,10 +33,7 @@ namespace PeopleConnectApi.Services
                 ConfirmationLink = confirmationLink
             };
 
-            var htmlBody =
-                await _templateService.RenderTemplateAsync(
-                    "EmailConfirmation",
-                    model);
+            var htmlBody = await _templateService.RenderTemplateAsync(model);
 
             var message = new EmailMessage
             {

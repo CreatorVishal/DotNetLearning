@@ -2,8 +2,8 @@
 
 namespace PeopleConnectApi.Interface
 {
-    public interface IEmailSender
+   public interface IEmailSender
     {
-        Task SendAsync(EmailMessage message);
+        public Task SendAsync(EmailMessage message);
     }
 }

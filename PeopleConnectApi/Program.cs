@@ -9,6 +9,7 @@ using PeopleConnectApi.Providers;
 using PeopleConnectApi.Repositories;
 using PeopleConnectApi.Services;
 using System.Text;
+using Razor.Templating.Core;
 
 
 namespace PeopleConnectApi
@@ -37,7 +38,7 @@ namespace PeopleConnectApi
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<PeopleConnectDbContext>()
                 .AddSignInManager<SignInManager<ApplicationUser>>()
-                .AddDefaultTokenProviders(); ;
+                .AddDefaultTokenProviders();
 
             // Dependency Injection
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
@@ -47,7 +48,7 @@ namespace PeopleConnectApi
             // Email Service
             //-----------------------------
             builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
-
+            builder.Services.AddRazorTemplating();
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IEmailTemplateService, EmailTemplateService>();
             //builder.Services.AddScoped<IEmailSender,SmtpEmailSender>();
