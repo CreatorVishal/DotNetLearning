@@ -1,20 +1,30 @@
-﻿using PeopleConnectApi.Interface;
+﻿using Microsoft.Extensions.Caching.Memory;
+using PeopleConnectApi.Interface;
 using PeopleConnectApi.Models;
 
 namespace PeopleConnectApi.Services
 {
     public class PersonService : IPersonService
     {
+        private readonly IMemoryCache _cache;
         private readonly IPersonRepository _repository;
 
-        public PersonService(IPersonRepository repository)
+        public PersonService(IPersonRepository repository, IMemoryCache cache)
         {
             _repository = repository;
+            _cache = cache;
         }
 
         public async Task<List<Person>> GetAllAsync()
         {
+           if(_cache.TryGetValue("all_people",out List<Person>? cachedPeople ) && cachedPeople is not null)
+            {
+                return cachedPeople;
+            }
+
             var people = await _repository.GetAllAsync();
+
+            _cache.Set("all_people", people, TimeSpan.FromMinutes(5));
 
             return people;
         }

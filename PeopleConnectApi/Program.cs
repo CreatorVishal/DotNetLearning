@@ -88,6 +88,7 @@ namespace PeopleConnectApi
 
             // OpenAPI
             builder.Services.AddOpenApi();
+            builder.Services.AddMemoryCache();
 
             var app = builder.Build();
             using(var scope = app.Services.CreateScope())
