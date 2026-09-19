@@ -95,6 +95,10 @@ namespace PeopleConnectApi
                 options.InstanceName= "PeopleConnectApi_";
             });
 
+            var appName= builder.Configuration["AppSetting:ApplicationName"];
+            var supportEmail= builder.Configuration["AppSetting:SupportEmail"];
+            var apiBaseUrl= builder.Configuration["AppSetting:ApiBaseUrl"];
+
             var app = builder.Build();
             using(var scope = app.Services.CreateScope())
             {
