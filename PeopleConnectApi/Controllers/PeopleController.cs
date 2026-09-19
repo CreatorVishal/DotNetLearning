@@ -16,7 +16,7 @@ namespace PeopleConnectApi.Controllers
         {
             _personService = personService;
         }
-        [Authorize]
+        
         [HttpGet]
         public async Task<ActionResult<List<PersonResponse>>> GetAll()
         {

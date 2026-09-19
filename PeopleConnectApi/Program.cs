@@ -89,6 +89,11 @@ namespace PeopleConnectApi
             // OpenAPI
             builder.Services.AddOpenApi();
             builder.Services.AddMemoryCache();
+            builder.Services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = builder.Configuration.GetConnectionString("Redis");
+                options.InstanceName= "PeopleConnectApi_";
+            });
 
             var app = builder.Build();
             using(var scope = app.Services.CreateScope())
